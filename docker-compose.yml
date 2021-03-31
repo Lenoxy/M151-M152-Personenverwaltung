@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  backend:
+    container_name: pers-backend
+    build: backend
+    ports:
+      - 8080:9080
+      - 7777:7777 #TODO
+    depends_on:
+      - database
+
+    networks:
+      - backend
+
+
+  database:
+    container_name: pers-db
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Person321
+      MONGO_INITDB_DATABASE: person
+    ports:
+      - 27017:27017 # Remove in Prod
+    networks:
+      - backend
+    volumes:
+      - ./database/db-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+
+networks:
+  backend:
+
