@@ -5,8 +5,8 @@ services:
     container_name: pers-backend
     build: backend
     ports:
-      - 8080:9080
-      - 7777:7777 #TODO
+      - 8080:8080
+      - 7777:7777 #TODO Debug port
     depends_on:
       - database
 
