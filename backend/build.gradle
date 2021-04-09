@@ -18,7 +18,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mongodb:mongo-java-driver'
+	// https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
+	implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.8'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
