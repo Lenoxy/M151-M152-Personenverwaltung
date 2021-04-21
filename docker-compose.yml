@@ -18,12 +18,12 @@ services:
     ports:
       - 8080:8080
       - 7777:7777 #TODO Debug port
+
     depends_on:
       - database
 
     networks:
       - backend
-
 
   database:
     container_name: pers-db
