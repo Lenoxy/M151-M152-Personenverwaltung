@@ -1,0 +1,21 @@
+name: Continuous-Integration
+
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout-Repository
+        uses: actions/checkout@v2
+        
+      - name: Run-Backend-Tests
+        run: | 
+          cd backend
+          gradle build
+          cd ..
