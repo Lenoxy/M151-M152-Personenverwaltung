@@ -34,7 +34,7 @@ Anna arbeitet im HR und muss regelmässig Adressen und Telefonnummern von andere
 
 ![Bild von Otto](https://images.generated.photos/mGQ0tvnrcUdEc0mQOZl9InGlr9DlHTM5kylykB8dsWc/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Ry/YW5zcGFyZW50X3Yz/L3YzXzA3NTE3ODMu/cG5n.png)
 
-Otto arbeitet in der Sekretariat der Firma. Er zieht ungefähr vier Mal im Jahr um und möchte daher seine Adresse im Personenverwaltungstool schnell und einfach ändern.
+Otto arbeitet im Sekretariat der Firma. Er zieht ungefähr vier Mal im Jahr um und möchte daher seine Adresse im Personenverwaltungstool schnell und einfach ändern.
 
 ## Userstories
 
@@ -58,7 +58,7 @@ Als Administrator möchte ich Benutzer sowie Administratoren anlegen, bearbeiten
 
 ### Backend
 - Java Spring als Framework
-  JPA als connector zur Datenbank
+- JPA als connector zur Datenbank
 - Gradle als package manager
 
 ### Datenbank
