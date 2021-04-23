@@ -3,11 +3,12 @@ version: '3'
 services:
   frontend:
     container_name: pers-frontend
-    image: nginx
+    build: frontend
     volumes:
       - ./frontend/dist:/usr/share/nginx/html
     ports:
-      - "3000:80"
+      # TODO In order to run on prod, necessary due to server limitations
+      - 81:80
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
@@ -16,7 +17,7 @@ services:
     container_name: pers-backend
     build: backend
     ports:
-      - 8080:8080
+      - 8081:8080
       - 7777:7777 #TODO Debug port
 
     depends_on:
