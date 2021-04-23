@@ -24,6 +24,6 @@ public class TestController{
         Document document = new Document("type", "exam");
         document.append("score", 300);
         mongoConfig.mongoClient().getDatabase("person").getCollection("person").insertOne(document);
-        return "Greetings from Spring Boot!";
+        return "Greetings from Spring Boot";
     }
 }
