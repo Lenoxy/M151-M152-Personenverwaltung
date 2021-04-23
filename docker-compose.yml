@@ -17,7 +17,7 @@ services:
     container_name: pers-backend
     build: backend
     ports:
-      - 8080:8080
+      - 8081:8080
       - 7777:7777 #TODO Debug port
 
     depends_on:
