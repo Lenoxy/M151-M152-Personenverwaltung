@@ -7,7 +7,7 @@ services:
     volumes:
       - ./frontend/dist:/usr/share/nginx/html
     ports:
-      # TODO In order to run on prod, necessary due to server limitations
+      # TODO In order to run on prod, necessary due to server limitations. Port 80 and 8080 is allocated to the cinegame-backlog Project
       - 81:80
     environment:
       - NGINX_HOST=localhost
@@ -18,7 +18,7 @@ services:
     build: backend
     ports:
       - 8081:8080
-      - 7777:7777 #TODO Debug port
+      - 7777:7777 #Debug port
 
     depends_on:
       - database
