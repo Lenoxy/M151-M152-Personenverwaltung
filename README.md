@@ -1,4 +1,9 @@
 # M151 / M152 Personenverwaltung
+[Link zu Openapi UI Lokal](http://localhost:8081/swagger-ui.html)
+
+
+
+
 
 ## Einführung
 

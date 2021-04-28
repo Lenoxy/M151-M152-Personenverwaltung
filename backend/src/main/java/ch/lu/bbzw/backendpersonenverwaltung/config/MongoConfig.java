@@ -7,12 +7,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MongoConfig{
-    public @Bean
-    MongoClient mongoClient(){
-
-        MongoClient mongoClient = MongoClients.create("mongodb://root:Person321@pers-db:27017");
-
-        System.out.println(mongoClient.listDatabaseNames().first());
-        return mongoClient;
+    @Bean
+    public MongoClient mongoClient(){
+        return MongoClients.create("mongodb://root:Person321@pers-db:27017");
     }
 }
