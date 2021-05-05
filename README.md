@@ -76,4 +76,8 @@ Als Administrator möchte ich Benutzer sowie Administratoren anlegen, bearbeiten
 ![Bild von Otto](images/New Wireframe 7.png)
 ![Bild von Otto](images/New Wireframe 10.png)
 ![Bild von Otto](images/New Wireframe 8.png)
+
+Die restliche Seiten sehen auf dem Händy gleich aus, wie im browser. z.B.:
+
 ![Bild von Otto](images/New Wireframe 9.png)
+
