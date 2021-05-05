@@ -64,3 +64,16 @@ Als Administrator möchte ich Benutzer sowie Administratoren anlegen, bearbeiten
 ### Datenbank
 - Dokumentbasiert, da die Personaldaten recht ineinander abgeschlossen sind.
 - MongoDB als DB 
+
+##Mockups
+
+![Bild von Otto](images/New Wireframe 1.png)
+![Bild von Otto](images/New Wireframe 2.png)
+![Bild von Otto](images/New Wireframe 3.png)
+![Bild von Otto](images/New Wireframe 4.png)
+![Bild von Otto](images/New Wireframe 5.png)
+![Bild von Otto](images/New Wireframe 6.png)
+![Bild von Otto](images/New Wireframe 7.png)
+![Bild von Otto](images/New Wireframe 10.png)
+![Bild von Otto](images/New Wireframe 8.png)
+![Bild von Otto](images/New Wireframe 9.png)
