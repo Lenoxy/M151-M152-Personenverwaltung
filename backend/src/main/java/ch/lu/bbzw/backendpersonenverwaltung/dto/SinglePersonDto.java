@@ -1,12 +1,14 @@
 package ch.lu.bbzw.backendpersonenverwaltung.dto;
 
+import java.util.Optional;
+
 public class SinglePersonDto{
-    int id;
+    String id;
     String firstname;
     String lastname;
     String email;
     AddressDto address;
-    String phonenumber;
+    Optional<String> phonenumber;
     String position;
     boolean isAdmin;
     String username;

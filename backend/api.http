@@ -1,0 +1,14 @@
+###
+PUT http://localhost:8081/person/
+Content-Type: application/json
+
+{
+  "firstname": "Leo",
+  "lastname": "Scherer"
+}
+
+
+
+###
+
+GET http://localhost:8081/person/609261ed8a2a0d70be755166
