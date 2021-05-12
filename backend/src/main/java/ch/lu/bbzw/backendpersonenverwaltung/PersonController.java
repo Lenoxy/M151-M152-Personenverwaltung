@@ -50,7 +50,7 @@ public class PersonController{
 
     @PutMapping("/")
     public boolean createPerson(@RequestBody SinglePersonDto singlePersonDto){
-        personRepository.insert(new PersonEntity());
+        personRepository.insert(singlePersonDto.toEntity());
         return false;
     }
 

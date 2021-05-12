@@ -1,1 +1,1 @@
-db.createCollection("person");
+//db.createCollection("person");

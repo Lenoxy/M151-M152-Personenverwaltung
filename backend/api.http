@@ -3,8 +3,20 @@ PUT http://localhost:8081/person/
 Content-Type: application/json
 
 {
+  "id": "1",
   "firstname": "Leo",
-  "lastname": "Scherer"
+  "lastname": "Scherer",
+  "email": "leo.scherer@bla.ch",
+  "address": {
+    "street": "Strasse",
+    "number": "21",
+    "zipcode": "6000",
+    "city": "Luzern"
+  },
+  "phonenumber": "0790000000",
+  "position": "CIO",
+  "isAdmin": true,
+  "username": "leo.scherer"
 }
 
 
