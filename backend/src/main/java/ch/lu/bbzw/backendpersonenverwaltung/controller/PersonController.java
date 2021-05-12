@@ -48,13 +48,13 @@ public class PersonController{
         return false;
     }
 
-    @PutMapping("/")
+    @PostMapping("/")
     public boolean createPerson(@RequestBody SinglePersonDto singlePersonDto){
         personRepository.insert(singlePersonDto.toEntity());
         return false;
     }
 
-    @PostMapping("/self")
+    @PutMapping("/self")
     public boolean editSelf(@RequestBody SinglePersonDto singlePersonDto){
         return false;
     }

@@ -1,10 +1,7 @@
-package ch.lu.bbzw.backendpersonenverwaltung;
+package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
 import ch.lu.bbzw.backendpersonenverwaltung.dto.LoginResponseDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/auth")
@@ -25,11 +22,9 @@ public class AuthenticationController{
         return null;
     }
 
-    @PostMapping("reset-password")
+    @PutMapping("reset-password")
     public boolean resetPassword(@RequestBody String oldPassword, @RequestBody String newPassword){
         return false;
     }
-
-
 
 }
