@@ -1,41 +1,52 @@
 package ch.lu.bbzw.backendpersonenverwaltung;
 
-import ch.lu.bbzw.backendpersonenverwaltung.config.MongoConfig;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.QueryPersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.SearchByProperty;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.SinglePersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/person")
 public class PersonController{
-    private final MongoCollection mongoCollection;
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
     @Autowired
-    public PersonController(final MongoConfig mongoConfig, final PersonRepository personRepository){
-        this.mongoCollection = mongoConfig.mongoClient()
-                .getDatabase("person")
-                .getCollection("person");
-
+    public PersonController(final PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
 
     @GetMapping("/{id}")
-    public PersonEntity getPersonById(@PathVariable String id){
-        return personRepository.getById(id);
+    public SinglePersonDto getPersonById(@PathVariable String id){
+        return personRepository.findById(id).toSinglePersonDto();
     }
 
     @GetMapping("query/{property}/{value}")
-    public List<QueryPersonDto> query(@PathVariable String property, @PathVariable String value){
-        return null;
+    public List<QueryPersonDto> query(@PathVariable SearchByProperty property, @PathVariable String value){
+        List<QueryPersonDto> queriedPersons = null;
+
+        switch(property){
+            case id:
+                queriedPersons = Collections.singletonList(personRepository.findById(value).toQueryPersonDto());
+                break;
+            case firstname:
+                queriedPersons = personRepository.findByFirstnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
+                break;
+            case lastname:
+                queriedPersons = personRepository.findByLastnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
+                break;
+            case email:
+                queriedPersons = personRepository.findByEmailIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
+                break;
+        }
+        return queriedPersons;
     }
 
     @DeleteMapping("/{id}")
@@ -50,8 +61,8 @@ public class PersonController{
 
     @PostMapping("/")
     public boolean createPerson(@RequestBody SinglePersonDto singlePersonDto){
-        personRepository.insert(singlePersonDto.toEntity());
-        return false;
+        personRepository.save(singlePersonDto.toEntity());
+        return true;
     }
 
     @PutMapping("/self")
@@ -59,12 +70,4 @@ public class PersonController{
         return false;
     }
 
-
-//    @GetMapping("")
-//    public String example(){
-//        Document document = new Document("type", "exam");
-//        document.append("score", 300);
-//        mongoCollection.insertOne(document);
-//        return "Greetings from Spring boot";
-//    }
 }

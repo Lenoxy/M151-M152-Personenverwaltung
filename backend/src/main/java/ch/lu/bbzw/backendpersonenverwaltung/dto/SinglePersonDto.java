@@ -2,8 +2,6 @@ package ch.lu.bbzw.backendpersonenverwaltung.dto;
 
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 
-import java.util.Optional;
-
 public class SinglePersonDto{
     String id;
     String firstname;
@@ -16,6 +14,18 @@ public class SinglePersonDto{
     String username;
     // String password; TODO: not in dto but in entity
 
+
+    public SinglePersonDto(String id, String firstname, String lastname, String email, AddressDto address, String phonenumber, String position, boolean isAdmin, String username){
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.address = address;
+        this.phonenumber = phonenumber;
+        this.position = position;
+        this.isAdmin = isAdmin;
+        this.username = username;
+    }
 
     public String getId(){
         return id;
@@ -88,7 +98,6 @@ public class SinglePersonDto{
     public void setUsername(String username){
         this.username = username;
     }
-
 
     public PersonEntity toEntity(){
         return new PersonEntity(

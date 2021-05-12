@@ -1,34 +1,18 @@
 package ch.lu.bbzw.backendpersonenverwaltung.repository;
 
-import ch.lu.bbzw.backendpersonenverwaltung.config.MongoConfig;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
-import com.mongodb.client.MongoCollection;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.data.repository.CrudRepository;
 
-@Service
-public class PersonRepository{
-    private final MongoCollection mongoCollection;
-    private final MongoTemplate mongoTemplate;
+import java.util.List;
 
-    @Autowired
-    public PersonRepository(final MongoConfig mongoConfig){
-        this.mongoCollection = mongoConfig.mongoClient()
-                .getDatabase("person")
-                .getCollection("person");
-        this.mongoTemplate = mongoConfig.mongoTemplate();
-    }
+public interface PersonRepository extends CrudRepository<PersonEntity, Long>{
+    PersonEntity findById(String id);
 
-    public PersonEntity getById(String id){
-        PersonEntity entity = mongoTemplate.findById(id, PersonEntity.class);
+    List<PersonEntity> findByFirstnameIgnoreCase(String firstname);
 
-        return entity;
+    List<PersonEntity> findByLastnameIgnoreCase(String lastname);
 
-    }
+    List<PersonEntity> findByEmailIgnoreCase(String email);
 
-    public void insert(PersonEntity personEntity){
-        mongoTemplate.save(personEntity);
-    }
 
 }
