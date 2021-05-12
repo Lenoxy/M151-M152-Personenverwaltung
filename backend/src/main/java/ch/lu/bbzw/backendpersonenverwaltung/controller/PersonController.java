@@ -1,4 +1,4 @@
-package ch.lu.bbzw.backendpersonenverwaltung;
+package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
 import ch.lu.bbzw.backendpersonenverwaltung.dto.QueryPersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.SearchByProperty;
