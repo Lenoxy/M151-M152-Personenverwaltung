@@ -1,4 +1,4 @@
-package ch.lu.bbzw.backendpersonenverwaltung.dto;
+package ch.lu.bbzw.backendpersonenverwaltung.controller.dto;
 
 public class QueryPersonDto{
     String id;

@@ -1,6 +1,6 @@
 package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
-import ch.lu.bbzw.backendpersonenverwaltung.dto.LoginResponseDto;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.LoginResponseDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

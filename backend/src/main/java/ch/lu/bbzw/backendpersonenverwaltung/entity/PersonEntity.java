@@ -1,7 +1,7 @@
 package ch.lu.bbzw.backendpersonenverwaltung.entity;
 
-import ch.lu.bbzw.backendpersonenverwaltung.dto.QueryPersonDto;
-import ch.lu.bbzw.backendpersonenverwaltung.dto.SinglePersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.QueryPersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.SinglePersonDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 

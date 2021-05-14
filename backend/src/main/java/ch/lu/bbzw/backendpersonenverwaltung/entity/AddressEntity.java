@@ -1,6 +1,6 @@
 package ch.lu.bbzw.backendpersonenverwaltung.entity;
 
-import ch.lu.bbzw.backendpersonenverwaltung.dto.AddressDto;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.AddressDto;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 public class AddressEntity{

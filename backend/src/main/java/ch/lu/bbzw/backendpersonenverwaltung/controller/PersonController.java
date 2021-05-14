@@ -1,8 +1,8 @@
 package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
-import ch.lu.bbzw.backendpersonenverwaltung.dto.QueryPersonDto;
-import ch.lu.bbzw.backendpersonenverwaltung.dto.SearchByProperty;
-import ch.lu.bbzw.backendpersonenverwaltung.dto.SinglePersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.QueryPersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.SearchByProperty;
+import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.SinglePersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
