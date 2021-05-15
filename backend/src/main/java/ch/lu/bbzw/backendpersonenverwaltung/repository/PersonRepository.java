@@ -2,11 +2,14 @@ package ch.lu.bbzw.backendpersonenverwaltung.repository;
 
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface PersonRepository extends CrudRepository<PersonEntity, Long>{
-    PersonEntity findById(String id);
+@Repository
+public interface PersonRepository extends CrudRepository<PersonEntity, String>{
+    Optional<PersonEntity> findById(String id);
 
     List<PersonEntity> findByFirstnameIgnoreCase(String firstname);
 
@@ -14,5 +17,5 @@ public interface PersonRepository extends CrudRepository<PersonEntity, Long>{
 
     List<PersonEntity> findByEmailIgnoreCase(String email);
 
-
+    String removeById(String id);
 }

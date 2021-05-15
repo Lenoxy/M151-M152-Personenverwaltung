@@ -25,7 +25,7 @@ public class PersonController{
 
     @GetMapping("/{id}")
     public SinglePersonDto getPersonById(@PathVariable String id){
-        return personRepository.findById(id).toSinglePersonDto();
+        return personRepository.findById(id).get().toSinglePersonDto();
     }
 
     @GetMapping("query/{property}/{value}")
@@ -34,7 +34,7 @@ public class PersonController{
 
         switch(property){
             case id:
-                queriedPersons = Collections.singletonList(personRepository.findById(value).toQueryPersonDto());
+                queriedPersons = Collections.singletonList(personRepository.findById(value).get().toQueryPersonDto());
                 break;
             case firstname:
                 queriedPersons = personRepository.findByFirstnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class PersonController{
 
     @DeleteMapping("/{id}")
     public boolean removePerson(@PathVariable String id){
-        return false;
+        return personRepository.removeById(id) != null;
     }
 
     @PutMapping("/{id}")
