@@ -2,31 +2,34 @@ package ch.lu.bbzw.backendpersonenverwaltung.entity;
 
 import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.QueryPersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.SinglePersonDto;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@Getter
+@Setter
 public class PersonEntity{
-
     @Id
-    String id;
+    private String id;
     @Field
-    String firstname;
+    private String firstname;
     @Field
-    String lastname;
+    private String lastname;
     @Field
-    String email;
+    private String email;
     @Field
-    AddressEntity address;
+    private AddressEntity address;
     @Field
-    String phonenumber;
+    private String phonenumber;
     @Field
-    String position;
+    private String position;
     @Field
-    boolean isAdmin;
+    private boolean isAdmin;
     @Field
-    String username;
+    private String username;
     @Field
-    String password;
+    private String password;
 
     public PersonEntity(
             String id,

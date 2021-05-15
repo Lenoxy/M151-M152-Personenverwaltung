@@ -1,18 +1,22 @@
 package ch.lu.bbzw.backendpersonenverwaltung.entity;
 
 import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.AddressDto;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@Getter
+@Setter
 public class AddressEntity{
 
     @Field
-    String street;
+    private String street;
     @Field
-    String number;
+    private String number;
     @Field
-    String zipcode;
+    private String zipcode;
     @Field
-    String city;
+    private String city;
 
     public AddressEntity(String street, String number, String zipcode, String city){
         this.street = street;
