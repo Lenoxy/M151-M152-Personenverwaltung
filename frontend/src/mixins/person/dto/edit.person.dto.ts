@@ -1,6 +1,5 @@
 import {AddressDto} from "@/mixins/person/dto/address.dto";
 export interface EditPersonDto {
-    id: string;
     firstname: string;
     lastname: string;
     email: string;

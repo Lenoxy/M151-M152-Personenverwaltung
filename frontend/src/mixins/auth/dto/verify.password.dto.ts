@@ -1,3 +1,4 @@
 export interface VerifyPasswordDto{
-    verify: string
+    username: string
+    password: string
 }

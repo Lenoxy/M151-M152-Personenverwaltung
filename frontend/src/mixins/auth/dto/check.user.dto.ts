@@ -1,4 +1,4 @@
-export interface RegisterDto{
+export interface CheckUserDto {
     username: string
     password: string
 }
