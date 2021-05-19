@@ -52,3 +52,30 @@ GET http://localhost:8081/person/query/firstname/{{firstname}}
 ###
 DELETE http://localhost:8081/person/{{id}}
 
+###
+POST http://localhost:8081/auth/check-username
+
+leo.scherer
+
+###
+POST http://localhost:8081/auth/register
+Content-Type: application/json
+
+{
+  "username": "leo.scherer",
+  "password": "blablabla"
+}
+
+###
+POST http://localhost:8081/auth/verify-password
+Content-Type: application/json
+
+{
+  "username": "leo.scherer",
+  "password": "blablabla"
+}
+
+###
+POST http://localhost:8081/auth/check-username
+
+leo.scherer

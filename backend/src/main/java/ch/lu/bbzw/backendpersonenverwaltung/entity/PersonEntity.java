@@ -5,6 +5,7 @@ import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InCreatePersonDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
@@ -17,6 +18,7 @@ public class PersonEntity{
     @Field
     private String lastname;
     @Field
+    @Indexed(unique=true)
     private String email;
     @Field
     private AddressEntity address;
@@ -27,6 +29,7 @@ public class PersonEntity{
     @Field
     private boolean isAdmin;
     @Field
+    @Indexed(unique=true)
     private String username;
     @Field
     private String password;
