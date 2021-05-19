@@ -47,7 +47,7 @@ public class AuthenticationController{
 
     }
 
-    @PutMapping("reset-password")
+    @PutMapping("/reset-password")
     public boolean resetPassword(@RequestBody String oldPassword, @RequestBody String newPassword){
         return false;
     }
