@@ -70,19 +70,24 @@ Als Administrator möchte ich Benutzer sowie Administratoren anlegen, bearbeiten
 - Dokumentbasiert, da die Personaldaten recht ineinander abgeschlossen sind.
 - MongoDB als DB 
 
-##Mockups
+## Mockups
 
-![Bild von Otto](images/New Wireframe 1.png)
-![Bild von Otto](images/New Wireframe 2.png)
-![Bild von Otto](images/New Wireframe 3.png)
-![Bild von Otto](images/New Wireframe 4.png)
-![Bild von Otto](images/New Wireframe 5.png)
-![Bild von Otto](images/New Wireframe 6.png)
-![Bild von Otto](images/New Wireframe 7.png)
-![Bild von Otto](images/New Wireframe 10.png)
-![Bild von Otto](images/New Wireframe 8.png)
+![Login](images/login.png)
 
-Die restliche Seiten sehen auf dem Händy gleich aus, wie im browser. z.B.:
+![Overview](images/overview.png)
 
-![Bild von Otto](images/New Wireframe 9.png)
+![Person overview](images/person-overview.png)
 
+![Admin Overview](images/admin-overview.png)
+
+![Set Password](images/set-password.png)
+
+![Edit self profile](images/edit-self-profile.png)
+
+![Admin edit and create profile](images/admin-edit-create-profile.png)
+
+![Overview responsive](images/responsive-overview.png)
+
+Die restlichen Seiten sehen im responsive Design gleich aus, wie im browser. z.B.:
+
+![Person overview reponsive](images/responsive-person-overview.png)
