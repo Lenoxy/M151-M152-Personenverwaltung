@@ -42,7 +42,9 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8081/person/{{id}}
+GET http://localhost:8081/person/60a533e6d1ccb26a95e6cf8a
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcy1hZG1pbiI6dHJ1ZSwiaXNzIjoibTE1MS1tMTUyLXBlcnNvbmVudmVyd2FsdHVuZyIsInVzZXIiOiJsZW8uc2NoZXJlciJ9.e0hBC4o5KgsgWCJpYv5PumBIrHaJyqLiKQBN4Uyi64A
+
 
 
 
@@ -50,7 +52,7 @@ GET http://localhost:8081/person/{{id}}
 GET http://localhost:8081/person/query/firstname/{{firstname}}
 
 ###
-DELETE http://localhost:8081/person/{{id}}
+DELETE http://localhost:8081/person/60a4f34f86875528dd32b3b0
 
 ###
 POST http://localhost:8081/auth/check-username

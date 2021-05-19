@@ -1,6 +1,5 @@
 package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
-import ch.lu.bbzw.backendpersonenverwaltung.Protected;
 import ch.lu.bbzw.backendpersonenverwaltung.ValidationUtils;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.in.*;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutValidationAnswerDto;
@@ -32,7 +31,6 @@ public class PersonController{
     }
 
     // Security: User
-    @Protected("user")
     @GetMapping("query/{property}/{value}")
     public List<InQueryPersonDto> query(@PathVariable InSearchByPropertyDto property, @PathVariable String value){
         List<InQueryPersonDto> queriedPersons = null;
