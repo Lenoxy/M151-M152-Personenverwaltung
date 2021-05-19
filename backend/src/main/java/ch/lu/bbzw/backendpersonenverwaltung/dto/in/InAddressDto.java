@@ -1,14 +1,16 @@
-package ch.lu.bbzw.backendpersonenverwaltung.controller.dto;
+package ch.lu.bbzw.backendpersonenverwaltung.dto.in;
 
 import ch.lu.bbzw.backendpersonenverwaltung.entity.AddressEntity;
+import lombok.Getter;
 
-public class AddressDto{
+@Getter
+public class InAddressDto{
     String street;
     String number;
     String zipcode;
     String city;
 
-    public AddressDto(String street, String number, String zipcode, String city){
+    public InAddressDto(String street, String number, String zipcode, String city){
         this.street = street;
         this.number = number;
         this.zipcode = zipcode;

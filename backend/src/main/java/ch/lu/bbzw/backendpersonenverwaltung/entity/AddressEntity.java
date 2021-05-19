@@ -1,6 +1,6 @@
 package ch.lu.bbzw.backendpersonenverwaltung.entity;
 
-import ch.lu.bbzw.backendpersonenverwaltung.controller.dto.AddressDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InAddressDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -25,8 +25,8 @@ public class AddressEntity{
         this.city = city;
     }
 
-    public AddressDto toDto(){
-        return new AddressDto(
+    public InAddressDto toDto(){
+        return new InAddressDto(
                 street,
                 number,
                 zipcode,

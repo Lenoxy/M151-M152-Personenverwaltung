@@ -21,6 +21,27 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:8081/person/609b7390c2f5d658844a4421
+Content-Type: application/json
+
+{
+  "firstname": "oooo",
+  "lastname": "rrrr",
+  "email": "leo.scherer@bla.ch",
+  "address": {
+    "street": "Strasse",
+    "number": "21",
+    "zipcode": "6000",
+    "city": "jh"
+  },
+  "phonenumber": "fadsfdsf0xxxxxx",
+  "position": "CIO",
+  "isAdmin": true,
+  "username": "leo.scherer"
+}
+
+###
+
 GET http://localhost:8081/person/{{id}}
 
 
