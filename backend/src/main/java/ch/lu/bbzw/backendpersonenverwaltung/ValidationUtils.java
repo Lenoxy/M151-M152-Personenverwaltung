@@ -3,6 +3,7 @@ package ch.lu.bbzw.backendpersonenverwaltung;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InAddressDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InCreatePersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InEditPersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InEditSelfDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutValidationAnswerDto;
 
 import java.util.HashSet;
@@ -38,6 +39,16 @@ public class ValidationUtils{
 
     private static OutValidationAnswerDto validateAddressCity(String city){
         return isNullOrBlank(city) ? OutValidationAnswerDto.ADDRESS_CITY_INVALID : null;
+    }
+
+    private static Set<OutValidationAnswerDto> validateAddress(InAddressDto addressDto){
+        Set<OutValidationAnswerDto> validationAnswerDtoSet = new HashSet<>();
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressStreet(addressDto.getStreet()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressNumber(addressDto.getNumber()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressZipcode(addressDto.getZipcode()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressCity(addressDto.getCity()));
+
+        return validationAnswerDtoSet;
     }
 
     private static OutValidationAnswerDto validatePosition(String position){
@@ -84,16 +95,15 @@ public class ValidationUtils{
         return validationAnswerDtoSet;
     }
 
-
-    private static Set<OutValidationAnswerDto> validateAddress(InAddressDto addressDto){
+    public static Set<OutValidationAnswerDto> validateEditSelfDto(InEditSelfDto editSelfDto){
         Set<OutValidationAnswerDto> validationAnswerDtoSet = new HashSet<>();
-        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressStreet(addressDto.getStreet()));
-        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressNumber(addressDto.getNumber()));
-        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressZipcode(addressDto.getZipcode()));
-        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateAddressCity(addressDto.getCity()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateFirstname(editSelfDto.getFirstname()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateLastname(editSelfDto.getLastname()));
+        validationAnswerDtoSet.addAll(validateAddress(editSelfDto.getAddress()));
 
         return validationAnswerDtoSet;
     }
+
 
     // Holy shit this is bad
     private static Set<OutValidationAnswerDto> addIfNotNull(Set<OutValidationAnswerDto> validationAnswerDtoSet, OutValidationAnswerDto toAdd){

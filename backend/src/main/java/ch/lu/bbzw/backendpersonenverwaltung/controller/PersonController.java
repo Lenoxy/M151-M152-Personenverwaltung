@@ -82,15 +82,27 @@ public class PersonController{
 
     // Security: Admin
     @PostMapping("/")
-    public boolean createPerson(@RequestBody InCreatePersonDto createPersonDto){
+    public Set<OutValidationAnswerDto> createPerson(@RequestBody InCreatePersonDto createPersonDto){
+        Set<OutValidationAnswerDto> validationAnswerDtoSet = ValidationUtils.validateCreatePersonDto(createPersonDto);
+        if(! validationAnswerDtoSet.isEmpty()){
+            return validationAnswerDtoSet;
+        }
+
         personRepository.save(createPersonDto.toEntity());
-        return true;
+        return Collections.emptySet();
     }
 
     // Security: User
     @PutMapping("/self")
-    public boolean editSelf(@RequestBody InEditSelfDto editSelfDto){
-        return false;
+    public Set<OutValidationAnswerDto> editSelf(@RequestBody InEditSelfDto editSelfDto){
+        Set<OutValidationAnswerDto> validation = ValidationUtils.validateEditSelfDto(editSelfDto);
+        if(!validation.isEmpty()){
+            return validation;
+        }
+
+
+
+        return Collections.emptySet();
     }
 
 }
