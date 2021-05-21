@@ -5,6 +5,8 @@ import ch.lu.bbzw.backendpersonenverwaltung.dto.in.*;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutValidationAnswerDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
+import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
+import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,7 @@ public class PersonController{
     }
 
     // Security: User
+    @ProtectedForRole(UserRole.USER)
     @GetMapping("/{id}")
     public InCreatePersonDto getPersonById(@PathVariable String id){
         return personRepository.findById(id).get().toCreatePersonDto();

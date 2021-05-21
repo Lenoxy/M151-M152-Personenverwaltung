@@ -47,4 +47,14 @@ public class JwtService{
             return null;
         }
     }
+
+    public Boolean isAdminFromClaim(String jwt){
+        try{
+            DecodedJWT decodedJWT = verifier.verify(jwt);
+            return decodedJWT.getClaim("is-admin").asBoolean();
+        }catch(JWTVerificationException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
