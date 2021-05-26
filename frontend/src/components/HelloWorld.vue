@@ -32,6 +32,8 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
   </div>
+
+  <md-button><router-link :to="'/login/'">Login</router-link></md-button>
 </template>
 
 <script lang="ts">

@@ -1,0 +1,14 @@
+package ch.lu.bbzw.backendpersonenverwaltung.dto.out;
+
+public enum OutValidationAnswerDto{
+    FIRSTNAME_INVALID,
+    LASTNAME_INVALID,
+    EMAIL_INVALID,
+    ADDRESS_STREET_INVALID,
+    ADDRESS_NUMBER_INVALID,
+    ADDRESS_ZIPCODE_INVALID,
+    ADDRESS_CITY_INVALID,
+    POSITION_INVALID,
+    PHONENUMBER_INVALID,
+    USERNAME_INVALID
+}

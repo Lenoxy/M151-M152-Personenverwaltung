@@ -1,0 +1,77 @@
+###
+POST http://localhost:8081/person/
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcy1hZG1pbiI6dHJ1ZSwiaXNzIjoibTE1MS1tMTUyLXBlcnNvbmVudmVyd2FsdHVuZyIsInVzZXIiOiJsZW8uc2NoZXJlciJ9.e0hBC4o5KgsgWCJpYv5PumBIrHaJyqLiKQBN4Uyi64A
+Content-Type: application/json
+
+{
+  "id": null,
+  "firstname": "Leo",
+  "lastname": "Scherer",
+  "email": "leo.scherer@bla.ch",
+  "address": {
+    "street": "Strasse",
+    "number": "21",
+    "zipcode": "6000",
+    "city": "Luzern"
+  },
+  "phonenumber": "0790000000",
+  "position": "CIO",
+  "isAdmin": true,
+  "username": "leo.scherer"
+}
+
+
+###
+
+PUT http://localhost:8081/person/609b7390c2f5d658844a4421
+Content-Type: application/json
+
+{
+  "firstname": "oooo",
+  "lastname": "rrrr",
+  "email": "leo.scherer@bla.ch",
+  "address": {
+    "street": "Strasse",
+    "number": "21",
+    "zipcode": "6000",
+    "city": "jh"
+  },
+  "phonenumber": "fadsfdsf0xxxxxx",
+  "position": "CIO",
+  "isAdmin": true,
+  "username": "leo.scherer"
+}
+
+###
+
+GET http://localhost:8081/person/60a5579e97964c326c78333b
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcy1hZG1pbiI6dHJ1ZSwiaXNzIjoibTE1MS1tMTUyLXBlcnNvbmVudmVyd2FsdHVuZyIsInVzZXIiOiJsZW8uc2NoZXJlciJ9.e0hBC4o5KgsgWCJpYv5PumBIrHaJyqLiKQBN4Uyi64A
+
+###
+GET http://localhost:8081/person/query/firstname/{{firstname}}
+
+###
+DELETE http://localhost:8081/person/60a4f34f86875528dd32b3b0
+
+###
+POST http://localhost:8081/auth/check-username
+
+leo.scherer
+
+###
+POST http://localhost:8081/auth/register
+Content-Type: application/json
+
+{
+  "username": "leo.scherer",
+  "password": "secureNotHashedPW"
+}
+
+###
+POST http://localhost:8081/auth/verify-password
+Content-Type: application/json
+
+{
+  "username": "leo.scherer",
+  "password": "secureNotHashedPW"
+}

@@ -32,7 +32,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Person321
-      MONGO_INITDB_DATABASE: person
     ports:
       - 27017:27017 # Remove in Prod
     networks:
