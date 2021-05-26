@@ -39,10 +39,10 @@ public class RolesInterceptor implements HandlerInterceptor{
                     return false;
                 }else if(isAdmin == true){
                     return true;
-                }else if (isAdmin == false){
+                }else{
                     return role == UserRole.USER;
                 }
-            }
+            } // Interceptor returns false if no Annotation is set -> Configure in InterceptorConfig.java
         }
         // True to proceed and false to stop the method call
         return false;
