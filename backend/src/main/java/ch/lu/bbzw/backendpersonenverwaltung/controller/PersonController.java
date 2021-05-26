@@ -33,7 +33,7 @@ public class PersonController{
         return personRepository.findById(id).get().toCreatePersonDto();
     }
 
-    // Security: User
+    @ProtectedForRole(UserRole.USER)
     @GetMapping("query/{property}/{value}")
     public List<InQueryPersonDto> query(@PathVariable InSearchByPropertyDto property, @PathVariable String value){
         List<InQueryPersonDto> queriedPersons = null;
@@ -55,13 +55,13 @@ public class PersonController{
         return queriedPersons;
     }
 
-    // Security: Admin
+    @ProtectedForRole(UserRole.ADMIN)
     @DeleteMapping("/{id}")
     public boolean removePerson(@PathVariable String id){
         return personRepository.removeById(id) != null;
     }
 
-    // Security: Admin
+    @ProtectedForRole(UserRole.ADMIN)
     @PutMapping("/{id}")
     public Set<OutValidationAnswerDto> editPerson(@PathVariable String id, @RequestBody InEditPersonDto editPersonDto){
         Set<OutValidationAnswerDto> validationAnswerDtoSet = ValidationUtils.validateEditPersonDto(editPersonDto);
@@ -83,7 +83,7 @@ public class PersonController{
         return Collections.emptySet();
     }
 
-    // Security: Admin
+    @ProtectedForRole(UserRole.ADMIN)
     @PostMapping("/")
     public Set<OutValidationAnswerDto> createPerson(@RequestBody InCreatePersonDto createPersonDto){
         Set<OutValidationAnswerDto> validationAnswerDtoSet = ValidationUtils.validateCreatePersonDto(createPersonDto);
@@ -95,17 +95,14 @@ public class PersonController{
         return Collections.emptySet();
     }
 
-    // Security: User
+    @ProtectedForRole(UserRole.USER)
     @PutMapping("/self")
     public Set<OutValidationAnswerDto> editSelf(@RequestBody InEditSelfDto editSelfDto){
         Set<OutValidationAnswerDto> validation = ValidationUtils.validateEditSelfDto(editSelfDto);
-        if(!validation.isEmpty()){
+        if(! validation.isEmpty()){
             return validation;
         }
 
-
-
         return Collections.emptySet();
     }
-
 }
