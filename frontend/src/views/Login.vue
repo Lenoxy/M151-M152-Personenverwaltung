@@ -8,19 +8,27 @@
       <label class="form-label">Username</label>
       <InputText type="text" v-model="username"/>
     </div>
-      <Button class="login-step" label="Login"/>
+    <Button class="login-step" label="Login" v-on:click="checkUser">
+      <router-link v-if="valid === null" :to="'/verify-password/'"></router-link>
+      <router-link v-if="valid" :to="'/verify-password/'"></router-link>
+      <router-link v-else :to="'/verify-password/'"></router-link>
+    </Button>
   </template>
 </Card>
-
 </template>
 
 <script lang="ts">
 import {Vue} from 'vue-class-component';
+import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 
 
 export default class Login extends Vue {
    private username = "" as string;
-   private password = "" as string;
+   private valid = false as boolean;
+
+  async checkUser() : Promise<void> {
+    await AuthEndpoints.methods.checkUser({username: this.username, password: ""});
+  }
 
 }
 
@@ -34,7 +42,7 @@ export default class Login extends Vue {
 }
 
 .login-step {
-  margin: 5% 5% auto auto;
+  margin: 1% auto;
 }
 
 .card {
@@ -44,7 +52,7 @@ export default class Login extends Vue {
 
 .title {
   display: block;
-  margin: 5% 5% auto auto;
+  margin: 5% auto;
 }
 
 </style>

@@ -6,7 +6,7 @@
     <template #content>
   <div class="login-step">
     <label class="form-label">Password</label>
-    <Password v-model="password">
+    <Password v-model="newPassword">
       <template #header>
         <h6>Pick a password</h6>
       </template>
@@ -23,34 +23,53 @@
       </template>
     </Password>
   </div>
-      <Button class="login-step" label="Set password"/>
+      <div class="login-step">
+        <label class="form-label">Confirm</label>
+        <Password :feedback="false" v-model="confirmPassword"/>
+      </div>
+      <Button class="login-step" label="Set password" v-on:click="setNewPassword"/>
     </template>
   </Card>
 </template>
 
-<script>
-export default {
-  name: "SetPassword"
+<script lang="ts">
+import {Vue} from "vue-class-component";
+import AuthEndpoints from "../mixins/auth/AuthEndpoints";
+
+export default class SetPassword extends Vue {
+  private newPassword = "" as string;
+  private confirmPassword = "" as string;
+
+  validatePassword(): boolean {
+    return this.newPassword === this.confirmPassword;
+  }
+
+  async setNewPassword(): Promise<void> {
+    this.validatePassword()
+        ? await AuthEndpoints.methods.register({username: "", password: this.newPassword})
+        : console.log('The 2 Fileds didint match');
+  }
+
+
+
 }
 </script>
 
 <style scoped>
-.form-component {
-  display: block;
-}
 
 .form-label {
-  display: block;
-  margin-right: 80pt;
+  display: grid;
+  margin-right: 90pt;
+  grid-auto-flow: column;
 }
 
 .login-step {
-  margin: 5% 5% auto auto;
+  margin: 1% auto;
 }
 
 .title {
   display: block;
-  margin: 5% 5% auto auto;
+  margin: 5% auto;
 }
 
 </style>
