@@ -6,7 +6,7 @@ import {ResetPasswordDto} from "@/mixins/auth/dto/reset.password.dto";
 
 export default {
     methods: {
-        async login(checkUserDto: CheckUserDto): Promise<void> {
+        async checkUser(checkUserDto: CheckUserDto): Promise<void> {
             await axios.post("http://localhost:8081/auth/check-username", {checkUserDto}, {withCredentials: true});
         },
         async register(registerDto: RegisterDto): Promise<void> {
