@@ -37,8 +37,8 @@ import {Vue} from "vue-class-component";
 import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 
 export default class SetPassword extends Vue {
-  private newPassword = "" as string;
-  private confirmPassword = "" as string;
+  private newPassword = "";
+  private confirmPassword = "";
 
   validatePassword(): boolean {
     return this.newPassword === this.confirmPassword;
@@ -47,10 +47,8 @@ export default class SetPassword extends Vue {
   async setNewPassword(): Promise<void> {
     this.validatePassword()
         ? await AuthEndpoints.methods.register({username: "", password: this.newPassword})
-        : console.log('The 2 Fileds didint match');
+        : console.log('The 2 Fields didnt match');
   }
-
-
 
 }
 </script>

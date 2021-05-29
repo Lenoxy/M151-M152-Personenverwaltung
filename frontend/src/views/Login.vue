@@ -23,11 +23,12 @@ import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 
 
 export default class Login extends Vue {
-   private username = "" as string;
-   private valid = false as boolean;
+   private username = "";
+   private valid = false;
+   private state: any;
 
   async checkUser() : Promise<void> {
-    await AuthEndpoints.methods.checkUser({username: this.username, password: ""});
+    this.state = await AuthEndpoints.methods.checkUser(this.username);
   }
 
 }

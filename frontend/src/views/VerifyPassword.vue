@@ -18,7 +18,7 @@ import {Vue} from "vue-class-component";
 import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 
 export default class VerifyPassword extends Vue {
-  private password = "" as string;
+  private password = "";
 
   async verifyPassword() : Promise<void> {
     await AuthEndpoints.methods.verifyPassword({username: "", password: this.password});
