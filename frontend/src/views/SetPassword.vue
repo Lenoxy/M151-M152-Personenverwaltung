@@ -1,4 +1,5 @@
 <template>
+  <Header></Header>
   <Card class="card">
     <template #title>
       <h1 class="title">Set Password</h1>
@@ -33,8 +34,15 @@
 </template>
 
 <script lang="ts">
-import {Vue} from "vue-class-component";
+import {Vue, Options} from "vue-class-component";
 import AuthEndpoints from "../mixins/auth/AuthEndpoints";
+import Header from "@/components/Header.vue";
+
+@Options({
+  components: {
+    Header
+  }
+})
 
 export default class SetPassword extends Vue {
   private newPassword = "";

@@ -25,6 +25,26 @@ const routes: Array<RouteRecordRaw> = [
     path: '/verify-password',
     name: 'Verify password',
     component: () => import('../views/VerifyPassword.vue')
+  },
+  {
+    path: '/create',
+    name: 'Create person',
+    component: () => import('../views/PersonCreate.vue')
+  },
+  {
+    path: '/list',
+    name: 'Person list',
+    component: () => import('../views/PersonList.vue')
+  },
+  {
+    path: '/edit',
+    name: 'Edit Person',
+    component: () => import('../views/PersonEdit.vue')
+  },
+  {
+    path: '/detail',
+    name: 'Person Detail',
+    component: () => import('../views/PersonDetail.vue')
   }
 ]
 
