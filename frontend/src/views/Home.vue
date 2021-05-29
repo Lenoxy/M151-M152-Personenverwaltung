@@ -15,7 +15,7 @@ import Header from '@/components/Header.vue';
   components: {
     HelloWorld,
     Header
-  },
+  }
 })
 export default class Home extends Vue {}
 </script>

@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 import {QueryPersonDto} from "@/mixins/person/dto/query.person.dto";
 import {GetPersonDto} from "@/mixins/person/dto/get.person.dto";
 import {EditPersonDto} from "@/mixins/person/dto/edit.person.dto";

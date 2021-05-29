@@ -1,6 +1,5 @@
 <template>
-  <Header></Header>
-  <Card class="card">
+  <Card>
     <template #title>
       <h1 class="title">Set Password</h1>
     </template>

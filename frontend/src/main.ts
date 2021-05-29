@@ -11,6 +11,8 @@ import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Card from 'primevue/card';
+import Listbox from 'primevue/listbox';
+import Dropdown from 'primevue/dropdown';
 
 
 
@@ -22,4 +24,6 @@ createApp(App)
     .component('Button', Button)
     .component('InputText', InputText)
     .component('Password', Password)
+    .component('Listbox', Listbox)
+    .component('Dropdown', Dropdown)
     .mount('#app')
