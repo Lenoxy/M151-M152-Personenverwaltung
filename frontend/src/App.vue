@@ -34,4 +34,24 @@ Card {
 h1 {
   font-size: 16pt;
 }
+
+.title {
+  display: block;
+  margin: 5% auto;
+}
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+}
+@media screen and (max-width: 500px) {
+  .form {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 0 0;
+    width: 100%;
+  }
+}
 </style>

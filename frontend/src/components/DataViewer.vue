@@ -1,13 +1,11 @@
 <template>
-<div>
-  <i class="pi pi-plus" style="fontSize: 2rem"></i>
-</div>
+<div></div>
 </template>
 
 <script lang="ts">
 import {Vue} from "vue-class-component";
 
-export default class AddUserIcon extends Vue {}
+export default class DataViewer extends Vue{}
 </script>
 
 <style scoped>

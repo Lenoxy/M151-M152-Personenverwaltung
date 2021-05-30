@@ -72,9 +72,4 @@ export default class SetPassword extends Vue {
   margin: 1% auto;
 }
 
-.title {
-  display: block;
-  margin: 5% auto;
-}
-
 </style>

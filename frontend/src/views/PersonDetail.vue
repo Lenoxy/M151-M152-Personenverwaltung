@@ -1,13 +1,37 @@
 <template>
-<div></div>
+  <UserProfileIcon></UserProfileIcon>
+  <Card>
+    <template #title>
+      <h1 class="title">Person XY Profile</h1>
+    </template>
+    <template #content>
+      <div class="form">
+        <DataTitle></DataTitle>
+      </div>
+    </template>
+  </Card>
+
 </template>
 
-<script>
-export default {
-  name: "PersonDetail"
+<script lang="ts">
+import {Options, Vue} from "vue-class-component";
+import DataTitle from "@/components/DataTitle.vue";
+import UserProfileIcon from "@/components/UserProfileIcon.vue";
+
+
+@Options({
+  components: {
+    DataTitle,
+    UserProfileIcon
+  }
+})
+
+export default class PersonDetail extends Vue{
+
 }
 </script>
 
 <style scoped>
+
 
 </style>

@@ -43,9 +43,4 @@ export default class VerifyPassword extends Vue {
 .login-step {
   margin: 1% auto;
 }
-
-.title {
-  display: block;
-  margin: 5% auto;
-}
 </style>

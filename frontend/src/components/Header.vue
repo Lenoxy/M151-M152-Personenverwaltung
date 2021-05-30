@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {Vue} from "vue-class-component";
 
 export default class Header extends Vue {}
@@ -15,6 +15,7 @@ export default class Header extends Vue {}
 .left-side-header {
   display: flex;
   float: left;
+  width: 100%;
 
 }
 img {

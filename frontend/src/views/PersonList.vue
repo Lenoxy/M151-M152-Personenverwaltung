@@ -1,4 +1,5 @@
 <template>
+  <UserProfileIcon></UserProfileIcon>
   <Card>
     <template #title>
       <h1 class="title">Person List</h1>
@@ -37,8 +38,12 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
+import UserProfileIcon from "@/components/UserProfileIcon.vue";
 
 @Options({
+  components : {
+    UserProfileIcon
+  },
   data() {
     return {
       selected: null,
