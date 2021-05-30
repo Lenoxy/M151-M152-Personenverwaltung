@@ -1,6 +1,6 @@
 <template>
   <div class="left-side-header">
-    <img src="../assets/logo.svg" alt="logo"><h1>People Management</h1>
+    <img src="../assets/logo.svg" alt="logo"><h1>Person Management</h1>
   </div>
 </template>
 

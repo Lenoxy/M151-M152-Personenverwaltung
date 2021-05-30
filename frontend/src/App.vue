@@ -46,6 +46,27 @@ h1 {
   width: 50%;
   margin: auto;
 }
+.labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.normal-label {
+  flex-grow: 1;
+  margin-top: 3pt;
+
+}
+.address-label {
+  flex-grow: 2;
+}
+
+.after-address-labels {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 3;
+  margin-bottom: 20pt;
+}
+
 @media screen and (max-width: 500px) {
   .form {
     display: flex;

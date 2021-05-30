@@ -19,24 +19,5 @@ export default class DataTitle extends Vue{}
 </script>
 
 <style scoped>
-.labels {
-  display: flex;
-  flex-direction: column;
-}
 
-.normal-label {
-  flex-grow: 1;
-  margin-top: 3pt;
-
-}
-.address-label {
-  flex-grow: 2;
-}
-
-.after-address-labels {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 3;
-  margin-bottom: 20pt;
-}
 </style>

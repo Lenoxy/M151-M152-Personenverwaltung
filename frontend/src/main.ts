@@ -14,6 +14,8 @@ import Card from 'primevue/card';
 import Listbox from 'primevue/listbox';
 import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
+import Sidebar from 'primevue/sidebar';
+import Menu from 'primevue/menu';
 
 
 
@@ -28,4 +30,6 @@ createApp(App)
     .component('Listbox', Listbox)
     .component('Dropdown', Dropdown)
     .component('InputNumber', InputNumber)
+    .component('Sidebar', Sidebar)
+    .component('Menu', Menu)
     .mount('#app')
