@@ -1,16 +1,16 @@
 <template>
   <div class="inputs">
-    <InputText type="text" class="normal-input"/>
-    <InputText type="text" class="normal-input"/>
-    <InputText type="email" class="normal-input"/>
+    <InputText type="text" class="normal-input" placeholder="John"/>
+    <InputText type="text" class="normal-input" placeholder="Doe"/>
+    <InputText type="email" class="normal-input" placeholder="example@xy.com"/>
     <div class="address-inputs">
-      <InputText type="text" class="street"/>
-      <InputText class="city" type="text"/>
-      <InputText class="zip" type="text"/>
+      <InputText type="text" class="street" placeholder="downing street 10"/>
+      <InputText class="city" type="text" placeholder="London"/>
+      <InputText class="zip" type="text" placeholder="9215"/>
     </div>
-    <InputNumber id="withoutgrouping" mode="decimal" :useGrouping="false" class="normal-input"/>
-    <InputText type="text" class="normal-input"/>
-    <InputText type="text" class="normal-input"/>
+    <InputText type="text" class="normal-input" placeholder="111 111 1111"/>
+    <InputText type="text" class="normal-input" placeholder="librarian"/>
+    <InputText type="text" class="normal-input" placeholder="john.doe"/>
     <Button class="save" label="Save"/>
   </div>
 </template>
