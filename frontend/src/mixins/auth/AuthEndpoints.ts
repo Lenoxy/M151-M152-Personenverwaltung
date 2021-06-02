@@ -7,18 +7,23 @@ import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
 export default {
     methods: {
         async checkUser(username: string): Promise<LoginResponseDto> {
-           return await axios.post("http://localhost:8081/auth/check-username", username, {withCredentials: true});
+            const answer = await axios.post<LoginResponseDto>("http://localhost:8081/auth/check-username", username, {
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            });
+            return answer.data;
         },
-        async register(registerDto: RegisterDto): Promise<void> {
-            await axios.post("http://localhost:8081/auth/register", {registerDto}, {withCredentials: true});
+        async register(registerDto: RegisterDto): Promise<string> {
+            return await axios.post("http://localhost:8081/auth/register", {registerDto});
 
         },
-        async verifyPassword(verifyPasswordDto: VerifyPasswordDto): Promise<void> {
-            await axios.post("http://localhost:8081/auth/verfy-password", {verifyPasswordDto}, {withCredentials: true});
+        async verifyPassword(verifyPasswordDto: VerifyPasswordDto): Promise<string> {
+            return await axios.post("http://localhost:8081/auth/verfy-password", {verifyPasswordDto});
 
         },
-        async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void> {
-            await axios.put("http://localhost:8081/auth/reset-password", {resetPasswordDto}, {withCredentials: true});
+        async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<string> {
+            return await axios.put("http://localhost:8081/auth/reset-password", {resetPasswordDto});
         }
     }
 }

@@ -20,7 +20,7 @@ import Menu from 'primevue/menu';
 
 
 createApp(App)
-    .use(store)
+    //.use(store)
     .use(router)
     .use(PrimeVue)
     .component('Card', Card)

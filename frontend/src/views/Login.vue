@@ -1,27 +1,27 @@
 <template>
-<Card>
-  <template #title>
-  <h1 class="title">Login</h1>
-  </template>
-  <template #content>
-    <div class="login-step">
-      <label class="form-label">Username</label>
-      <InputText type="text" v-model="username"/>
-    </div>
-    <Button class="login-step" v-on:click="checkUser">Login
-      <router-link v-if="state === 0" :to="'/verify-password/'"></router-link>
-      <router-link v-if="state === 1" :to="'/verify-password/'"></router-link>
-      <router-link v-if="state === 2" :to="'/verify-password/'"></router-link>
-    </Button>
-  </template>
-</Card>
+  <Card>
+    <template #title>
+      <h1 class="title">Login</h1>
+    </template>
+    <template #content>
+      <div class="login-step">
+        <label class="form-label">Username</label>
+        <InputText type="text" v-model="username"/>
+      </div>
+      <Button class="login-step" v-on:click="checkUser">
+        Login
+      </Button>
+    </template>
+  </Card>
 </template>
 
 <script lang="ts">
-import {Vue, Options} from 'vue-class-component';
+
+import {Options, Vue} from 'vue-class-component';
 import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
 import Header from '@/components/Header.vue';
+import router from '@/router';
 
 @Options({
   components: {
@@ -30,11 +30,19 @@ import Header from '@/components/Header.vue';
 })
 
 export default class Login extends Vue {
-   private username = "";
-   private state = LoginResponseDto.INVALID_USER;
+  private username = "";
+  private state: LoginResponseDto | undefined;
 
-  async checkUser() : Promise<void> {
-    this.state = await AuthEndpoints.methods.checkUser(this.username);
+  async checkUser(): Promise<void> {
+    this.state = LoginResponseDto[await AuthEndpoints.methods.checkUser(this.username)];
+    console.log(this.state);
+    if (this.state == LoginResponseDto.NEEDS_PASSWORD) {
+      router.push('/set-password');
+    } else if (this.state == LoginResponseDto.HAS_PASSWORD) {
+      router.push('/verify-password')
+    } else if (this.state == LoginResponseDto.INVALID_USER) {
+      // Show error
+    }
   }
 
 }

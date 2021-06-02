@@ -26,6 +26,7 @@ public class AuthenticationController{
     @PostMapping("/check-username")
     public OutLoginResponseDto checkUsername(@RequestBody String username){
         // Checks if the users password has been set
+        System.out.println(username);
         return authenticationService.checkRegistrationStatus(username);
     }
 
