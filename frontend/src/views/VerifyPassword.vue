@@ -6,7 +6,7 @@
     <template #content>
       <div class="login-step">
         <label class="form-label">Password</label>
-        <Password v-model="password" :feedback="false" />
+        <Password v-model="password" :feedback="false"/>
       </div>
       <Button class="login-step" label="Login" v-on:click="verifyPassword"/>
     </template>
@@ -14,22 +14,31 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options} from "vue-class-component";
+import {Options, Vue} from "vue-class-component";
 import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 import Header from "@/components/Header.vue";
+import store from "@/store"
 
 @Options({
   components: {
     Header
   }
+
 })
 
 
 export default class VerifyPassword extends Vue {
-  private password = "";
 
-  async verifyPassword() : Promise<void> {
-    await AuthEndpoints.methods.verifyPassword({username: "", password: this.password});
+  private password = "";
+  private jwtResponse: string | undefined;
+  private username = ""
+
+
+  async verifyPassword(): Promise<void> {
+    this.username = store.getters.username;
+    this.jwtResponse = await AuthEndpoints.methods.verifyPassword({username: this.username, password: this.password});
+    console.log(this.jwtResponse)
+    store.commit('updateJwt', this.jwtResponse);
   }
 }
 </script>

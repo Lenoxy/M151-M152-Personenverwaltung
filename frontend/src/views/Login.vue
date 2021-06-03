@@ -22,6 +22,7 @@ import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
 import Header from '@/components/Header.vue';
 import router from '@/router';
+import store from '@/store'
 
 @Options({
   components: {
@@ -37,9 +38,11 @@ export default class Login extends Vue {
     this.state = LoginResponseDto[await AuthEndpoints.methods.checkUser(this.username)];
     console.log(this.state);
     if (this.state == LoginResponseDto.NEEDS_PASSWORD) {
-      router.push('/set-password');
+      store.commit('updateUsername', this.username)
+      await router.push({path: '/set-password'});
     } else if (this.state == LoginResponseDto.HAS_PASSWORD) {
-      router.push('/verify-password')
+      store.commit('updateUsername', this.username)
+      await router.push({path: '/verify-password'})
     } else if (this.state == LoginResponseDto.INVALID_USER) {
       // Show error
     }

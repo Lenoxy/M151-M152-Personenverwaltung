@@ -15,13 +15,22 @@ export default {
             return answer.data;
         },
         async register(registerDto: RegisterDto): Promise<string> {
-            return await axios.post("http://localhost:8081/auth/register", {registerDto});
-
+            const answer = await axios.post<string>("http://localhost:8081/auth/register", registerDto, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return answer.data;
         },
         async verifyPassword(verifyPasswordDto: VerifyPasswordDto): Promise<string> {
-            return await axios.post("http://localhost:8081/auth/verfy-password", {verifyPasswordDto});
-
+            return (await axios.post<string>("http://localhost:8081/auth/verify-password", verifyPasswordDto, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+            ).data;
         },
+        // TODO
         async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<string> {
             return await axios.put("http://localhost:8081/auth/reset-password", {resetPasswordDto});
         }

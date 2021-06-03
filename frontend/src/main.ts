@@ -16,13 +16,16 @@ import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 import Sidebar from 'primevue/sidebar';
 import Menu from 'primevue/menu';
+import Menubar from 'primevue/menubar';
+
 
 
 
 createApp(App)
-    //.use(store)
+    .use(store)
     .use(router)
     .use(PrimeVue)
+    .component('Menubar', Menubar)
     .component('Card', Card)
     .component('Button', Button)
     .component('InputText', InputText)
