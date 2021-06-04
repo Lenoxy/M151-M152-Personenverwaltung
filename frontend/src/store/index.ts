@@ -1,8 +1,13 @@
 import {createStore} from 'vuex'
 import AuthEndpoints from '@/mixins/auth/AuthEndpoints';
 import {VerifyPasswordDto} from '@/mixins/auth/dto/verify.password.dto';
+import createPersistedState from "vuex-persistedstate";
+
 
 export default createStore({
+    plugins: [
+        createPersistedState({storage: window.sessionStorage})
+    ],
     state: {
         username: "",
         jwt: ""
