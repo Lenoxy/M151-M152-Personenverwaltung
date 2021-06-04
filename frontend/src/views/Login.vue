@@ -6,7 +6,7 @@
     <template #content>
       <div class="login-step">
         <label class="form-label">Username</label>
-        <InputText type="text" v-model="username"/>
+        <InputText type="text" v-model="username" v-on:keyup.enter="checkUser"/>
       </div>
       <Button class="login-step" v-on:click="checkUser">
         Login
@@ -45,6 +45,13 @@ export default class Login extends Vue {
       await router.push({path: '/verify-password'})
     } else if (this.state == LoginResponseDto.INVALID_USER) {
       // Show error
+    }
+  }
+
+  async created() {
+    let jwt = await store.getters.getJwt;
+    if (jwt !== '') {
+      await router.push('/list')
     }
   }
 

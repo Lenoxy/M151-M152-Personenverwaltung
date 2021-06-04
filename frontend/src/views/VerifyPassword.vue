@@ -6,7 +6,7 @@
     <template #content>
       <div class="login-step">
         <label class="form-label">Password</label>
-        <Password v-model="password" :feedback="false"/>
+        <Password v-model="password" :feedback="false" v-on:keyup.enter="verifyPassword" ref="verifyPassword"/>
       </div>
       <Button class="login-step" label="Login" v-on:click="verifyPassword()"/>
     </template>
@@ -26,10 +26,11 @@ export default class VerifyPassword extends Vue {
     let username = await store.getters.username;
 
     await store.dispatch('verifyPassword', {username: username, password: this.password} as VerifyPasswordDto)
-    console.log(await store.getters.getJwt)
+    await router.push('/list')
   }
 
   async created() {
+    //this.$refs.verifyPassword.focus();
     let username = await store.getters.username;
     if (username === '') {
       await router.push('/login')
