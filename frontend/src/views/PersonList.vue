@@ -6,7 +6,7 @@
     </template>
     <template #content>
       <div class="content">
-      <Dropdown :options="userDataFilter" optionLabel="name" :filter="true" placeholder="Filter by" class="filter" :showClear="true">
+      <Dropdown :options="userDataFilter" v-model="property" optionLabel="name" :filter="true" placeholder="Filter by" class="filter" :showClear="true">
         <template #value="slotProps">
           <div v-if="slotProps.value">
             <div>{{slotProps.value.name}}</div>
@@ -22,7 +22,7 @@
         </template>
       </Dropdown>
 
-      <Listbox v-model="selected" :options="templates" :multiple="true" :filter="true" optionLabel="name" listStyle="max-height:250px" class="search" filterPlaceholder="Search">
+      <Listbox v-model="value" :options="employees" v-on:input="searchPerson" :multiple="true" :filter="true" optionLabel="name" listStyle="max-height:250px" class="search" filterPlaceholder="Search">
         <template #option="slotProps">
           <div>
             <div>{{slotProps.option.name}}</div>
@@ -39,6 +39,7 @@
 import {Options, Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import UserProfileIcon from "@/components/UserProfileIcon.vue";
+import {QueryPersonDto} from "@/mixins/person/dto/query.person.dto";
 
 @Options({
   components : {
@@ -46,18 +47,11 @@ import UserProfileIcon from "@/components/UserProfileIcon.vue";
   },
   data() {
     return {
-      selected: null,
-      templates: [
-        {name: 'Stefan', lastname: 'Keller'},
-        {name: 'Anna', lastname: 'Baumann'},
-        {name: 'Otto', lastname: 'Heller'},
-      ],
       userDataFilter: [
         {name: 'firstname'},
         {name: 'lastname'},
         {name: 'email'},
-        {name: 'address'},
-        {name: 'phone'}
+        {name: 'address'}
       ]
     }
   }
@@ -66,9 +60,11 @@ import UserProfileIcon from "@/components/UserProfileIcon.vue";
 export default class PersonList extends Vue{
   private property = "";
   private value = "";
+  private employees :QueryPersonDto[]  = [];
 
-  searchPerson(): void {
-    PersonEndpoints.methods.getQuery(this.property, this.value);
+  async searchPerson(): Promise<void> {
+    console.log("changed")
+    this.employees = await PersonEndpoints.methods.getQuery(this.property, this.value);
   }
 }
 </script>
