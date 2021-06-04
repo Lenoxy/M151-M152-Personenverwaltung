@@ -7,7 +7,7 @@ import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
 export default {
     methods: {
         async checkUser(username: string): Promise<LoginResponseDto> {
-            const answer = await axios.post<LoginResponseDto>("http://localhost:8081/auth/check-username", username, {
+            const answer = await axios.post<LoginResponseDto>(process.env.VUE_APP_BACKEND + "auth/check-username", username, {
                 headers: {
                     'Content-Type': 'text/plain'
                 }
@@ -15,7 +15,7 @@ export default {
             return answer.data;
         },
         async register(registerDto: RegisterDto): Promise<string> {
-            const answer = await axios.post<string>("http://localhost:8081/auth/register", registerDto, {
+            const answer = await axios.post<string>(process.env.VUE_APP_BACKEND + "auth/register", registerDto, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -23,7 +23,7 @@ export default {
             return answer.data;
         },
         async verifyPassword(verifyPasswordDto: VerifyPasswordDto): Promise<string> {
-            return (await axios.post<string>("http://localhost:8081/auth/verify-password", verifyPasswordDto, {
+            return (await axios.post<string>(process.env.VUE_APP_BACKEND + "auth/verify-password", verifyPasswordDto, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -32,7 +32,7 @@ export default {
         },
         // TODO
         async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<string> {
-            return await axios.put("http://localhost:8081/auth/reset-password", {resetPasswordDto});
+            return await axios.put(process.env.VUE_APP_BACKEND + "auth/reset-password", {resetPasswordDto});
         }
     }
 }

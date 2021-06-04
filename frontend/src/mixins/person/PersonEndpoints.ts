@@ -4,31 +4,32 @@ import {GetPersonDto} from "@/mixins/person/dto/get.person.dto";
 import {EditPersonDto} from "@/mixins/person/dto/edit.person.dto";
 import {EditSelfPersonDto} from "@/mixins/person/dto/edit.self.person.dto";
 import {CreatePersonDto} from "@/mixins/person/dto/create.person.dto";
+import store from '@/store'
 
 export default {
     methods: {
-        async getPersonById(id: string): Promise<GetPersonDto>{
+        async getPersonById(id: string): Promise<GetPersonDto> {
             const response = await axios.get("http://localhost:8081/person/" + id);
             return response.data;
         },
-        async removePerson(id: string): Promise<void>{
-          await axios.delete("http://localhost:8081/person/" + id);
+        async removePerson(id: string): Promise<void> {
+            await axios.delete(process.env.VUE_APP_BACKEND + "person/" + id, {withCredentials: true});
         },
-        async editPerson(id: string, person: EditPersonDto): Promise<void>{
-          await axios.put("http://localhost:8081/person/" + id, {person});
+        async editPerson(id: string, person: EditPersonDto): Promise<void> {
+            await axios.put(process.env.VUE_APP_BACKEND + "person/" + id, {person}, {withCredentials: true});
         },
-        async createPerson(person: CreatePersonDto): Promise<void>{
-            await axios.post("http://localhost:8081/person/", {person});
+        async createPerson(person: CreatePersonDto): Promise<void> {
+            await axios.post(process.env.VUE_APP_BACKEND + "person/", {person}, {withCredentials: true});
         },
-        async editSelf(person: EditSelfPersonDto): Promise<void>{
-            await axios.put("http://localhost:8081/person/self", {person});
+        async editSelf(person: EditSelfPersonDto): Promise<void> {
+            await axios.put(process.env.VUE_APP_BACKEND + "person/self", {person}, {withCredentials: true});
         },
-        async getQuery(property: string, value: string): Promise<QueryPersonDto[]>{
-            const response = await axios.get("http://localhost:8081/person/query/" + property + "/" + value, {headers: {
-                    'Authorisation': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcy1hZG1pbiI6ZmFsc2UsImlzcyI6Im0xNTEtbTE1Mi1wZXJzb25lbnZlcndhbHR1bmciLCJ1c2VyIjoibGVvLnNjaGVyZXIifQ._zi_7VDWcdmkG_o3aIe85E75Gq_zDWvBbXk75hBjMxY'
+        async getQuery(property: string, value: string): Promise<QueryPersonDto[]> {
+            return (await axios.put(process.env.VUE_APP_BACKEND + "person/query/" + property + "/" + value, {
+                headers: {
+                    'Authorisation': store.getters.jwt,
                 }
-            });
-            return response.data;
+            })).data;
         },
 
     }
