@@ -1,5 +1,4 @@
 <template>
-  <UserProfileIcon></UserProfileIcon>
   <Card>
     <template #title>
       <h1 class="title">Person XY Profile</h1>
