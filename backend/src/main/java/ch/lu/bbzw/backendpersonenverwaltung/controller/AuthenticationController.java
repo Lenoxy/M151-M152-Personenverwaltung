@@ -5,6 +5,8 @@ import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutLoginResponseDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.service.AuthenticationService;
 import ch.lu.bbzw.backendpersonenverwaltung.service.JwtService;
+import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
+import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,7 @@ public class AuthenticationController{
     @PostMapping("/check-username")
     public OutLoginResponseDto checkUsername(@RequestBody String username){
         // Checks if the users password has been set
+        System.out.println(username);
         return authenticationService.checkRegistrationStatus(username);
     }
 
@@ -47,6 +50,7 @@ public class AuthenticationController{
 
     }
 
+    @ProtectedForRole(UserRole.USER)
     @PutMapping("/reset-password")
     public boolean resetPassword(@RequestBody String oldPassword, @RequestBody String newPassword){
         return false;

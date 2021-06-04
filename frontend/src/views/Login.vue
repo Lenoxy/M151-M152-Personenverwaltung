@@ -1,37 +1,61 @@
 <template>
-<Card class="card">
-  <template #title>
-  <h1 class="title">Login</h1>
-  </template>
-  <template #content>
-    <div class="login-step">
-      <label class="form-label">Username</label>
-      <InputText type="text" v-model="username"/>
-    </div>
-    <Button class="login-step" label="Login" v-on:click="checkUser">
-      <router-link v-if="valid === null" :to="'/verify-password/'"></router-link>
-      <router-link v-if="valid" :to="'/verify-password/'"></router-link>
-      <router-link v-else :to="'/verify-password/'"></router-link>
-    </Button>
-  </template>
-</Card>
+  <Card>
+    <template #title>
+      <h1 class="title">Login</h1>
+    </template>
+    <template #content>
+      <div class="login-step">
+        <label class="form-label">Username</label>
+        <InputText type="text" v-model="username" v-on:keyup.enter="checkUser"/>
+      </div>
+      <Button class="login-step" v-on:click="checkUser">
+        Login
+      </Button>
+    </template>
+  </Card>
 </template>
 
 <script lang="ts">
-import {Vue} from 'vue-class-component';
-import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 
+import {Options, Vue} from 'vue-class-component';
+import AuthEndpoints from "../mixins/auth/AuthEndpoints";
+import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
+import Header from '@/components/Header.vue';
+import router from '@/router';
+import store from '@/store'
+
+@Options({
+  components: {
+    Header
+  }
+})
 
 export default class Login extends Vue {
-   private username = "" as string;
-   private valid = false as boolean;
+  private username = "";
+  private state: LoginResponseDto | undefined;
 
-  async checkUser() : Promise<void> {
-    await AuthEndpoints.methods.checkUser({username: this.username, password: ""});
+  async checkUser(): Promise<void> {
+    this.state = LoginResponseDto[await AuthEndpoints.methods.checkUser(this.username)];
+    console.log(this.state);
+    if (this.state == LoginResponseDto.NEEDS_PASSWORD) {
+      store.commit('updateUsername', this.username)
+      await router.push({path: '/set-password'});
+    } else if (this.state == LoginResponseDto.HAS_PASSWORD) {
+      store.commit('updateUsername', this.username)
+      await router.push({path: '/verify-password'})
+    } else if (this.state == LoginResponseDto.INVALID_USER) {
+      // Show error
+    }
+  }
+
+  async created() {
+    let jwt = await store.getters.getJwt;
+    if (jwt !== '') {
+      await router.push('/list')
+    }
   }
 
 }
-
 </script>
 
 <style scoped>
@@ -43,16 +67,6 @@ export default class Login extends Vue {
 
 .login-step {
   margin: 1% auto;
-}
-
-.card {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.title {
-  display: block;
-  margin: 5% auto;
 }
 
 </style>

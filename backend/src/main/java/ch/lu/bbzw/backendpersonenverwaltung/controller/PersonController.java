@@ -26,7 +26,6 @@ public class PersonController{
         this.personRepository = personRepository;
     }
 
-    // Security: User
     @ProtectedForRole(UserRole.USER)
     @GetMapping("/{id}")
     public InCreatePersonDto getPersonById(@PathVariable String id){

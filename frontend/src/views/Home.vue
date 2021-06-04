@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <h1>Fancy start page</h1>
+    <p>With uncentered logo</p>
+    <img alt="Vue logo" src="../assets/logo.svg" class="big">
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Header from '@/components/Header.vue';
 
 @Options({
   components: {
-    HelloWorld,
-  },
+    Header
+  }
 })
 export default class Home extends Vue {}
 </script>
+<style scoped>
+  .big{
+    width: 100%;
+  }
+</style>

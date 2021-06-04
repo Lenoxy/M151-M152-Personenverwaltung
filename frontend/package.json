@@ -1,11 +1,13 @@
 {
-  "name": "frontend",
+  "name": "personenverwaltung-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-watch": "vue-cli-service build --watch",
+    "serve": "vue-cli-service serve --watch --mode development",
+    "serve-prod": "vue-cli-service serve --mode production",
+    "build": "vue-cli-service build --mode development",
+    "build-prod": "vue-cli-service build --mode production",
+    "build-watch": "vue-cli-service build --mode development --watch",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -16,9 +18,10 @@
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
-    "vue-material": "^1.0.0-beta-15",
+    "vue-enums": "^1.0.0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",

@@ -1,0 +1,5 @@
+export enum LoginResponseDto {
+    NEEDS_PASSWORD = "NEEDS_PASSWORD",
+    HAS_PASSWORD = "HAS_PASSWORD",
+    INVALID_USER = "INVALID_USER"
+}

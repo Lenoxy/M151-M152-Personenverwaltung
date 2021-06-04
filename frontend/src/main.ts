@@ -11,6 +11,13 @@ import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Card from 'primevue/card';
+import Listbox from 'primevue/listbox';
+import Dropdown from 'primevue/dropdown';
+import InputNumber from 'primevue/inputnumber';
+import Sidebar from 'primevue/sidebar';
+import Menu from 'primevue/menu';
+import Menubar from 'primevue/menubar';
+
 
 
 
@@ -18,8 +25,14 @@ createApp(App)
     .use(store)
     .use(router)
     .use(PrimeVue)
+    .component('Menubar', Menubar)
     .component('Card', Card)
     .component('Button', Button)
     .component('InputText', InputText)
     .component('Password', Password)
+    .component('Listbox', Listbox)
+    .component('Dropdown', Dropdown)
+    .component('InputNumber', InputNumber)
+    .component('Sidebar', Sidebar)
+    .component('Menu', Menu)
     .mount('#app')
