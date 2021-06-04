@@ -21,9 +21,9 @@
             </div>
           </template>
         </Dropdown>
+        <Listbox v-model="value" :options="employees" v-on:input="searchPerson" :multiple="false" :filter="true"
+                 :optionLabel="property" listStyle="max-height:250px" class="search" filterPlaceholder="Search">
 
-        <Listbox v-model="value" :options="employees" v-on:input="searchPerson" :multiple="true" :filter="true"
-                 optionLabel="name" listStyle="max-height:250px" class="search" filterPlaceholder="Search">
           <template #option="slotProps">
             <div>
               <div>{{ slotProps.option.name }}</div>
@@ -60,8 +60,13 @@ export default class PersonList extends Vue {
   private employees: QueryPersonDto[] = [];
 
   async searchPerson(): Promise<void> {
-    console.log("changed")
+    console.log(this.value)
+    console.log("changed", this.property, this.value)
     this.employees = await PersonEndpoints.methods.getQuery(this.property, this.value);
+    console.log(this.employees)
+  }
+  created(){
+    this.searchPerson();
   }
 }
 </script>

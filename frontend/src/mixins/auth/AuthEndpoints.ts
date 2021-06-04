@@ -25,7 +25,7 @@ export default {
         async verifyPassword(verifyPasswordDto: VerifyPasswordDto): Promise<string> {
             return (await axios.post<string>(process.env.VUE_APP_BACKEND + "auth/verify-password", verifyPasswordDto, {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     }
                 })
             ).data;
