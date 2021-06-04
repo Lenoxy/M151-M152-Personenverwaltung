@@ -20,9 +20,8 @@ import router from '@/router';
 
 export default {
   computed: {
-    jwt: () =>  store.state.jwt
+    jwt: () => store.state.jwt
   },
-
   data: () => {
     return {
       notAuthItems: [
@@ -36,7 +35,6 @@ export default {
           label: 'Login',
           icon: PrimeIcons.SIGN_IN,
           to: '/login',
-          style: 'position: absolute; right: 10px;',
         }
       ],
       authItems: [
@@ -53,7 +51,6 @@ export default {
         {
           label: 'Profile',
           icon: PrimeIcons.USER,
-          style: 'position: absolute; right: 10px;',
           items: [
             {
               label: 'Edit Profile',
@@ -82,11 +79,6 @@ export default {
 </script>
 
 <style scoped>
-.p-menu-list {
-  color: green;
-  left: -200px !important;
-}
-
 .intro {
   display: flex;
   flex-direction: row;

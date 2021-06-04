@@ -12,19 +12,19 @@ export default {
             return response.data;
         },
         async removePerson(id: string): Promise<void>{
-          await axios.delete("http://localhost:8081/person/" + id, {withCredentials: true});
+          await axios.delete(process.env.VUE_APP_BACKEND + "person/" + id, {withCredentials: true});
         },
         async editPerson(id: string, person: EditPersonDto): Promise<void>{
-          await axios.put("http://localhost:8081/person/" + id, {person},{withCredentials: true});
+          await axios.put(process.env.VUE_APP_BACKEND + "person/" + id, {person},{withCredentials: true});
         },
         async createPerson(person: CreatePersonDto): Promise<void>{
-            await axios.post("http://localhost:8081/person/", {person},{withCredentials: true});
+            await axios.post(process.env.VUE_APP_BACKEND + "person/", {person},{withCredentials: true});
         },
         async editSelf(person: EditSelfPersonDto): Promise<void>{
-            await axios.put("http://localhost:8081/person/self", {person},{withCredentials: true});
+            await axios.put(process.env.VUE_APP_BACKEND + "person/self", {person},{withCredentials: true});
         },
         async getQuery(property: string, value: string): Promise<QueryPersonDto[]>{
-            const response = await axios.put("http://localhost:8081/person/query/" + property + "/" + value, {},{withCredentials: true});
+            const response = await axios.put(process.env.VUE_APP_BACKEND + "person/query/" + property + "/" + value, {},{withCredentials: true});
             return response.data;
         },
 

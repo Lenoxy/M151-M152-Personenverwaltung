@@ -14,18 +14,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import Header from "@/components/Header.vue";
+import {Vue} from "vue-class-component";
 import store from "@/store"
 import router from '@/router';
 import {VerifyPasswordDto} from '@/mixins/auth/dto/verify.password.dto';
-
-@Options({
-  components: {
-    Header
-  }
-})
-
 
 export default class VerifyPassword extends Vue {
   private password = "";
@@ -39,7 +31,7 @@ export default class VerifyPassword extends Vue {
 
   async created() {
     let username = await store.getters.username;
-    if (username === "") {
+    if (username === '') {
       await router.push('/login')
     }
   }
