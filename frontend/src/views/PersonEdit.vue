@@ -17,17 +17,16 @@
 import {Options, Vue} from "vue-class-component";
 import DataTitle from "@/components/DataTitle.vue";
 import DataEditor from "@/components/DataEditor.vue";
-import UserProfileIcon from "@/components/UserProfileIcon.vue";
 
 @Options({
   components: {
     DataTitle,
     DataEditor,
-    UserProfileIcon
   }
 })
 
-export default class PersonEdit extends Vue{}
+export default class PersonEdit extends Vue {
+}
 
 </script>
 

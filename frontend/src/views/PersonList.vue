@@ -6,30 +6,32 @@
     </template>
     <template #content>
       <div class="content">
-      <Dropdown :options="userDataFilter" optionLabel="name" :filter="true" placeholder="Filter by" class="filter" :showClear="true">
-        <template #value="slotProps">
-          <div v-if="slotProps.value">
-            <div>{{slotProps.value.name}}</div>
-          </div>
-          <span v-else>
-            {{slotProps.placeholder}}
+        <Dropdown :options="userDataFilter" optionLabel="name" :filter="true" placeholder="Filter by" class="filter"
+                  :showClear="true">
+          <template #value="slotProps">
+            <div v-if="slotProps.value">
+              <div>{{ slotProps.value.name }}</div>
+            </div>
+            <span v-else>
+            {{ slotProps.placeholder }}
           </span>
-        </template>
-        <template #option="slotProps">
-          <div>
-            <div>{{slotProps.option.name}}</div>
-          </div>
-        </template>
-      </Dropdown>
+          </template>
+          <template #option="slotProps">
+            <div>
+              <div>{{ slotProps.option.name }}</div>
+            </div>
+          </template>
+        </Dropdown>
 
-      <Listbox v-model="selected" :options="templates" :multiple="true" :filter="true" optionLabel="name" listStyle="max-height:250px" class="search" filterPlaceholder="Search">
-        <template #option="slotProps">
-          <div>
-            <div>{{slotProps.option.name}}</div>
-            <div>{{slotProps.option.lastname}}</div>
-          </div>
-        </template>
-      </Listbox>
+        <Listbox v-model="selected" :options="templates" :multiple="true" :filter="true" optionLabel="name"
+                 listStyle="max-height:250px" class="search" filterPlaceholder="Search">
+          <template #option="slotProps">
+            <div>
+              <div>{{ slotProps.option.name }}</div>
+              <div>{{ slotProps.option.lastname }}</div>
+            </div>
+          </template>
+        </Listbox>
       </div>
     </template>
   </Card>
@@ -38,12 +40,8 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
-import UserProfileIcon from "@/components/UserProfileIcon.vue";
 
 @Options({
-  components : {
-    UserProfileIcon
-  },
   data() {
     return {
       selected: null,
@@ -63,7 +61,7 @@ import UserProfileIcon from "@/components/UserProfileIcon.vue";
   }
 })
 
-export default class PersonList extends Vue{
+export default class PersonList extends Vue {
   private property = "";
   private value = "";
 
@@ -78,18 +76,20 @@ export default class PersonList extends Vue{
   display: block;
   margin: 5% auto;
 }
+
 .content {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin:auto;
+  margin: auto;
   width: 80%;
 }
-.search{
+
+.search {
   flex-grow: 9;
 }
 
-.filter{
+.filter {
   float: left;
   height: 20%;
   flex-grow: 1;

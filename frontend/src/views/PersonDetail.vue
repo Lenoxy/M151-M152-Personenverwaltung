@@ -17,14 +17,12 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import DataTitle from "@/components/DataTitle.vue";
-import UserProfileIcon from "@/components/UserProfileIcon.vue";
 import DataViewer from "@/components/DataViewer.vue";
 
 
 @Options({
   components: {
     DataTitle,
-    UserProfileIcon,
     DataViewer
   }
 })
