@@ -73,5 +73,5 @@ Content-Type: application/json
 
 {
   "username": "leo.scherer",
-  "password": "secureNotHashedPW"
+  "password": "hallovelo"
 }

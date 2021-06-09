@@ -34,19 +34,24 @@ export default {
         {
           label: 'Login',
           icon: PrimeIcons.SIGN_IN,
-          to: '/login',
+          to: 'login',
         }
       ],
       authItems: [
         {
           label: 'Home',
           icon: PrimeIcons.HOME,
-          to: '/',
+          to: '',
         },
         {
           label: 'Search',
           icon: PrimeIcons.SEARCH,
-          to: '/list',
+          to: 'list',
+        },
+        {
+          label: 'Create person',
+          icon: PrimeIcons.USER_PLUS,
+          to: 'create',
         },
         {
           label: 'Profile',

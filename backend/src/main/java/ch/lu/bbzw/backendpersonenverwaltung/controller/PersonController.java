@@ -32,6 +32,7 @@ public class PersonController{
         return personRepository.findById(id).get().toCreatePersonDto();
     }
 
+    // TODO UNUSED
     @ProtectedForRole(UserRole.USER)
     @GetMapping("query/{property}/{value}")
     public List<InQueryPersonDto> query(@PathVariable InSearchByPropertyDto property, @PathVariable String value){
@@ -52,6 +53,12 @@ public class PersonController{
                 break;
         }
         return queriedPersons;
+    }
+
+    @ProtectedForRole(UserRole.USER)
+    @GetMapping("/query")
+    public List<InQueryPersonDto> queryAll(){
+        return personRepository.findAll().stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
     }
 
     @ProtectedForRole(UserRole.ADMIN)

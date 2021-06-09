@@ -17,6 +17,10 @@ import InputNumber from 'primevue/inputnumber';
 import Sidebar from 'primevue/sidebar';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
+import Column from 'primevue/column';
+import TriStateCheckbox from 'primevue/tristatecheckbox';
+import DataTable from 'primevue/datatable';
+import Tooltip from 'primevue/tooltip';
 import Checkbox from 'primevue/checkbox';
 
 
@@ -27,6 +31,9 @@ createApp(App)
     .use(store)
     .use(router)
     .use(PrimeVue)
+    .component('Column', Column)
+    .component('TriStateCheckbox', TriStateCheckbox)
+    .component('DataTable', DataTable)
     .component('Menubar', Menubar)
     .component('Card', Card)
     .component('Button', Button)
@@ -37,5 +44,6 @@ createApp(App)
     .component('InputNumber', InputNumber)
     .component('Sidebar', Sidebar)
     .component('Menu', Menu)
+    .directive('Tooltip', Tooltip)
     .component('Checkbox', Checkbox)
     .mount('#app')

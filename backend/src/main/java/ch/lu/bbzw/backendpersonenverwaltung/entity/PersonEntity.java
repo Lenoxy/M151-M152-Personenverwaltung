@@ -61,7 +61,8 @@ public class PersonEntity{
                 id,
                 firstname,
                 lastname,
-                email
+                email,
+                isAdmin
         );
     }
 

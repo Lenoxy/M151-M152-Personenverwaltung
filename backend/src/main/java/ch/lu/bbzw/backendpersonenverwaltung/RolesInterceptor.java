@@ -6,6 +6,7 @@ import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,6 +26,12 @@ public class RolesInterceptor implements HandlerInterceptor{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+        // Allow preflight
+        if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
+            System.out.println("preflight allowed");
+            return true;
+        }
+
         String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if(jwt == null || ! jwtService.isJwtValid(jwt)){
