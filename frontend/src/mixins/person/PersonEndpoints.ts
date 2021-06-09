@@ -25,7 +25,6 @@ export default {
             await axios.put(process.env.VUE_APP_BACKEND + "person/self", {person}, {withCredentials: true});
         },
         async queryAll(): Promise<QueryPersonDto[]>{
-            console.log('jwt PersonEndpoints', store.getters.getJwt);
             return (await axios.get(process.env.VUE_APP_BACKEND + "person/query/", {
                 headers: {
                     'Authorization': store.getters.getJwt,

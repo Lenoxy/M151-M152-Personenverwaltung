@@ -33,12 +33,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/edit',
-    name: 'Edit Person',
+    name: 'Edit person',
     component: () => import('../views/PersonEdit.vue')
   },
   {
     path: '/detail',
-    name: 'Person Detail',
+    name: 'Person detail',
     component: () => import('../views/PersonDetail.vue')
   }
 ]

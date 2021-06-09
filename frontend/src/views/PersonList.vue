@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!--    <template #title>-->
-    <!--      <h1 class="title">Person List</h1>-->
-    <!--    </template>-->
+    <h1 class="title">Person List</h1>
     <div class="card">
       <DataTable :value="employees" :paginator="true" class="p-datatable-customers" :rows="10"
                  dataKey="id" v-model:filters="filter" filterDisplay="row" :loading="loading"
@@ -28,7 +26,7 @@
           </template>
           <template #filter="{filterModel,filterCallback}">
             <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter"
-                       :placeholder="`Search by name - `" v-tooltip.top.focus="'Hit enter key to filter'"/>
+                       placeholder="Search by name" v-tooltip.top.focus="'Hit enter key to filter'"/>
           </template>
         </Column>
         <Column header="Email" filterField="email" style="min-width:12rem">
@@ -68,18 +66,20 @@ import {FilterMatchMode} from "primevue/api";
         'name': {value: null, matchMode: FilterMatchMode.CONTAINS},
         'email': {value: null, matchMode: FilterMatchMode.CONTAINS},
         'admin': {value: null, matchMode: FilterMatchMode.EQUALS}
-      },
-      loading: false
+      }
     }
   }
 })
 
 export default class PersonList extends Vue {
   private employees: QueryPersonDto[] = [];
+  private loading = true;
 
   async searchPerson(): Promise<void> {
-    this.employees = await PersonEndpoints.methods.queryAll();
-    console.log(this.employees)
+    PersonEndpoints.methods.queryAll().then(e => {
+      this.employees = e;
+      this.loading = false
+    });
   }
 
   created() {
