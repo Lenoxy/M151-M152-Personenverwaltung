@@ -1,6 +1,6 @@
 export interface QueryPersonDto {
     id: string;
-    firstname: string;
-    lastname: string;
+    name: string
     email: string;
+    admin: boolean;
 }

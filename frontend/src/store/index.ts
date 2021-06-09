@@ -24,13 +24,13 @@ export default createStore({
         }
     },
     actions: {
-        verifyPassword(context, verifyPasswordDto: VerifyPasswordDto) {
-            context.commit('updateJwt', AuthEndpoints.methods.verifyPassword(verifyPasswordDto));
+        async verifyPassword(context, verifyPasswordDto: VerifyPasswordDto) {
+            context.commit('updateJwt', await AuthEndpoints.methods.verifyPassword(verifyPasswordDto));
         }
     },
     getters: {
         username: state => state.username,
-        getJwt: state => state.jwt,
-        isAuthenticated: state => state.jwt !== '',
+        getJwt: state => state.jwt
+
     }
 })

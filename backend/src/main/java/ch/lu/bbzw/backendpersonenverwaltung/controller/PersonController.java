@@ -32,7 +32,7 @@ public class PersonController{
         return personRepository.findById(id).get().toCreatePersonDto();
     }
 
-    // UNUSED
+    // TODO UNUSED
     @ProtectedForRole(UserRole.USER)
     @GetMapping("query/{property}/{value}")
     public List<InQueryPersonDto> query(@PathVariable InSearchByPropertyDto property, @PathVariable String value){

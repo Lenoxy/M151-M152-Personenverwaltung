@@ -5,14 +5,15 @@ import lombok.Getter;
 @Getter
 public class InQueryPersonDto{
     String id;
-    String firstname;
-    String lastname;
+    String name;
     String email;
+    boolean isAdmin;
 
-    public InQueryPersonDto(String id, String firstname, String lastname, String email){
+    public InQueryPersonDto(String id, String firstname, String lastname, String email, boolean isAdmin){
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.name = firstname + " " + lastname;
         this.email = email;
+        this.isAdmin = isAdmin;
+        System.out.println(isAdmin);
     }
 }

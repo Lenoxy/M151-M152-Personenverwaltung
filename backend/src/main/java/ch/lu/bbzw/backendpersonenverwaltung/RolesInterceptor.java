@@ -26,6 +26,7 @@ public class RolesInterceptor implements HandlerInterceptor{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+        // Allow preflight
         if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
             System.out.println("preflight allowed");
             return true;

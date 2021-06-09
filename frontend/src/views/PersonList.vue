@@ -40,10 +40,10 @@
                        placeholder="Search by email" v-tooltip.top.focus="'Filter as you type'"/>
           </template>
         </Column>
-        <Column field="isAdmin" header="Is Admin" dataType="boolean" style="min-width:6rem">
+        <Column field="admin" header="Is Admin" dataType="boolean" style="min-width:6rem">
           <template #body="{data}">
             <i class="pi"
-               :class="{'true-icon pi-check-circle': data.isAdmin, 'false-icon pi-times-circle': !data.isAdmin}"></i>
+               :class="{'true-icon pi-check-circle': data.admin, 'false-icon pi-times-circle': !data.admin}"></i>
           </template>
           <template #filter="{filterModel,filterCallback}">
             <TriStateCheckbox v-model="filterModel.value" @change="filterCallback()"/>
@@ -65,9 +65,9 @@ import {FilterMatchMode} from "primevue/api";
     return {
       filter: {
         'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
-        'name': {value: null, matchMode: FilterMatchMode.STARTS_WITH},
+        'name': {value: null, matchMode: FilterMatchMode.CONTAINS},
         'email': {value: null, matchMode: FilterMatchMode.CONTAINS},
-        'isAdmin': {value: null, matchMode: FilterMatchMode.EQUALS}
+        'admin': {value: null, matchMode: FilterMatchMode.EQUALS}
       },
       loading: false
     }
