@@ -17,6 +17,8 @@ import InputNumber from 'primevue/inputnumber';
 import Sidebar from 'primevue/sidebar';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
+import Checkbox from 'primevue/checkbox';
+
 
 
 
@@ -35,4 +37,5 @@ createApp(App)
     .component('InputNumber', InputNumber)
     .component('Sidebar', Sidebar)
     .component('Menu', Menu)
+    .component('Checkbox', Checkbox)
     .mount('#app')

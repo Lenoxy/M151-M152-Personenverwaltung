@@ -1,25 +1,51 @@
 <template>
   <div class="inputs">
-    <InputText type="text" class="normal-input" placeholder="John"/>
-    <InputText type="text" class="normal-input" placeholder="Doe"/>
-    <InputText type="email" class="normal-input" placeholder="example@xy.com"/>
+    <InputText type="text" class="normal-input" placeholder="John" v-model="firstname"/>
+    <InputText type="text" class="normal-input" placeholder="Doe" v-model="lastname"/>
+    <InputText type="email" class="normal-input" placeholder="example@xy.com" v-model="email"/>
     <div class="address-inputs">
-      <InputText type="text" class="street" placeholder="downing street 10"/>
-      <InputText class="city" type="text" placeholder="London"/>
-      <InputText class="zip" type="text" placeholder="9215"/>
+      <InputText type="text" class="street" placeholder="downing street 10" v-model="street"/>
+      <InputText class="city" type="text" placeholder="London" v-model="city"/>
+      <InputText class="zip" type="text" placeholder="9215" v-model="zip"/>
     </div>
-    <InputText type="text" class="normal-input" placeholder="111 111 1111"/>
-    <InputText type="text" class="normal-input" placeholder="librarian"/>
-    <InputText type="text" class="normal-input" placeholder="john.doe"/>
-    <Button class="save" label="Save"/>
+    <InputText type="text" class="normal-input" placeholder="111 111 1111" v-model="phone"/>
+    <InputText type="text" class="normal-input" placeholder="librarian" v-model="job"/>
+    <InputText type="text" class="normal-input" placeholder="john.doe" v-model="username"/>
+    <Checkbox v-model="isAdmin" :binary="true" />
+    <label>Admin</label>
+    <Button class="save" label="Save" v-on:click="createPerson"/>
   </div>
 </template>
 
 <script lang="ts">
 import {Vue} from "vue-class-component";
+import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 
 export default class DataEditor extends Vue {
+  private firstname = "";
+  private lastname = "";
+  private email = "";
+  private street = "";
+  private city = "";
+  private zip = "";
+  private phone = "";
+  private job = "";
+  private isAdmin = false;
+  private username = "";
 
+
+  async createPerson(): Promise<void> {
+    await PersonEndpoints.methods.createPerson({
+      firstname: this.firstname,
+      lastname: this.lastname,
+      email: this.email,
+      address: {street: this.street, number: "2", city: this.city, zipcode: this.zip},
+      phonenumber: this.phone,
+      position: this.job,
+      isAdmin: this.isAdmin,
+      username: this.username
+    })
+  }
 }
 </script>
 
