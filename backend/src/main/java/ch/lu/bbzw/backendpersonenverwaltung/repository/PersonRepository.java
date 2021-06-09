@@ -22,5 +22,7 @@ public interface PersonRepository extends CrudRepository<PersonEntity, String>{
 
     List<PersonEntity> findByEmailIgnoreCase(String email);
 
+    List<PersonEntity> findAll();
+
     String removeById(String id);
 }

@@ -24,10 +24,17 @@ export default {
         async editSelf(person: EditSelfPersonDto): Promise<void> {
             await axios.put(process.env.VUE_APP_BACKEND + "person/self", {person}, {withCredentials: true});
         },
-        async getQuery(property: string, value: string): Promise<QueryPersonDto[]> {
-            return (await axios.put(process.env.VUE_APP_BACKEND + "person/query/" + property + "/" + value, {
+        async queryAll(): Promise<QueryPersonDto[]>{
+            return (await axios.get(process.env.VUE_APP_BACKEND + "person/query/", {
                 headers: {
-                    'Authorisation': store.getters.jwt,
+                    'Authorization': store.getters.jwt,
+                }
+            })).data;
+        },
+        async getQuery(property: string, value: string): Promise<QueryPersonDto[]> {
+            return (await axios.get(process.env.VUE_APP_BACKEND + "person/query/" + property + "/" + value, {
+                headers: {
+                    'Authorization': store.getters.jwt,
                 }
             })).data;
         },
