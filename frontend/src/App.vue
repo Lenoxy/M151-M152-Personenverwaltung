@@ -36,45 +36,4 @@ Card {
 h1 {
   font-size: 16pt;
 }
-
-.title {
-  display: block;
-  margin: 5% auto;
-}
-.form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 50%;
-  margin: auto;
-}
-.labels {
-  display: flex;
-  flex-direction: column;
-}
-
-.normal-label {
-  flex-grow: 1;
-  margin-top: 3pt;
-
-}
-.address-label {
-  flex-grow: 2;
-}
-
-.after-address-labels {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 3;
-  margin-bottom: 20pt;
-}
-
-@media screen and (max-width: 500px) {
-  .form {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0 0 0 0;
-    width: 100%;
-  }
-}
 </style>

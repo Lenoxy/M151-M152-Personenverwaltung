@@ -1,11 +1,11 @@
 <template>
-  <div class="inputs">
+  <div class="form">
     <InputText type="text" class="normal-input" placeholder="John" v-model="firstname" :class="{'p-invalid': validations.includes('FIRSTNAME_INVALID')}"/>
     <InputText type="text" class="normal-input" placeholder="Doe" v-model="lastname" :class="{'p-invalid': validations.includes('LASTNAME_INVALID')}"/>
     <InputText type="email" class="normal-input" placeholder="example@xy.com" v-model="email" :class="{'p-invalid': validations.includes('EMAIL_INVALID')}"/>
     <div class="address-inputs">
       <InputText type="text" class="street" placeholder="downing street 10" v-model="street" :class="{'p-invalid': validations.includes('ADDRESS_STREET_INVALID')}"/>
-      <InputText class="city" type="text" placeholder="London" v-model="city" :class="{'p-invalid': validations.includes('ADDRESS_CITY_INVALID')}"/>
+      <InputText class="address-big" type="text" placeholder="London" v-model="city" :class="{'p-invalid': validations.includes('ADDRESS_CITY_INVALID')}"/>
       <InputText class="zip" type="text" placeholder="9215" v-model="zip" :class="{'p-invalid': validations.includes('ADDRESS_ZIPCODE_INVALID')}"/>
     </div>
     <InputText type="text" class="normal-input" placeholder="111 111 1111" v-model="phone" :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
@@ -36,7 +36,7 @@ export default class DataEditor extends Vue {
 
 
   async createPerson(): Promise<void> {
-    this.validations = (await PersonEndpoints.methods.createPerson({
+    this.validations = await PersonEndpoints.methods.createPerson({
       firstname: this.firstname,
       lastname: this.lastname,
       email: this.email,
@@ -45,14 +45,13 @@ export default class DataEditor extends Vue {
       position: this.job,
       isAdmin: this.isAdmin,
       username: this.username
-    }))
-    console.log(this.validations);
+    })
   }
 }
 </script>
 
 <style scoped>
-.inputs {
+.form {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -72,7 +71,7 @@ export default class DataEditor extends Vue {
   margin-bottom: 10pt;
 }
 
-.city{
+.address-big{
   width:70%;
 }
 
@@ -85,7 +84,7 @@ export default class DataEditor extends Vue {
 }
 
 @media screen and (max-width: 500px) {
-  .inputs {
+  .form {
     width: 70%;
   }
   .normal-input {
