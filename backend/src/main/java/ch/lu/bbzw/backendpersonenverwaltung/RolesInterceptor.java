@@ -42,14 +42,13 @@ public class RolesInterceptor implements HandlerInterceptor{
                 UserRole role = method.getAnnotation(ProtectedForRole.class).value();
                 Boolean isAdmin = jwtService.isAdminFromClaim(jwt);
 
-                if(isAdmin == null){
-                    return false;
-                }else if(isAdmin == true){
-                    return true;
-                }else{
-                    return role == UserRole.USER;
+                if(role == UserRole.ADMIN){
+                    return isAdmin;
                 }
-            } // Interceptor returns false if no Annotation is set -> Configure in InterceptorConfig.java
+                if(role == UserRole.USER){
+                    return isAdmin != null;
+                }
+            } // Interceptor returns false if no Annotation is set -> Configure unwanted paths in InterceptorConfig.java
         }
         // True to proceed and false to stop the method call
         return false;

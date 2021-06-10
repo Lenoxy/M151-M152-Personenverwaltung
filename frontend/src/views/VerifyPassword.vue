@@ -29,6 +29,7 @@ export default class VerifyPassword extends Vue {
     await router.push('/list')
   }
 
+  // Deny users arriving at this page directly
   async created() {
     //this.$refs.verifyPassword.focus();
     let username = await store.getters.username;

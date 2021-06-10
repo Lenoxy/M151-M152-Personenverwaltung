@@ -45,7 +45,7 @@ public class AuthenticationService{
         PersonEntity personEntity = personEntityOptional.get();
 
         if(personEntity.getPassword() != null){
-            System.out.println("Person with username " + username + "has their password set. User the login API for this use case.");
+            System.out.println("Person with username " + username + " has their password set. Use the login API for this use case.");
             return null;
         }
 

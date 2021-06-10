@@ -1,4 +1,5 @@
 <template>
+  <Toast/>
   <Header></Header>
   <router-view/>
 
@@ -8,6 +9,7 @@
 
 import {Options, Vue} from "vue-class-component";
 import Header from "@/components/Header.vue";
+import store from '@/store';
 
 @Options({
   components: {

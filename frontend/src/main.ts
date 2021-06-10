@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
@@ -22,15 +22,16 @@ import TriStateCheckbox from 'primevue/tristatecheckbox';
 import DataTable from 'primevue/datatable';
 import Tooltip from 'primevue/tooltip';
 import Checkbox from 'primevue/checkbox';
-
-
-
+import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
 
 
 createApp(App)
     .use(store)
     .use(router)
     .use(PrimeVue)
+    .use(ToastService)
+    .component('Toast', Toast)
     .component('Column', Column)
     .component('TriStateCheckbox', TriStateCheckbox)
     .component('DataTable', DataTable)

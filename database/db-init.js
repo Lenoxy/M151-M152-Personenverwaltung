@@ -29,6 +29,23 @@ db.personEntity.insertMany(
             "address": {
                 "street": "Strasse",
                 "number": "21",
+                "zipcode": "6000",
+                "city": "Attinghausen"
+            },
+            "email": "daniel.polgar@gmail.com",
+            "firstname": "Daniel",
+            "isAdmin": true,
+            "lastname": "Polgar",
+            "password": null,
+            "phonenumber": "0789876543",
+            "position": "Sekretär",
+            "username": "daniel.polgar"
+        },
+        {
+            "_class": "ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity",
+            "address": {
+                "street": "Strasse",
+                "number": "21",
                 "zipcode": "6030",
                 "city": "Ebikon"
             },

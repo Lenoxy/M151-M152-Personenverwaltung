@@ -14,6 +14,5 @@ public class InQueryPersonDto{
         this.name = firstname + " " + lastname;
         this.email = email;
         this.isAdmin = isAdmin;
-        System.out.println(isAdmin);
     }
 }

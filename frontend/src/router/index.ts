@@ -37,7 +37,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/PersonEdit.vue')
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'Person detail',
     component: () => import('../views/PersonDetail.vue')
   }

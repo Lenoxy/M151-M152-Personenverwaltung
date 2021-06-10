@@ -9,8 +9,11 @@ import store from '@/store'
 export default {
     methods: {
         async getPersonById(id: string): Promise<GetPersonDto> {
-            const response = await axios.get("http://localhost:8081/person/" + id);
-            return response.data;
+            return (await axios.get(process.env.VUE_APP_BACKEND + "person/" + id, {
+                headers: {
+                    'Authorization': store.getters.getJwt,
+                }
+            })).data;
         },
         async removePerson(id: string): Promise<void> {
             await axios.delete(process.env.VUE_APP_BACKEND + "person/" + id);
