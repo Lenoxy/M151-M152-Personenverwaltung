@@ -37,7 +37,7 @@
           <label class="normal-label">Username:</label>
           <InputText type="text" class="normal-input" placeholder="john.doe" v-model="person.username" disabled/>
           <label class="normal-label">Admin:</label>
-          <Checkbox v-model="person.isAdmin" :binary="true" disabled/>
+          <Checkbox v-model="person.admin" :binary="true" disabled/>
         </div>
       </section>
     </template>

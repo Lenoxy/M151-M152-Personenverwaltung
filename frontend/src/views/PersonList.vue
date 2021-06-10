@@ -5,7 +5,10 @@
       <DataTable :value="employees" :paginator="true" class="p-datatable-customers" :rows="10"
                  dataKey="id" v-model:filters="filter" filterDisplay="row" :loading="loading"
                  responsiveLayout="scroll"
-                 :globalFilterFields="['name','email','isAdmin']">
+                 :globalFilterFields="['name','email','isAdmin']"
+                 :row-hover="true"
+                 @row-click="rowSelect($event)"
+      >
         <template #header>
           <div class="p-d-flex p-jc-end">
             <span class="p-input-icon-left ">
@@ -57,6 +60,7 @@ import {Options, Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import {QueryPersonDto} from "@/mixins/person/dto/query.person.dto";
 import {FilterMatchMode} from "primevue/api";
+import router from '@/router';
 
 @Options({
   data() {
@@ -74,6 +78,11 @@ import {FilterMatchMode} from "primevue/api";
 export default class PersonList extends Vue {
   private employees: QueryPersonDto[] = [];
   private loading = true;
+
+  rowSelect($event: any) {
+    let id = $event.data.id;
+    router.push('/detail/' + id );
+  }
 
   async searchPerson(): Promise<void> {
     PersonEndpoints.methods.queryAll().then(e => {

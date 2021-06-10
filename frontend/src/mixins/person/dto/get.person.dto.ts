@@ -8,6 +8,6 @@ export interface GetPersonDto {
     address: AddressDto;
     phonenumber: string;
     position: string;
-    isAdmin: boolean;
+    admin: boolean;
     username: string;
 }
