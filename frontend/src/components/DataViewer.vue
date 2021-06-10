@@ -14,13 +14,7 @@
 
 <script lang="ts">
 export default {
-  props: {
-    id: String
-  },
-  created() {
-
-  }
-
+  props: ['person']
 }
 </script>
 

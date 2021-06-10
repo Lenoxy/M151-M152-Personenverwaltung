@@ -1,11 +1,11 @@
 <template>
-  <div class="inputs">
-    <InputText type="text" class="normal-input" placeholder="John" v-model="firstname"/>
+  <div class="form">
+    <InputText type="text" class="normal-input" placeholder="John" v-model="firstname" />
     <InputText type="text" class="normal-input" placeholder="Doe" v-model="lastname"/>
     <InputText type="email" class="normal-input" placeholder="example@xy.com" v-model="email"/>
     <div class="address-inputs">
       <InputText type="text" class="street" placeholder="downing street 10" v-model="street"/>
-      <InputText class="city" type="text" placeholder="London" v-model="city"/>
+      <InputText class="address-big" type="text" placeholder="London" v-model="city"/>
       <InputText class="zip" type="text" placeholder="9215" v-model="zip"/>
     </div>
     <InputText type="text" class="normal-input" placeholder="111 111 1111" v-model="phone"/>
@@ -50,7 +50,7 @@ export default class DataEditor extends Vue {
 </script>
 
 <style scoped>
-.inputs {
+.form {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -70,7 +70,7 @@ export default class DataEditor extends Vue {
   margin-bottom: 10pt;
 }
 
-.city{
+.address-big{
   width:70%;
 }
 
@@ -83,7 +83,7 @@ export default class DataEditor extends Vue {
 }
 
 @media screen and (max-width: 500px) {
-  .inputs {
+  .form {
     width: 70%;
   }
   .normal-input {
