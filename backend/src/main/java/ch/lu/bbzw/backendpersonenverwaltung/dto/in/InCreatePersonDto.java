@@ -4,7 +4,7 @@ import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import lombok.Getter;
 
 @Getter
-public class InCreatePersonDto{
+public class InCreatePersonDto {
     String firstname;
     String lastname;
     String email;
@@ -14,7 +14,7 @@ public class InCreatePersonDto{
     boolean isAdmin;
     String username;
 
-    public InCreatePersonDto(String firstname, String lastname, String email, InAddressDto address, String phonenumber, String position, boolean isAdmin, String username){
+    public InCreatePersonDto(String firstname, String lastname, String email, InAddressDto address, String phonenumber, String position, boolean isAdmin, String username) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -25,7 +25,10 @@ public class InCreatePersonDto{
         this.username = username;
     }
 
-    public PersonEntity toEntity(){
+    public InCreatePersonDto() {
+    }
+
+    public PersonEntity toEntity() {
         return new PersonEntity(
                 null,
                 firstname,

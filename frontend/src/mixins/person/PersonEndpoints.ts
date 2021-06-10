@@ -21,12 +21,12 @@ export default {
         async editPerson(id: string, person: EditPersonDto): Promise<void> {
             await axios.put(process.env.VUE_APP_BACKEND + "person/" + id, {person});
         },
-        async createPerson(person: CreatePersonDto): Promise<void> {
-            await axios.post(process.env.VUE_APP_BACKEND + "person/", {person}, {
+        async createPerson(person: CreatePersonDto): Promise<string[]> {
+            return (await axios.post(process.env.VUE_APP_BACKEND + "person/", person, {
                 headers: {
-                    'Authorisation': store.getters.jwt,
+                    'Authorization': store.getters.getJwt,
                 }
-            });
+            })).data;
         },
         async editSelf(person: EditSelfPersonDto): Promise<void> {
             await axios.put(process.env.VUE_APP_BACKEND + "person/self", {person});

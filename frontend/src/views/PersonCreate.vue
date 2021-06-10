@@ -15,7 +15,7 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import DataTitle from "@/components/DataTitle.vue";
-import DataEditor from "@/components/DataEditor.vue";
+import DataEditor from "@/components/DataCreator.vue";
 
 @Options({
   components: {
