@@ -1,9 +1,12 @@
 package ch.lu.bbzw.backendpersonenverwaltung.service;
 
+import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotAuthorizedException;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutLoginResponseDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +15,8 @@ import java.util.Optional;
 public class AuthenticationService{
 
     private final PersonRepository personRepository;
+
+    public PasswordEncoder encoder = new Pbkdf2PasswordEncoder("terces");
 
     @Autowired
     public AuthenticationService(PersonRepository personRepository){
@@ -32,8 +37,15 @@ public class AuthenticationService{
     }
 
     public PersonEntity login(String username, String password){
-        Optional<PersonEntity> personEntity = personRepository.findByUsernameIgnoreCaseAndPasswordIgnoreCase(username, password);
-        return personEntity.orElse(null);
+        PersonEntity personEntity = personRepository.findByUsernameIgnoreCase(username)
+                .orElseThrow(NotAuthorizedException::new);
+
+        if(encoder.matches(password, personEntity.getPassword())){
+            return personEntity;
+        }else{
+            throw new NotAuthorizedException();
+        }
+
     }
 
     public PersonEntity initialLogin(String username, String password){
@@ -49,7 +61,7 @@ public class AuthenticationService{
             return null;
         }
 
-        personEntity.setPassword(password);
+        personEntity.setPassword(encoder.encode(password));
         return personRepository.save(personEntity);
     }
 

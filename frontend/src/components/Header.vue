@@ -3,7 +3,7 @@
 
     <Menubar v-bind:model="jwt === '' ? notAuthItems : authItems" class="menubar">
       <template #start>
-        <div class="intro">
+        <div class="intro" v-on:click="routeToList">
           <img src="../assets/logo.svg" alt="logo">
           <h2>Person Management</h2>
         </div>
@@ -20,7 +20,7 @@ import router from '@/router';
 
 export default {
   computed: {
-    jwt: () => store.state.jwt
+    jwt: () => store.getters.getJwt
   },
   data: () => {
     return {
@@ -34,24 +34,24 @@ export default {
         {
           label: 'Login',
           icon: PrimeIcons.SIGN_IN,
-          to: 'login',
+          to: '/login',
         }
       ],
       authItems: [
         {
           label: 'Home',
           icon: PrimeIcons.HOME,
-          to: '',
+          to: '/',
         },
         {
           label: 'Search',
           icon: PrimeIcons.SEARCH,
-          to: 'list',
+          to: '/list',
         },
         {
           label: 'Create person',
           icon: PrimeIcons.USER_PLUS,
-          to: 'create',
+          to: '/create',
         },
         {
           label: 'Profile',
@@ -59,12 +59,12 @@ export default {
           items: [
             {
               label: 'Edit Profile',
-              to: 'edit',
+              to: '/edit',
               icon: PrimeIcons.USER_EDIT
             },
             {
               label: 'Change Password',
-              to: 'set-password',
+              to: '/set-password',
               icon: PrimeIcons.KEY
             },
             {
@@ -78,6 +78,11 @@ export default {
           ]
         },
       ],
+    }
+  },
+  methods: {
+    routeToList() {
+      router.push('/list');
     }
   }
 }

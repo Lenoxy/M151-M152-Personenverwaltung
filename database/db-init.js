@@ -19,7 +19,7 @@ db.personEntity.insertMany(
             "firstname": "Leo",
             "isAdmin": true,
             "lastname": "Scherer",
-            "password": "hallovelo",
+            "password": "243ab44b06e2ed10107bbf71c3a31f0ba3169d1e12fd9e5826fdfe4b771991ed4009a3cdcea46c22",
             "phonenumber": "0790000000",
             "position": "CIO",
             "username": "leo.scherer"
@@ -53,7 +53,7 @@ db.personEntity.insertMany(
             "firstname": "Sheev",
             "isAdmin": false,
             "lastname": "Palpatine",
-            "password": "hallovelo",
+            "password": null,
             "phonenumber": "0000000000",
             "position": "Chairman",
             "username": "darth.sidious"
@@ -70,7 +70,7 @@ db.personEntity.insertMany(
             "firstname": "Anakin",
             "isAdmin": false,
             "lastname": "Skywalker",
-            "password": "hallovelo",
+            "password": "23ed036b4bcfdc3c788ef431ca79fecce1597752c0738fac0f894e9dc4504699c481d697a13a7b6e",
             "phonenumber": "0000000000",
             "position": "Jedi Knight",
             "username": "anakin.skywalker"

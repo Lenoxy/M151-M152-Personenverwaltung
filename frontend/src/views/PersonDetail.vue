@@ -66,9 +66,7 @@ export default class PersonDetail extends Vue {
 
   created() {
     let id: string = this.$route.params.id.toString();
-    console.log(id)
     PersonEndpoints.methods.getPersonById(id).then((p) => {
-      console.log(p)
       this.person = p;
       this.loading = false;
     });

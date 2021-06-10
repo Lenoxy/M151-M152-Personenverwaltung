@@ -18,7 +18,9 @@ public class AuthenticationController{
     private final JwtService jwtService;
 
     @Autowired
-    public AuthenticationController(final AuthenticationService authenticationService, final JwtService jwtService){
+    public AuthenticationController(
+            final AuthenticationService authenticationService,
+            final JwtService jwtService){
         this.authenticationService = authenticationService;
         this.jwtService = jwtService;
     }
@@ -26,7 +28,6 @@ public class AuthenticationController{
     @PostMapping("/check-username")
     public OutLoginResponseDto checkUsername(@RequestBody String username){
         // Checks if the users password has been set
-        System.out.println(username);
         return authenticationService.checkRegistrationStatus(username);
     }
 
