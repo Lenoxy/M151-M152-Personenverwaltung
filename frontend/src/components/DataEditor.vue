@@ -58,10 +58,7 @@ export default class DataEditor extends Vue {
 
   created() {
      this.id = this.$route.params.id.toString();
-     console.log(this.$props)
-    console.log(this.id)
     PersonEndpoints.methods.getPersonById(this.id).then((p) => {
-      console.log(p)
       this.person = p;
       this.loading = false;
     });

@@ -15,8 +15,12 @@ export default {
                 }
             })).data;
         },
-        async removePerson(id: string): Promise<void> {
-            await axios.delete(process.env.VUE_APP_BACKEND + "person/" + id);
+        async removePerson(id: string): Promise<boolean> {
+            return(await axios.delete(process.env.VUE_APP_BACKEND + "person/" + id, {
+                headers: {
+                    'Authorization': store.getters.getJwt,
+                }
+            })).data;
         },
         async editPerson(id: string, person: EditPersonDto): Promise<string[]> {
             return (await axios.put(process.env.VUE_APP_BACKEND + "person/" + id, person, {
