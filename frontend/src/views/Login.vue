@@ -44,7 +44,7 @@ export default class Login extends Vue {
       store.commit('updateUsername', this.username)
       await router.push({path: '/verify-password'})
     } else if (this.state == LoginResponseDto.INVALID_USER) {
-      // Show error
+      this.$toast.add({severity: 'warn', summary: 'The specified user doesn\'t exist.', life: 3000});
     }
   }
 

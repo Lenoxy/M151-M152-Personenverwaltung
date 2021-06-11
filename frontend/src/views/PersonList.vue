@@ -50,6 +50,14 @@
             <TriStateCheckbox v-model="filterModel.value" @change="filterCallback()"/>
           </template>
         </Column>
+        <Column header="Edit">
+          <template #body="{data}" v-if="isAdmin">
+            <router-link :to="'/edit/' + data.id" class="edit-link">
+
+              <i class="pi true-icon pi-pencil"/>
+            </router-link>
+          </template>
+        </Column>
       </DataTable>
     </div>
   </div>
@@ -61,6 +69,7 @@ import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import {QueryPersonDto} from "@/mixins/person/dto/query.person.dto";
 import {FilterMatchMode} from "primevue/api";
 import router from '@/router';
+import store from '@/store'
 
 @Options({
   data() {
@@ -78,21 +87,23 @@ import router from '@/router';
 export default class PersonList extends Vue {
   private employees: QueryPersonDto[] = [];
   private loading = true;
+  private isAdmin: boolean = store.getters.isAdmin;
 
   rowSelect($event: any) {
     let id = $event.data.id;
-    router.push('/detail/' + id );
+    router.push('/detail/' + id);
   }
 
   async searchPerson(): Promise<void> {
     PersonEndpoints.methods.queryAll().then(e => {
       this.employees = e;
-      this.loading = false
+      this.loading = false;
     });
   }
 
   created() {
     this.searchPerson();
+
   }
 }
 </script>
@@ -120,4 +131,9 @@ export default class PersonList extends Vue {
   height: 20%;
   flex-grow: 1;
 }
+
+.edit-link{
+  color: black
+}
+
 </style>

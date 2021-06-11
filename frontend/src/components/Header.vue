@@ -3,7 +3,7 @@
 
     <Menubar v-bind:model="jwt === '' ? notAuthItems : authItems" class="menubar">
       <template #start>
-        <div class="intro" v-on:click="routeToList">
+        <div class="intro" v-on:click="onHomeClick">
           <img src="../assets/logo.svg" alt="logo">
           <h2>Person Management</h2>
         </div>
@@ -81,8 +81,8 @@ export default {
     }
   },
   methods: {
-    routeToList() {
-      router.push('/list');
+    onHomeClick() {
+      router.push(store.getters.getJwt === '' ? '/' : '/list')
     }
   }
 }

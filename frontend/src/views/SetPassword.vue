@@ -56,7 +56,7 @@ export default class SetPassword extends Vue {
   // Deny users arriving at this page directly
   async created() {
     //this.$refs.verifyPassword.focus();
-    let username = await store.getters.username;
+    let username = await store.getters.getUsername;
     if (username === '') {
       await router.push('/login')
     }
@@ -85,9 +85,9 @@ export default class SetPassword extends Vue {
 
   async setNewPassword(): Promise<void> {
     if (this.validatePassword()) {
-      let jwt: string = await AuthEndpoints.methods.register({username: store.getters.username, password: this.newPassword});
+      let jwt: string = await AuthEndpoints.methods.register({username: store.getters.getUsername, password: this.newPassword});
       store.commit('updateJwt', jwt)
-      this.$toast.add({severity: 'success', summary: 'Welcome ' + store.getters.username, life: 3000})
+      this.$toast.add({severity: 'success', summary: 'Welcome ' + store.getters.getUsername, life: 3000})
       await this.$router.push('list');
     }
   }

@@ -23,7 +23,7 @@ export default class VerifyPassword extends Vue {
   private password = "";
 
   async verifyPassword(): Promise<void> {
-    let username = await store.getters.username;
+    let username = await store.getters.getUsername;
 
     await store.dispatch('verifyPassword', {username: username, password: this.password} as VerifyPasswordDto)
     await router.push('/list')
@@ -32,7 +32,7 @@ export default class VerifyPassword extends Vue {
   // Deny users arriving at this page directly
   async created() {
     //this.$refs.verifyPassword.focus();
-    let username = await store.getters.username;
+    let username = await store.getters.getUsername;
     if (username === '') {
       await router.push('/login')
     }

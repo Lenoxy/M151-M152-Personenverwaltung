@@ -17,7 +17,7 @@ public class JwtService{
     private final JWTVerifier verifier = JWT.require(ALGORITHM)
             .withIssuer(ISSUER)
             .withClaimPresence("user")
-            .withClaimPresence("is-admin")
+            .withClaimPresence("isAdmin")
             .build();
 
 
@@ -25,7 +25,7 @@ public class JwtService{
         return JWT.create()
                 .withIssuer(ISSUER)
                 .withClaim("user", personEntity.getUsername())
-                .withClaim("is-admin", personEntity.isAdmin())
+                .withClaim("isAdmin", personEntity.isAdmin())
                 .sign(ALGORITHM);
     }
 
@@ -51,7 +51,7 @@ public class JwtService{
     public Boolean isAdminFromClaim(String jwt){
         try{
             DecodedJWT decodedJWT = verifier.verify(jwt);
-            return decodedJWT.getClaim("is-admin").asBoolean();
+            return decodedJWT.getClaim("isAdmin").asBoolean();
         }catch(JWTVerificationException e){
             e.printStackTrace();
             return null;
