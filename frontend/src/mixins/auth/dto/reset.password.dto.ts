@@ -1,3 +1,4 @@
 export interface ResetPasswordDto{
-    reset: string
+    oldPassword: string;
+    newPassword: string;
 }

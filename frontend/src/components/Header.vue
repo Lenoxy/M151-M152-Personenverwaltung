@@ -64,7 +64,7 @@ export default {
             },
             {
               label: 'Change Password',
-              to: '/set-password',
+              to: '/change-password',
               icon: PrimeIcons.KEY
             },
             {

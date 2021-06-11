@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/SetPassword.vue')
   },
   {
+    path: '/change-password',
+    name: 'Change password',
+    component: () => import('../views/ChangePassword.vue')
+  },
+  {
     path: '/verify-password',
     name: 'Verify password',
     component: () => import('../views/VerifyPassword.vue')

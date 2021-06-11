@@ -47,18 +47,19 @@ import router from '@/router';
     username: String
   }
 })
-
 export default class SetPassword extends Vue {
 
   private newPassword = "";
   private confirmPassword = "";
 
-  // Deny users arriving at this page directly
+  // Deny users arriving at this page directly without
   async created() {
-    //this.$refs.verifyPassword.focus();
-    let username = await store.getters.getUsername;
+    let username = store.getters.getUsername;
     if (username === '') {
-      await router.push('/login')
+      username = store.getters.getJwtData.user;
+      if (username === '') {
+        await router.push('/login')
+      }
     }
   }
 
@@ -85,7 +86,10 @@ export default class SetPassword extends Vue {
 
   async setNewPassword(): Promise<void> {
     if (this.validatePassword()) {
-      let jwt: string = await AuthEndpoints.methods.register({username: store.getters.getUsername, password: this.newPassword});
+      let jwt: string = await AuthEndpoints.methods.register({
+        username: store.getters.getUsername,
+        password: this.newPassword
+      });
       store.commit('updateJwt', jwt)
       this.$toast.add({severity: 'success', summary: 'Welcome ' + store.getters.getUsername, life: 3000})
       await this.$router.push('list');
