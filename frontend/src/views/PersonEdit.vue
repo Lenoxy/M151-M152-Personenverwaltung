@@ -4,22 +4,17 @@
       <h1 class="title">Edit User</h1>
     </template>
     <template #content>
-      <div class="form">
-        <DataTitle></DataTitle>
         <DataEditor></DataEditor>
-      </div>
     </template>
   </Card>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
-import DataTitle from "@/components/DataTitle.vue";
-import DataEditor from "@/components/DataCreator.vue";
+import DataEditor from "@/components/DataEditor.vue";
 
 @Options({
   components: {
-    DataTitle,
     DataEditor,
   }
 })

@@ -20,7 +20,7 @@
             <InputText type="text" class="address-big normal-input" placeholder="Downing street"
                        v-model="person.address.street"
                        disabled/>
-            <InputText type="text" class="address-small normal-input" placeholder="10" v-model="person.address.street"
+            <InputText type="text" class="address-small normal-input" placeholder="10" v-model="person.address.number"
                        disabled/>
           </div>
           <div/>
@@ -46,19 +46,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import DataTitle from "@/components/DataTitle.vue";
-import DataViewer from "@/components/DataViewer.vue";
+import {Vue} from "vue-class-component";
 import PersonEndpoints from '@/mixins/person/PersonEndpoints';
 import {GetPersonDto} from '@/mixins/person/dto/get.person.dto';
 
-
-@Options({
-  components: {
-    DataTitle,
-    DataViewer
-  }
-})
 
 export default class PersonDetail extends Vue {
   private person!: GetPersonDto;
@@ -89,7 +80,7 @@ export default class PersonDetail extends Vue {
   grid-template-rows: repeat(8, 50px);
 }
 
-label {
+.normal-label {
   grid-column: 1;
   align-self: center;
   text-align: left;
