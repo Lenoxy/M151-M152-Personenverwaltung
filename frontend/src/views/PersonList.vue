@@ -13,7 +13,7 @@
           <div class="p-d-flex p-jc-end">
             <span class="p-input-icon-left ">
                 <i class="pi pi-search"/>
-                <InputText v-model="filter['global'].value" placeholder="Keyword Search"/>
+                <InputText v-model="filter['global'].value" placeholder="Search"/>
             </span>
           </div>
         </template>
@@ -111,7 +111,7 @@ export default class PersonList extends Vue {
 <style scoped>
 .title {
   display: block;
-  margin: 5% auto;
+  margin: 2% auto;
 }
 
 .content {

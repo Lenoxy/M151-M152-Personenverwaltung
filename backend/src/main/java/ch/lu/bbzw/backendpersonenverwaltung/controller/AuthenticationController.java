@@ -1,5 +1,6 @@
 package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.ChangePasswordDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InLoginDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutLoginResponseDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
@@ -8,6 +9,7 @@ import ch.lu.bbzw.backendpersonenverwaltung.service.JwtService;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -53,8 +55,15 @@ public class AuthenticationController{
 
     @ProtectedForRole(UserRole.USER)
     @PutMapping("/reset-password")
-    public boolean resetPassword(@RequestBody String oldPassword, @RequestBody String newPassword){
-        return false;
+    public boolean resetPassword(
+            @RequestBody ChangePasswordDto changePasswordDto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String jwt
+    ){
+        authenticationService.changePassword(
+                jwtService.getUserNameFromClaim(jwt),
+                changePasswordDto.getOldPassword(),
+                changePasswordDto.getNewPassword());
+        return true;
     }
 
 }

@@ -1,10 +1,12 @@
 package ch.lu.bbzw.backendpersonenverwaltung.service;
 
 import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotAuthorizedException;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotFoundException;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutLoginResponseDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -63,6 +65,16 @@ public class AuthenticationService{
 
         personEntity.setPassword(encoder.encode(password));
         return personRepository.save(personEntity);
+    }
+
+    public void changePassword(String username, String oldPasswordTypedByUser, String newPassword){
+        PersonEntity personEntity = personRepository.findByUsernameIgnoreCase(username).orElseThrow(NotFoundException::new);
+        if(!encoder.matches(oldPasswordTypedByUser, personEntity.getPassword())){
+            throw new NotAuthorizedException();
+        }
+
+        personEntity.setPassword(encoder.encode(newPassword));
+        personRepository.save(personEntity);
     }
 
 }
