@@ -22,11 +22,11 @@ public class ValidationUtils{
     }
 
     private static OutValidationAnswerDto validateEmail(String email){
-        return isNullOrBlank(email) || ! email.matches("^(.+)@(.+)$") ? OutValidationAnswerDto.EMAIL_INVALID : null;
+        return isNullOrBlank(email) || ! email.trim().matches("^(.+)@(.+)$") ? OutValidationAnswerDto.EMAIL_INVALID : null;
     }
 
     private static OutValidationAnswerDto validateAddressStreet(String street){
-        return isNullOrBlank(street) || street.length() < 3 ? OutValidationAnswerDto.ADDRESS_STREET_INVALID : null;
+        return isNullOrBlank(street) || street.trim().length() < 3 ? OutValidationAnswerDto.ADDRESS_STREET_INVALID : null;
     }
 
     private static OutValidationAnswerDto validateAddressNumber(String number){
@@ -34,7 +34,7 @@ public class ValidationUtils{
     }
 
     private static OutValidationAnswerDto validateAddressZipcode(String zipcode){
-        return isNullOrBlank(zipcode) || zipcode.length() < 4 ? OutValidationAnswerDto.ADDRESS_ZIPCODE_INVALID : null;
+        return isNullOrBlank(zipcode) || zipcode.trim().length() < 4 ? OutValidationAnswerDto.ADDRESS_ZIPCODE_INVALID : null;
     }
 
     private static OutValidationAnswerDto validateAddressCity(String city){
@@ -56,7 +56,7 @@ public class ValidationUtils{
     }
 
     private static OutValidationAnswerDto validatePhonenumber(String phonenumber){
-        return isNullOrBlank(phonenumber) || phonenumber.length() < 10 ? OutValidationAnswerDto.PHONENUMBER_INVALID : null;
+        return isNullOrBlank(phonenumber) || phonenumber.trim().length() < 10 ? OutValidationAnswerDto.PHONENUMBER_INVALID : null;
     }
 
     private static OutValidationAnswerDto validateIsAdmin(boolean isAdmin){
@@ -65,7 +65,7 @@ public class ValidationUtils{
     }
 
     private static OutValidationAnswerDto validateUsername(String username){
-        return isNullOrBlank(username) || username.length() < 3 ? OutValidationAnswerDto.USERNAME_INVALID : null;
+        return isNullOrBlank(username) || username.trim().length() < 3 ? OutValidationAnswerDto.USERNAME_INVALID : null;
     }
 
     public static Set<OutValidationAnswerDto> validateEditPersonDto(InEditPersonDto editPersonDto){
@@ -116,7 +116,7 @@ public class ValidationUtils{
 
     // Did I just not find the default implementation of this?
     private static boolean isNullOrBlank(String s){
-        return s == null || s.isEmpty();
+        return s == null || s.trim().isEmpty();
     }
 
 }

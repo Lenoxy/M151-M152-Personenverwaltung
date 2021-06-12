@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
+import{Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import {GetPersonDto} from "@/mixins/person/dto/get.person.dto";
 import router from '@/router';
