@@ -91,7 +91,7 @@ export default class SetPassword extends Vue {
         password: this.newPassword
       });
       store.commit('updateJwt', jwt)
-      this.$toast.add({severity: 'success', summary: 'Welcome ' + store.getters.getUsername, life: 3000})
+      this.$toast.add({severity: 'success', summary: 'Welcome, ' + store.getters.getUsername, life: 3000})
       await this.$router.push('list');
     }
   }

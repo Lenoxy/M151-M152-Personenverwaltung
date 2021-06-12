@@ -36,6 +36,14 @@ Card {
 }
 
 h1 {
+  font-size: 20pt;
+}
+
+h2 {
   font-size: 16pt;
+}
+
+h3 {
+  font-size: 12pt;
 }
 </style>
