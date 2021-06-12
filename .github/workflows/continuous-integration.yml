@@ -7,14 +7,26 @@ on:
 
 
 jobs:
-  build:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout-Repository
+        uses: actions/checkout@v2
+        
+      - name: Backend-build
+        run: | 
+          cd backend
+          gradle build
+          cd ..
+  
+  build-windows:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout-Repository
         uses: actions/checkout@v2
         
-      - name: Run-Backend-Tests
+      - name: Backend-build
         run: | 
           cd backend
           gradle build
