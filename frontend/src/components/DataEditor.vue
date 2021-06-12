@@ -34,10 +34,10 @@
                  :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
       <label class="normal-label">Position:</label>
       <InputText type="text" class="normal-input" placeholder="librarian" v-model="person.position"
-                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!person.admin"/>
+                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!isAdmin"/>
       <label class="normal-label">Username:</label>
       <InputText type="text" class="normal-input" placeholder="john.doe" v-model="person.username"
-                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" v-bind:disabled="!person.admin"/>
+                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" v-bind:disabled="!isAdmin"/>
       <label class="normal-label">Admin:</label>
       <Checkbox v-model="person.admin" :binary="true" disabled/>
       <div class="action-button-container">
@@ -60,20 +60,17 @@ import {GetPersonDto} from "@/mixins/person/dto/get.person.dto";
 import router from '@/router';
 import store from '@/store'
 
-@Options({
-  props: {
-    id: String
-  }
-})
-
 export default class DataEditor extends Vue {
 
   private validations: string[] = [];
   private id = '';
   private person!: GetPersonDto;
   private loading = true;
+  private isAdmin = false;
 
   created() {
+    this.isAdmin = store.getters.getJwtData.isAdmin
+
     let pathId = this.$route.params.id;
     if (pathId) {
       this.id = pathId.toString()
@@ -120,10 +117,6 @@ export default class DataEditor extends Vue {
 
   isCurrentUser(): boolean{
     return store.getters.getJwtData.id === this.id;
-  }
-
-  isAdmin(person: GetPersonDto): boolean {
-    return person.admin;
   }
 
 }

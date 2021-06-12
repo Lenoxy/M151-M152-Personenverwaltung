@@ -102,7 +102,10 @@ export default class PersonList extends Vue {
 
   created() {
     this.searchPerson();
-
+    let jwt = store.getters.getJwt;
+    if (jwt === '') {
+      router.push('/')
+    }
   }
 }
 </script>
