@@ -74,8 +74,14 @@ export default class DataEditor extends Vue {
   private loading = true;
 
   created() {
-    this.id = this.$route.params.id.toString();
+    let pathId = this.$route.params.id;
+    if (pathId) {
+      this.id = pathId.toString()
+    } else {
+      this.id = store.getters.getJwtData.id.toString();
+    }
     PersonEndpoints.methods.getPersonById(this.id).then((p) => {
+      console.log(p)
       this.person = p;
       this.loading = false;
     });

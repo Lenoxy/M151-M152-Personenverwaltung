@@ -56,7 +56,7 @@ export default {
           items: [
             {
               label: 'Edit Profile',
-              to: `/edit/${store.getters.getJwtData.id}`,
+              to: '/selfedit',
               icon: PrimeIcons.USER_EDIT
             },
             {
