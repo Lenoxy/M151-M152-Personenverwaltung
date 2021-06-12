@@ -48,6 +48,7 @@
 import {Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import router from '@/router';
+import store from "@/store";
 
 export default class DataEditor extends Vue {
   private firstname = "";
@@ -82,6 +83,15 @@ export default class DataEditor extends Vue {
 
     }catch (e) {
       this.$toast.add({severity: 'warn', summary: 'This username or email already exists ', life: 3000})
+    }
+  }
+
+  created() {
+    let jwt = store.getters.getJwt;
+    let isAdmin = store.getters.getJwtData.isAdmin
+
+    if (jwt === '' || !isAdmin) {
+       router.push('/')
     }
   }
 }

@@ -34,10 +34,10 @@
                  :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
       <label class="normal-label">Position:</label>
       <InputText type="text" class="normal-input" placeholder="Librarian" v-model="person.position"
-                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!person.admin"/>
+                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!isAdmin"/>
       <label class="normal-label">Username:</label>
       <InputText type="text" class="normal-input" placeholder="john.doe" v-model="person.username"
-                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" v-bind:disabled="!person.admin"/>
+                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" v-bind:disabled="!isAdmin"/>
       <label class="normal-label">Admin:</label>
       <Checkbox v-model="person.admin" :binary="true" disabled/>
       <div class="action-button-container">
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
+import{Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import {GetPersonDto} from "@/mixins/person/dto/get.person.dto";
 import router from '@/router';
@@ -63,12 +63,6 @@ import {EditPersonDto} from '@/mixins/person/dto/edit.person.dto';
 import {AddressDto} from '@/mixins/person/dto/address.dto';
 import {EditSelfPersonDto} from '@/mixins/person/dto/edit.self.person.dto';
 
-@Options({
-  props: {
-    id: String
-  }
-})
-
 export default class DataEditor extends Vue {
 
   private validations: string[] = [];
@@ -76,8 +70,11 @@ export default class DataEditor extends Vue {
   private person!: GetPersonDto;
   private loading = true;
   private isEditingSelf = false;
+  private isAdmin = false;
 
   created() {
+    this.isAdmin = store.getters.getJwtData.isAdmin
+
     let pathId = this.$route.params.id;
 
     if (pathId) {
@@ -162,10 +159,6 @@ export default class DataEditor extends Vue {
 
   isCurrentUser(): boolean {
     return store.getters.getJwtData.id === this.id;
-  }
-
-  isAdmin(person: GetPersonDto): boolean {
-    return person.admin;
   }
 
 }
