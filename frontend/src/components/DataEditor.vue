@@ -34,10 +34,10 @@
                  :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
       <label class="normal-label">Position:</label>
       <InputText type="text" class="normal-input" placeholder="librarian" v-model="person.position"
-                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" disabled/>
+                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!person.admin"/>
       <label class="normal-label">Username:</label>
       <InputText type="text" class="normal-input" placeholder="john.doe" v-model="person.username"
-                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" disabled/>
+                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" v-bind:disabled="!person.admin"/>
       <label class="normal-label">Admin:</label>
       <Checkbox v-model="person.admin" :binary="true" disabled/>
       <div class="action-button-container">
@@ -114,6 +114,10 @@ export default class DataEditor extends Vue {
 
   isCurrentUser(): boolean{
     return store.getters.getJwtData.id === this.id;
+  }
+
+  isAdmin(person: GetPersonDto): boolean {
+    return person.admin;
   }
 
 }
