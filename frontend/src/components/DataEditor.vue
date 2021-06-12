@@ -33,7 +33,7 @@
       <InputText type="text" class="normal-input" placeholder="111 111 1111" v-model="person.phonenumber"
                  :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
       <label class="normal-label">Position:</label>
-      <InputText type="text" class="normal-input" placeholder="librarian" v-model="person.position"
+      <InputText type="text" class="normal-input" placeholder="Librarian" v-model="person.position"
                  :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!person.admin"/>
       <label class="normal-label">Username:</label>
       <InputText type="text" class="normal-input" placeholder="john.doe" v-model="person.username"
@@ -59,6 +59,9 @@ import PersonEndpoints from "@/mixins/person/PersonEndpoints";
 import {GetPersonDto} from "@/mixins/person/dto/get.person.dto";
 import router from '@/router';
 import store from '@/store'
+import {EditPersonDto} from '@/mixins/person/dto/edit.person.dto';
+import {AddressDto} from '@/mixins/person/dto/address.dto';
+import {EditSelfPersonDto} from '@/mixins/person/dto/edit.self.person.dto';
 
 @Options({
   props: {
@@ -72,13 +75,17 @@ export default class DataEditor extends Vue {
   private id = '';
   private person!: GetPersonDto;
   private loading = true;
+  private isEditingSelf = false;
 
   created() {
     let pathId = this.$route.params.id;
+
     if (pathId) {
       this.id = pathId.toString()
+      this.isEditingSelf = false;
     } else {
       this.id = store.getters.getJwtData.id.toString();
+      this.isEditingSelf = true;
     }
     PersonEndpoints.methods.getPersonById(this.id).then((p) => {
       console.log(p)
@@ -88,20 +95,51 @@ export default class DataEditor extends Vue {
   }
 
   async editPerson(): Promise<void> {
-    this.validations = await PersonEndpoints.methods.editPerson(this.id, {
-      firstname: this.person.firstname,
-      lastname: this.person.lastname,
-      email: this.person.email,
-      address: {
-        street: this.person.address.street,
-        number: "2",
-        zipcode: this.person.address.zipcode,
-        city: this.person.address.city
-      },
-      phonenumber: this.person.phonenumber,
-      position: this.person.position,
-      isAdmin: this.person.admin,
-    })
+    if (this.isEditingSelf) {
+      this.validations = await PersonEndpoints.methods.editSelf({
+            firstname: this.person.firstname,
+            lastname: this.person.lastname,
+            email: this.person.email,
+            address: {
+              street: this.person.address.street,
+              number: this.person.address.number,
+              zipcode: this.person.address.zipcode,
+              city: this.person.address.city
+            } as AddressDto,
+            phonenumber: this.person.phonenumber,
+            position: this.person.position,
+            username: this.person.username
+          } as EditSelfPersonDto
+      );
+    } else {
+      this.validations = await PersonEndpoints.methods.editPerson(this.id,
+          {
+            firstname: this.person.firstname,
+            lastname: this.person.lastname,
+            email: this.person.email,
+            address: {
+              street: this.person.address.street,
+              number: this.person.address.number,
+              zipcode: this.person.address.zipcode,
+              city: this.person.address.city
+            } as AddressDto,
+            phonenumber: this.person.phonenumber,
+            position: this.person.position,
+            username: this.person.username,
+            isAdmin: this.person.admin,
+          } as EditPersonDto
+      );
+    }
+
+    if (this.validations.length === 0) {
+      await router.push('/list');
+      this.$toast.add({
+        severity: 'success',
+        summary: 'User  "' + this.person.firstname + ' ' + this.person.lastname + '" edited successfully',
+        life: 3000
+      })
+
+    }
   }
 
   async deletePerson(): Promise<void> {
@@ -112,13 +150,17 @@ export default class DataEditor extends Vue {
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
         await PersonEndpoints.methods.removePerson(this.id)
-        await this.$toast.add({severity: 'success', summary: 'User "' + this.person.firstname + ' ' + this.person.lastname + '" has been deleted successfully.', life: 3000})
+        await this.$toast.add({
+          severity: 'success',
+          summary: 'User "' + this.person.firstname + ' ' + this.person.lastname + '" has been deleted successfully.',
+          life: 3000
+        })
         await router.push('/list')
       }
     });
   }
 
-  isCurrentUser(): boolean{
+  isCurrentUser(): boolean {
     return store.getters.getJwtData.id === this.id;
   }
 

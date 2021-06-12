@@ -95,13 +95,29 @@ public class ValidationUtils{
         return validationAnswerDtoSet;
     }
 
-    public static Set<OutValidationAnswerDto> validateEditSelfDto(InEditSelfDto editSelfDto){
+    public static Set<OutValidationAnswerDto> validateEditSelfDtoForUser(InEditSelfDto editSelfDto){
         Set<OutValidationAnswerDto> validationAnswerDtoSet = new HashSet<>();
+        validateEditSelfDto(validationAnswerDtoSet, editSelfDto);
+
+        return validationAnswerDtoSet;
+    }
+
+    public static Set<OutValidationAnswerDto> validateEditSelfDtoForAdmin(InEditSelfDto editSelfDto){
+        Set<OutValidationAnswerDto> validationAnswerDtoSet = new HashSet<>();
+        validateEditSelfDto(validationAnswerDtoSet,editSelfDto);
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validatePosition(editSelfDto.getPosition()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateUsername(editSelfDto.getUsername()));
+
+
+        return validationAnswerDtoSet;
+    }
+
+    private static void validateEditSelfDto(Set<OutValidationAnswerDto> validationAnswerDtoSet, InEditSelfDto editSelfDto){
         validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateFirstname(editSelfDto.getFirstname()));
         validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateLastname(editSelfDto.getLastname()));
         validationAnswerDtoSet.addAll(validateAddress(editSelfDto.getAddress()));
-
-        return validationAnswerDtoSet;
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validateEmail(editSelfDto.getEmail()));
+        validationAnswerDtoSet = addIfNotNull(validationAnswerDtoSet, validatePhonenumber(editSelfDto.getPhonenumber()));
     }
 
 

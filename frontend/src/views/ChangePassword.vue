@@ -50,7 +50,6 @@ export default class ChangePassword extends Vue {
 }
 .form-label {
   display: block;
-  margin-right: 80pt;
 }
 
 </style>

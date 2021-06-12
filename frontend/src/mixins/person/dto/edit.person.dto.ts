@@ -6,5 +6,6 @@ export interface EditPersonDto {
     address: AddressDto;
     phonenumber: string;
     position: string;
+    username: string;
     isAdmin: boolean;
 }

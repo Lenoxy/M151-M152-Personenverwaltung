@@ -66,8 +66,6 @@ export default class RepeatPassword extends Vue {
 
 .form-label {
   display: grid;
-  margin-right: 90pt;
-  grid-auto-flow: column;
 }
 
 .login-step {

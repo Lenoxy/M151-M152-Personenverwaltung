@@ -2,7 +2,11 @@ package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
 import ch.lu.bbzw.backendpersonenverwaltung.ValidationUtils;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotAuthorizedException;
-import ch.lu.bbzw.backendpersonenverwaltung.dto.in.*;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotFoundException;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InCreatePersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InEditPersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InEditSelfDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InQueryPersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutValidationAnswerDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
@@ -76,6 +80,35 @@ public class PersonController{
 
             personRepository.save(newPersonEntity);
         }
+        return Collections.emptySet();
+    }
+
+    @ProtectedForRole(UserRole.USER)
+    @PutMapping("/self")
+    public Set<OutValidationAnswerDto> editSelf(
+            @RequestBody InEditSelfDto editSelfDto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String jwt
+    ){
+        String id = jwtService.getIdFromClaim(jwt);
+        PersonEntity personEntity = personRepository.findById(id).orElseThrow(NotFoundException::new);
+
+        Set<OutValidationAnswerDto> validation;
+
+        if(personEntity.isAdmin()){
+            validation = ValidationUtils.validateEditSelfDtoForAdmin(editSelfDto);
+        }else{
+            validation = ValidationUtils.validateEditSelfDtoForUser(editSelfDto);
+        }
+        if(! validation.isEmpty()){
+            return validation;
+        }
+
+        if(personEntity.isAdmin()){
+            personRepository.save(editSelfDto.toEntityWithAdminPermission(personEntity));
+        }else{
+            personRepository.save(editSelfDto.toEntityWithUserPermission(personEntity));
+        }
+
         return Collections.emptySet();
     }
 
