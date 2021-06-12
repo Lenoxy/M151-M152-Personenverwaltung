@@ -78,6 +78,8 @@ export default class DataEditor extends Vue {
     try {
       this.validations = await PersonEndpoints.methods.createPerson(person)
       await router.push('/list');
+      this.$toast.add({severity: 'success', summary: 'User  "' + this.firstname + ' ' + this.lastname + '" created successfully', life: 3000})
+
     }catch (e) {
       this.$toast.add({severity: 'warn', summary: 'This username or email already exists ', life: 3000})
     }
