@@ -19,10 +19,10 @@ import router from '@/router';
 
 
 export default {
-  computed: {
-    jwt: () => store.getters.getJwt
+  created() {
+    console.log(store.getters.getJwtData.id)
   },
-  data: () => {
+  data() : any{
     return {
       notAuthItems: [
         {
@@ -59,7 +59,7 @@ export default {
           items: [
             {
               label: 'Edit Profile',
-              to: '/edit',
+              to: `/edit/${store.getters.getJwtData.id}`,
               icon: PrimeIcons.USER_EDIT
             },
             {
@@ -84,6 +84,9 @@ export default {
     onHomeClick() {
       router.push(store.getters.getJwt === '' ? '/' : '/list')
     }
+  },
+  computed: {
+    jwt: () => store.getters.getJwt,
   }
 }
 </script>
