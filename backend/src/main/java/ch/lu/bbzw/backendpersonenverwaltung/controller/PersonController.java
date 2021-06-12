@@ -38,29 +38,6 @@ public class PersonController{
         return personRepository.findById(id).get().toCreatePersonDto();
     }
 
-    // TODO UNUSED
-    @ProtectedForRole(UserRole.USER)
-    @GetMapping("query/{property}/{value}")
-    public List<InQueryPersonDto> query(@PathVariable InSearchByPropertyDto property, @PathVariable String value){
-        List<InQueryPersonDto> queriedPersons = null;
-
-        switch(property){
-            case id:
-                queriedPersons = Collections.singletonList(personRepository.findById(value).get().toQueryPersonDto());
-                break;
-            case firstname:
-                queriedPersons = personRepository.findByFirstnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
-                break;
-            case lastname:
-                queriedPersons = personRepository.findByLastnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
-                break;
-            case email:
-                queriedPersons = personRepository.findByEmailIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
-                break;
-        }
-        return queriedPersons;
-    }
-
     @ProtectedForRole(UserRole.USER)
     @GetMapping("/query")
     public List<InQueryPersonDto> queryAll(){
@@ -111,17 +88,6 @@ public class PersonController{
         }
 
         personRepository.save(createPersonDto.toEntity());
-        return Collections.emptySet();
-    }
-
-    @ProtectedForRole(UserRole.USER)
-    @PutMapping("/self")
-    public Set<OutValidationAnswerDto> editSelf(@RequestBody InEditSelfDto editSelfDto){
-        Set<OutValidationAnswerDto> validation = ValidationUtils.validateEditSelfDto(editSelfDto);
-        if(! validation.isEmpty()){
-            return validation;
-        }
-
         return Collections.emptySet();
     }
 }

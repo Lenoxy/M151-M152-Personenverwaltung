@@ -19,9 +19,6 @@ import router from '@/router';
 
 
 export default {
-  created() {
-    console.log(store.getters.getJwtData.id)
-  },
   data() : any{
     return {
       notAuthItems: [
