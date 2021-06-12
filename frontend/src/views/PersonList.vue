@@ -10,12 +10,6 @@
                  @row-click="rowSelect($event)"
       >
         <template #header>
-          <div class="p-d-flex p-jc-end">
-            <span class="p-input-icon-left ">
-                <i class="pi pi-search"/>
-                <InputText v-model="filter['global'].value" placeholder="Search"/>
-            </span>
-          </div>
         </template>
         <template #empty>
           No employees found.
@@ -114,24 +108,6 @@ export default class PersonList extends Vue {
 .title {
   display: block;
   margin: 2% auto;
-}
-
-.content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: auto;
-  width: 80%;
-}
-
-.search {
-  flex-grow: 9;
-}
-
-.filter {
-  float: left;
-  height: 20%;
-  flex-grow: 1;
 }
 
 .edit-link{

@@ -37,7 +37,6 @@ export default {
             })).data;
         },
         async editSelf(person: EditSelfPersonDto): Promise<string[]> {
-            console.log(person)
             return (await axios.put(process.env.VUE_APP_BACKEND + "person/self", person, {
                 headers: {
                     'Authorization': store.getters.getJwt,

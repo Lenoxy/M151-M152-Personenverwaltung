@@ -85,7 +85,6 @@ export default class DataEditor extends Vue {
       this.isEditingSelf = true;
     }
     PersonEndpoints.methods.getPersonById(this.id).then((p) => {
-      console.log(p)
       this.person = p;
       this.loading = false;
     });

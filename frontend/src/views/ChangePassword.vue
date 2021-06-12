@@ -11,6 +11,7 @@ import {Options, Vue} from "vue-class-component";
 import RepeatPassword from '@/components/RepeatPassword.vue';
 import AuthEndpoints from '@/mixins/auth/AuthEndpoints';
 import router from '@/router';
+import store from "@/store";
 
 @Options({
   components: {
@@ -40,6 +41,13 @@ export default class ChangePassword extends Vue {
       await router.push('/list');
     }
 
+  }
+
+  created() {
+    let jwt = store.getters.getJwt;
+    if (jwt === '') {
+      router.push('/')
+    }
   }
 }
 </script>

@@ -18,14 +18,9 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component';
-import Header from '@/components/Header.vue';
+import {Vue} from 'vue-class-component';
 
-@Options({
-  components: {
-    Header
-  }
-})
+
 export default class Home extends Vue {
 }
 </script>
