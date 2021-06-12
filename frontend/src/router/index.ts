@@ -42,6 +42,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/PersonEdit.vue')
   },
   {
+    path: '/selfedit',
+    name: 'Edit Self',
+    component: () => import('../views/PersonEdit.vue')
+  },
+  {
     path: '/detail/:id',
     name: 'Person detail',
     component: () => import('../views/PersonDetail.vue')

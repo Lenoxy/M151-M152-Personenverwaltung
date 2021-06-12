@@ -27,14 +27,15 @@ export default createStore<State>({
             state.jwt = jwt;
         },
         logout(state) {
-            state.jwt = ''
+            state.jwt = '';
+            state.username = '';
+            state.decodedJwtData = {isAdmin: false, iss: "", user: "", id: ""};
         }
     },
     actions: {
         async verifyPassword(context, verifyPasswordDto: VerifyPasswordDto) {
             context.commit('updateJwt', await AuthEndpoints.methods.verifyPassword(verifyPasswordDto));
         },
-        //async login(context, login: Dto)
     },
     getters: {
         getUsername: state => state.username,
