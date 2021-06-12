@@ -11,7 +11,7 @@ export default createStore<State>({
     state: {
         username: "",
         jwt: "",
-        decodedJwtData: {isAdmin: false, iss: "", user: ""},
+        decodedJwtData: {isAdmin: false, iss: "", user: "", id: ""},
     },
     mutations: {
         updateUsername(state, username) {
@@ -49,5 +49,5 @@ export default createStore<State>({
 interface State {
     username: string,
     jwt: string,
-    decodedJwtData: { isAdmin: boolean, iss: string, user: string },
+    decodedJwtData: { isAdmin: boolean, iss: string, user: string, id: string },
 }

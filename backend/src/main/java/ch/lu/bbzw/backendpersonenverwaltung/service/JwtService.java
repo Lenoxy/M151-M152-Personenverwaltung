@@ -16,6 +16,7 @@ public class JwtService{
 
     private final JWTVerifier verifier = JWT.require(ALGORITHM)
             .withIssuer(ISSUER)
+            .withClaimPresence("id")
             .withClaimPresence("user")
             .withClaimPresence("isAdmin")
             .build();
@@ -24,6 +25,7 @@ public class JwtService{
     public String createJwt(PersonEntity personEntity){
         return JWT.create()
                 .withIssuer(ISSUER)
+                .withClaim("id", personEntity.getId())
                 .withClaim("user", personEntity.getUsername())
                 .withClaim("isAdmin", personEntity.isAdmin())
                 .sign(ALGORITHM);
