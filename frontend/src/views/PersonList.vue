@@ -101,11 +101,6 @@ export default class PersonList extends Vue {
     });
   }
 
-  async deletePerson(id: string):Promise<void> {
-    console.log(id);
-    console.log(await PersonEndpoints.methods.removePerson(id));
-  }
-
   created() {
     this.searchPerson();
 

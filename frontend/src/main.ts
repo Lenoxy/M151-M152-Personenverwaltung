@@ -24,6 +24,8 @@ import Tooltip from 'primevue/tooltip';
 import Checkbox from 'primevue/checkbox';
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
+import ConfirmDialog from 'primevue/confirmdialog';
+import ConfirmationService from 'primevue/confirmationservice';
 
 
 createApp(App)
@@ -31,6 +33,8 @@ createApp(App)
     .use(router)
     .use(PrimeVue)
     .use(ToastService)
+    .use(ConfirmationService)
+    .component('ConfirmDialog', ConfirmDialog)
     .component('Toast', Toast)
     .component('Column', Column)
     .component('TriStateCheckbox', TriStateCheckbox)

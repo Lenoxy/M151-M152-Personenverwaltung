@@ -1,6 +1,7 @@
 <template>
+  <ConfirmDialog/>
   <Toast/>
-  <Header></Header>
+  <Header/>
   <router-view/>
 
 </template>
@@ -9,7 +10,6 @@
 
 import {Options, Vue} from "vue-class-component";
 import Header from "@/components/Header.vue";
-import store from '@/store';
 
 @Options({
   components: {
@@ -17,7 +17,8 @@ import store from '@/store';
   }
 })
 
-export default class App extends Vue {}
+export default class App extends Vue {
+}
 </script>
 
 <style>
@@ -28,6 +29,7 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
 }
+
 Card {
   width: 80%;
   margin: 20% auto;

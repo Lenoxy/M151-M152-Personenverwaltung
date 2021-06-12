@@ -24,7 +24,6 @@ export default createStore<State>({
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
             state.decodedJwtData = JSON.parse(jsonPayload);
-
             state.jwt = jwt;
         },
         logout(state) {
