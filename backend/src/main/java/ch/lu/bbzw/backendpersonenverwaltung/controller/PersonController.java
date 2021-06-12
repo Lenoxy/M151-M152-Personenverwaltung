@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -69,17 +68,12 @@ public class PersonController{
             return validationAnswerDtoSet;
         }
 
-        Optional<PersonEntity> optionalPersonEntity = personRepository.findById(id);
-        if(optionalPersonEntity.isPresent()){
-            PersonEntity oldPersonEntity = optionalPersonEntity.get();
+        PersonEntity oldPersonEntity = personRepository.findById(id).orElseThrow(NotFoundException::new);
 
-            PersonEntity newPersonEntity = editPersonDto.toEntity();
-            // These properties are not allowed to be changed by the user
-            newPersonEntity.setId(oldPersonEntity.getId());
-            newPersonEntity.setUsername(oldPersonEntity.getUsername());
+        PersonEntity newPersonEntity = editPersonDto.toEntity(oldPersonEntity);
 
-            personRepository.save(newPersonEntity);
-        }
+        personRepository.save(newPersonEntity);
+
         return Collections.emptySet();
     }
 

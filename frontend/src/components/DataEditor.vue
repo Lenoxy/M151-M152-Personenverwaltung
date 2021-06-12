@@ -1,5 +1,6 @@
 <template>
   <section class="center-grid">
+
     <div class="form" v-if="!loading">
       <label class="normal-label">Firstname:</label>
       <InputText type="text" class="normal-input" placeholder="John" v-model="person.firstname"
@@ -34,18 +35,23 @@
                  :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
       <label class="normal-label">Position:</label>
       <InputText type="text" class="normal-input" placeholder="Librarian" v-model="person.position"
-                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" v-bind:disabled="!isAdmin"/>
+                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}" :disabled="!isViewerAdmin"/>
       <label class="normal-label">Username:</label>
       <InputText type="text" class="normal-input" placeholder="john.doe" v-model="person.username"
-                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" v-bind:disabled="!isAdmin"/>
+                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" :disabled="!isViewerAdmin"/>
       <label class="normal-label">Admin:</label>
-      <Checkbox v-model="person.admin" :binary="true" disabled/>
+      <InputSwitch
+          v-model="person.admin"
+          :disabled="!isViewerAdmin || isEditingSelf"
+      ></InputSwitch>
+
       <div class="action-button-container">
         <Button
             class="p-button-danger action-button"
             label="Delete"
             v-on:click="deletePerson"
-            v-bind:disabled="isCurrentUser()"/>
+            :disabled="isCurrentUser()"
+        />
         <Button class="save action-button" label="Save" v-on:click="editPerson"/>
 
       </div>
@@ -67,17 +73,18 @@ export default class DataEditor extends Vue {
 
   private validations: string[] = [];
   private id = '';
-  private person!: GetPersonDto;
+  private person = {} as GetPersonDto;
   private loading = true;
   private isEditingSelf = false;
-  private isAdmin = false;
+  private isViewerAdmin = false;
 
   created() {
-    this.isAdmin = store.getters.getJwtData.isAdmin
+    this.isViewerAdmin = store.getters.getJwtData.isAdmin
 
     let pathId = this.$route.params.id;
 
-    if (pathId) {
+    // The second case should in theory never occur, since the edit button in the List view is disabled for the viewer himself.
+    if (pathId && pathId != store.getters.getJwtData.id) {
       this.id = pathId.toString()
       this.isEditingSelf = false;
     } else {
@@ -103,8 +110,9 @@ export default class DataEditor extends Vue {
               city: this.person.address.city
             } as AddressDto,
             phonenumber: this.person.phonenumber,
+            admin: this.person.admin,
             position: this.person.position,
-            username: this.person.username
+            username: this.person.username,
           } as EditSelfPersonDto
       );
     } else {
@@ -117,12 +125,12 @@ export default class DataEditor extends Vue {
               street: this.person.address.street,
               number: this.person.address.number,
               zipcode: this.person.address.zipcode,
-              city: this.person.address.city
+              city: this.person.address.city,
             } as AddressDto,
             phonenumber: this.person.phonenumber,
+            admin: this.person.admin,
             position: this.person.position,
             username: this.person.username,
-            isAdmin: this.person.admin,
           } as EditPersonDto
       );
     }

@@ -21,11 +21,11 @@ import Column from 'primevue/column';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import DataTable from 'primevue/datatable';
 import Tooltip from 'primevue/tooltip';
-import Checkbox from 'primevue/checkbox';
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
 import ConfirmDialog from 'primevue/confirmdialog';
 import ConfirmationService from 'primevue/confirmationservice';
+import InputSwitch from 'primevue/inputswitch';
 
 
 createApp(App)
@@ -50,5 +50,5 @@ createApp(App)
     .component('Sidebar', Sidebar)
     .component('Menu', Menu)
     .directive('Tooltip', Tooltip)
-    .component('Checkbox', Checkbox)
+    .component('InputSwitch', InputSwitch)
     .mount('#app')

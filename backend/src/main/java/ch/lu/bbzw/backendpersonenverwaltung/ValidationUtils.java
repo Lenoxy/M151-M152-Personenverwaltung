@@ -59,7 +59,7 @@ public class ValidationUtils{
         return isNullOrBlank(phonenumber) || phonenumber.trim().length() < 10 ? OutValidationAnswerDto.PHONENUMBER_INVALID : null;
     }
 
-    private static OutValidationAnswerDto validateIsAdmin(boolean isAdmin){
+    private static OutValidationAnswerDto validateIsAdmin(boolean admin){
         // The completionist
         return null;
     }

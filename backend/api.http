@@ -16,7 +16,7 @@ Content-Type: application/json
   },
   "phonenumber": "0790000000",
   "position": "CIO",
-  "isAdmin": true,
+  "admin": true,
   "username": "leo.scherer"
 }
 
@@ -38,7 +38,7 @@ Content-Type: application/json
   },
   "phonenumber": "fadsfdsf0xxxxxx",
   "position": "CIO",
-  "isAdmin": true,
+  "admin": true,
   "username": "leo.scherer"
 }
 

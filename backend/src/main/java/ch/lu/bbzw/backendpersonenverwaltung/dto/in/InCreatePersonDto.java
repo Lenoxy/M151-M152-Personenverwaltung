@@ -11,17 +11,17 @@ public class InCreatePersonDto{
     InAddressDto address;
     String phonenumber;
     String position;
-    boolean isAdmin;
+    boolean admin;
     String username;
 
-    public InCreatePersonDto(String firstname, String lastname, String email, InAddressDto address, String phonenumber, String position, boolean isAdmin, String username){
+    public InCreatePersonDto(String firstname, String lastname, String email, InAddressDto address, String phonenumber, String position, boolean admin, String username){
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.address = address;
         this.phonenumber = phonenumber;
         this.position = position;
-        this.isAdmin = isAdmin;
+        this.admin = admin;
         this.username = username;
     }
 
@@ -37,7 +37,7 @@ public class InCreatePersonDto{
                 address != null ? address.toEntity() : null,
                 phonenumber,
                 position,
-                isAdmin,
+                admin,
                 username
         );
     }

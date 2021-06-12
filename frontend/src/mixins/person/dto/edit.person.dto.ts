@@ -7,5 +7,5 @@ export interface EditPersonDto {
     phonenumber: string;
     position: string;
     username: string;
-    isAdmin: boolean;
+    admin: boolean;
 }

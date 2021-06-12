@@ -5,7 +5,7 @@
       <DataTable :value="employees" :paginator="true" class="p-datatable-customers" :rows="10"
                  dataKey="id" v-model:filters="filter" filterDisplay="row" :loading="loading"
                  responsiveLayout="scroll"
-                 :globalFilterFields="['name','email','isAdmin']"
+                 :globalFilterFields="['name','email','admin']"
                  :row-hover="true"
                  @row-click="rowSelect($event)"
       >
@@ -44,11 +44,13 @@
             <TriStateCheckbox v-model="filterModel.value" @change="filterCallback()"/>
           </template>
         </Column>
-        <Column header="Edit">
-          <template #body="{data}" v-if="isAdmin">
-            <router-link :to="'/edit/' + data.id" class="edit-link">
-
+        <Column header="Edit" v-if="admin">
+          <template #body="{data}">
+            <router-link :to="'/edit/' + data.id" class="edit-link" v-if="data.id !== viewerId">
               <i class="pi true-icon pi-pencil"/>
+            </router-link>
+            <router-link :to="'/edit/' + data.id" class="edit-link" v-else>
+              <i class="pi true-icon pi-pencil" style="color: purple"/>
             </router-link>
           </template>
         </Column>
@@ -80,7 +82,8 @@ import store from '@/store'
 export default class PersonList extends Vue {
   private employees: QueryPersonDto[] = [];
   private loading = true;
-  private isAdmin: boolean = store.getters.isAdmin;
+  private admin: boolean = store.getters.isAdmin;
+  private viewerId: boolean = store.getters.getJwtData.id;
 
   rowSelect($event: any) {
     let id = $event.data.id;

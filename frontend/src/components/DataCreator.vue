@@ -38,7 +38,7 @@
       <InputText type="text" class="normal-input" placeholder="john.doe" v-model="username"
                  :class="{'p-invalid': validations.includes('USERNAME_INVALID')}"/>
       <label class="normal-label">Admin:</label>
-      <Checkbox v-model="isAdmin" :binary="true"/>
+      <InputSwitch v-model="admin"/>
       <Button class="save" label="Save" v-on:click="createPerson"/>
     </div>
   </section>
@@ -60,7 +60,7 @@ export default class DataEditor extends Vue {
   private zipcode = "";
   private phonenumber = "";
   private position = "";
-  private isAdmin = false;
+  private admin = false;
   private username = "";
   private validations: string[] = [];
 
@@ -73,7 +73,7 @@ export default class DataEditor extends Vue {
       address: {street: this.street, number: this.number, zipcode: this.zipcode, city: this.city},
       phonenumber: this.phonenumber,
       position: this.position,
-      isAdmin: this.isAdmin,
+      admin: this.admin,
       username: this.username
     };
     try {

@@ -10,5 +10,6 @@ export interface EditSelfPersonDto{
     // Only for admins
     position: string;
     username: string;
+    admin: boolean;
 
 }

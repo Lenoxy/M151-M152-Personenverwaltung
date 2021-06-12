@@ -15,28 +15,21 @@ public class InEditPersonDto{
     InAddressDto address;
     String phonenumber;
     String position;
-    boolean isAdmin;
+    String username;
+    boolean admin;
 
-    public PersonEntity toEntity(){
+    public PersonEntity toEntity(PersonEntity personEntity){
         return new PersonEntity(
-                null,
+                personEntity.getId(),
                 firstname,
                 lastname,
                 email,
                 address.toEntity(),
                 phonenumber,
                 position,
-                isAdmin,
-                null
+                admin,
+                username,
+                personEntity.getPassword()
         );
     }
-
-    public Set<OutValidationAnswerDto> validateSelf(){
-        Set<OutValidationAnswerDto> validationAnswerDtoSet = new HashSet<>();
-
-
-
-        return validationAnswerDtoSet;
-    }
-
 }
