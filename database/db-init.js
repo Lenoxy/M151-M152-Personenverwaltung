@@ -77,3 +77,8 @@ db.personEntity.insertMany(
         }
     ]
 );
+
+db.personEntity.createIndex({ email: 1 }, { unique: true })
+db.personEntity.createIndex({ username: 1 }, { unique: true })
+
+print("###### DB SCRIPT DONE #####")

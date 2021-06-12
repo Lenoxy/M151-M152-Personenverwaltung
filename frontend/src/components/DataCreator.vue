@@ -2,13 +2,16 @@
   <section class="center-grid">
     <div class="form">
       <label class="normal-label">Firstname:</label>
-      <InputText type="text" class="normal-input" placeholder="John" v-model="firstname" :class="{'p-invalid': validations.includes('FIRSTNAME_INVALID')}"/>
+      <InputText type="text" class="normal-input" placeholder="John" v-model="firstname"
+                 :class="{'p-invalid': validations.includes('FIRSTNAME_INVALID')}"/>
 
       <label class="normal-label">Lastname:</label>
-      <InputText type="text" class="normal-input" placeholder="Doe" v-model="lastname" :class="{'p-invalid': validations.includes('LASTNAME_INVALID')}"/>
+      <InputText type="text" class="normal-input" placeholder="Doe" v-model="lastname"
+                 :class="{'p-invalid': validations.includes('LASTNAME_INVALID')}"/>
 
       <label class="normal-label">Email:</label>
-      <InputText type="email" class="normal-input" placeholder="example@xy.com" v-model="email" :class="{'p-invalid': validations.includes('EMAIL_INVALID')}"/>
+      <InputText type="email" class="normal-input" placeholder="example@xy.com" v-model="email"
+                 :class="{'p-invalid': validations.includes('EMAIL_INVALID')}"/>
 
       <label class="normal-label">Address:</label>
       <div class="street-number flex">
@@ -26,11 +29,14 @@
                    v-model="zipcode" :class="{'p-invalid': validations.includes('ADDRESS_ZIPCODE_INVALID')}"/>
       </div>
       <label class="normal-label">Phone:</label>
-      <InputText type="text" class="normal-input" placeholder="111 111 1111" v-model="phonenumber" :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
+      <InputText type="text" class="normal-input" placeholder="111 111 1111" v-model="phonenumber"
+                 :class="{'p-invalid': validations.includes('PHONENUMBER_INVALID')}"/>
       <label class="normal-label">Position:</label>
-      <InputText type="text" class="normal-input" placeholder="librarian" v-model="position" :class="{'p-invalid': validations.includes('POSITION_INVALID')}" />
+      <InputText type="text" class="normal-input" placeholder="librarian" v-model="position"
+                 :class="{'p-invalid': validations.includes('POSITION_INVALID')}"/>
       <label class="normal-label">Username:</label>
-      <InputText type="text" class="normal-input" placeholder="john.doe" v-model="username" :class="{'p-invalid': validations.includes('USERNAME_INVALID')}" />
+      <InputText type="text" class="normal-input" placeholder="john.doe" v-model="username"
+                 :class="{'p-invalid': validations.includes('USERNAME_INVALID')}"/>
       <label class="normal-label">Admin:</label>
       <Checkbox v-model="isAdmin" :binary="true"/>
       <Button class="save" label="Save" v-on:click="createPerson"/>
@@ -41,6 +47,7 @@
 <script lang="ts">
 import {Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
+import router from '@/router';
 
 export default class DataEditor extends Vue {
   private firstname = "";
@@ -58,7 +65,7 @@ export default class DataEditor extends Vue {
 
 
   async createPerson(): Promise<void> {
-    this.validations = await PersonEndpoints.methods.createPerson({
+    let person = {
       firstname: this.firstname,
       lastname: this.lastname,
       email: this.email,
@@ -67,7 +74,13 @@ export default class DataEditor extends Vue {
       position: this.position,
       isAdmin: this.isAdmin,
       username: this.username
-    })
+    };
+    try {
+      this.validations = await PersonEndpoints.methods.createPerson(person)
+      await router.push('/list');
+    }catch (e) {
+      this.$toast.add({severity: 'warn', summary: 'This username or email already exists ', life: 3000})
+    }
   }
 }
 </script>
@@ -114,7 +127,7 @@ export default class DataEditor extends Vue {
   width: 80px;
 }
 
-.save{
+.save {
   height: 30px;
   width: 80px;
   justify-content: right;
