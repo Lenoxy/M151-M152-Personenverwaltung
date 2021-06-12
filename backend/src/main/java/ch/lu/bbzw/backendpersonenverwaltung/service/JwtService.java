@@ -50,6 +50,16 @@ public class JwtService{
         }
     }
 
+    public String getIdFromClaim(String jwt){
+        try{
+            DecodedJWT decodedJWT = verifier.verify(jwt);
+            return decodedJWT.getClaim("id").asString();
+        }catch(JWTVerificationException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public Boolean isAdminFromClaim(String jwt){
         try{
             DecodedJWT decodedJWT = verifier.verify(jwt);

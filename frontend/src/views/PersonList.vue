@@ -83,7 +83,6 @@ import store from '@/store'
     }
   }
 })
-
 export default class PersonList extends Vue {
   private employees: QueryPersonDto[] = [];
   private loading = true;

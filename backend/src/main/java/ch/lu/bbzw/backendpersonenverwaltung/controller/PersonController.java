@@ -1,13 +1,16 @@
 package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
 import ch.lu.bbzw.backendpersonenverwaltung.ValidationUtils;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotAuthorizedException;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.in.*;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutValidationAnswerDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
+import ch.lu.bbzw.backendpersonenverwaltung.service.JwtService;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -21,9 +24,12 @@ import java.util.stream.Collectors;
 public class PersonController{
     private final PersonRepository personRepository;
 
+    private final JwtService jwtService;
+
     @Autowired
-    public PersonController(final PersonRepository personRepository){
+    public PersonController(final PersonRepository personRepository, final JwtService jwtService){
         this.personRepository = personRepository;
+        this.jwtService = jwtService;
     }
 
     @ProtectedForRole(UserRole.USER)
@@ -63,8 +69,15 @@ public class PersonController{
 
     @ProtectedForRole(UserRole.ADMIN)
     @DeleteMapping("/{id}")
-    public boolean removePerson(@PathVariable String id){
-        return personRepository.removeById(id) != null;
+    public boolean removePerson(
+            @PathVariable String id,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String jwt
+    ){
+        if(! jwtService.getIdFromClaim(jwt).equals(id)){
+            return personRepository.removeById(id) != null;
+        }else{
+            throw new NotAuthorizedException();
+        }
     }
 
     @ProtectedForRole(UserRole.ADMIN)
