@@ -1,18 +1,24 @@
 package ch.lu.bbzw.backendpersonenverwaltung.controller;
 
 import ch.lu.bbzw.backendpersonenverwaltung.ValidationUtils;
-import ch.lu.bbzw.backendpersonenverwaltung.dto.in.*;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotAuthorizedException;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotFoundException;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InCreatePersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InEditPersonDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InEditSelfDto;
+import ch.lu.bbzw.backendpersonenverwaltung.dto.in.InQueryPersonDto;
 import ch.lu.bbzw.backendpersonenverwaltung.dto.out.OutValidationAnswerDto;
 import ch.lu.bbzw.backendpersonenverwaltung.entity.PersonEntity;
 import ch.lu.bbzw.backendpersonenverwaltung.repository.PersonRepository;
+import ch.lu.bbzw.backendpersonenverwaltung.service.JwtService;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,9 +27,12 @@ import java.util.stream.Collectors;
 public class PersonController{
     private final PersonRepository personRepository;
 
+    private final JwtService jwtService;
+
     @Autowired
-    public PersonController(final PersonRepository personRepository){
+    public PersonController(final PersonRepository personRepository, final JwtService jwtService){
         this.personRepository = personRepository;
+        this.jwtService = jwtService;
     }
 
     @ProtectedForRole(UserRole.USER)
@@ -33,31 +42,22 @@ public class PersonController{
     }
 
     @ProtectedForRole(UserRole.USER)
-    @GetMapping("query/{property}/{value}")
-    public List<InQueryPersonDto> query(@PathVariable InSearchByPropertyDto property, @PathVariable String value){
-        List<InQueryPersonDto> queriedPersons = null;
-
-        switch(property){
-            case id:
-                queriedPersons = Collections.singletonList(personRepository.findById(value).get().toQueryPersonDto());
-                break;
-            case firstname:
-                queriedPersons = personRepository.findByFirstnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
-                break;
-            case lastname:
-                queriedPersons = personRepository.findByLastnameIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
-                break;
-            case email:
-                queriedPersons = personRepository.findByEmailIgnoreCase(value).stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
-                break;
-        }
-        return queriedPersons;
+    @GetMapping("/query")
+    public List<InQueryPersonDto> queryAll(){
+        return personRepository.findAll().stream().map(PersonEntity::toQueryPersonDto).collect(Collectors.toList());
     }
 
     @ProtectedForRole(UserRole.ADMIN)
     @DeleteMapping("/{id}")
-    public boolean removePerson(@PathVariable String id){
-        return personRepository.removeById(id) != null;
+    public boolean removePerson(
+            @PathVariable String id,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String jwt
+    ){
+        if(! jwtService.getIdFromClaim(jwt).equals(id)){
+            return personRepository.removeById(id) != null;
+        }else{
+            throw new NotAuthorizedException();
+        }
     }
 
     @ProtectedForRole(UserRole.ADMIN)
@@ -68,17 +68,41 @@ public class PersonController{
             return validationAnswerDtoSet;
         }
 
-        Optional<PersonEntity> optionalPersonEntity = personRepository.findById(id);
-        if(optionalPersonEntity.isPresent()){
-            PersonEntity oldPersonEntity = optionalPersonEntity.get();
+        PersonEntity oldPersonEntity = personRepository.findById(id).orElseThrow(NotFoundException::new);
 
-            PersonEntity newPersonEntity = editPersonDto.toEntity();
-            // These properties are not allowed to be changed by the user
-            newPersonEntity.setId(oldPersonEntity.getId());
-            newPersonEntity.setUsername(oldPersonEntity.getUsername());
+        PersonEntity newPersonEntity = editPersonDto.toEntity(oldPersonEntity);
 
-            personRepository.save(newPersonEntity);
+        personRepository.save(newPersonEntity);
+
+        return Collections.emptySet();
+    }
+
+    @ProtectedForRole(UserRole.USER)
+    @PutMapping("/self")
+    public Set<OutValidationAnswerDto> editSelf(
+            @RequestBody InEditSelfDto editSelfDto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String jwt
+    ){
+        String id = jwtService.getIdFromClaim(jwt);
+        PersonEntity personEntity = personRepository.findById(id).orElseThrow(NotFoundException::new);
+
+        Set<OutValidationAnswerDto> validation;
+
+        if(personEntity.isAdmin()){
+            validation = ValidationUtils.validateEditSelfDtoForAdmin(editSelfDto);
+        }else{
+            validation = ValidationUtils.validateEditSelfDtoForUser(editSelfDto);
         }
+        if(! validation.isEmpty()){
+            return validation;
+        }
+
+        if(personEntity.isAdmin()){
+            personRepository.save(editSelfDto.toEntityWithAdminPermission(personEntity));
+        }else{
+            personRepository.save(editSelfDto.toEntityWithUserPermission(personEntity));
+        }
+
         return Collections.emptySet();
     }
 
@@ -91,17 +115,6 @@ public class PersonController{
         }
 
         personRepository.save(createPersonDto.toEntity());
-        return Collections.emptySet();
-    }
-
-    @ProtectedForRole(UserRole.USER)
-    @PutMapping("/self")
-    public Set<OutValidationAnswerDto> editSelf(@RequestBody InEditSelfDto editSelfDto){
-        Set<OutValidationAnswerDto> validation = ValidationUtils.validateEditSelfDto(editSelfDto);
-        if(! validation.isEmpty()){
-            return validation;
-        }
-
         return Collections.emptySet();
     }
 }

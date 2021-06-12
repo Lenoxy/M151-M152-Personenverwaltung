@@ -27,7 +27,7 @@ public class PersonEntity{
     @Field
     private String position;
     @Field
-    private boolean isAdmin;
+    private boolean admin;
     @Field
     @Indexed(unique=true)
     private String username;
@@ -42,7 +42,7 @@ public class PersonEntity{
             AddressEntity address,
             String phonenumber,
             String position,
-            boolean isAdmin,
+            boolean admin,
             String username
     ){
         this.id = id;
@@ -52,16 +52,43 @@ public class PersonEntity{
         this.address = address;
         this.phonenumber = phonenumber;
         this.position = position;
-        this.isAdmin = isAdmin;
+        this.admin = admin;
         this.username = username;
     }
+
+    public PersonEntity(
+            String id,
+            String firstname,
+            String lastname,
+            String email,
+            AddressEntity address,
+            String phonenumber,
+            String position,
+            boolean admin,
+            String username,
+            String password
+    ){
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.address = address;
+        this.phonenumber = phonenumber;
+        this.position = position;
+        this.admin = admin;
+        this.username = username;
+        this.password = password;
+    }
+
+    public PersonEntity(){}
 
     public InQueryPersonDto toQueryPersonDto(){
         return new InQueryPersonDto(
                 id,
                 firstname,
                 lastname,
-                email
+                email,
+                admin
         );
     }
 
@@ -73,7 +100,7 @@ public class PersonEntity{
                 address.toDto(),
                 phonenumber,
                 position,
-                isAdmin,
+                admin,
                 username
         );
     }

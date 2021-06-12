@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
@@ -17,14 +17,28 @@ import InputNumber from 'primevue/inputnumber';
 import Sidebar from 'primevue/sidebar';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
-
-
+import Column from 'primevue/column';
+import TriStateCheckbox from 'primevue/tristatecheckbox';
+import DataTable from 'primevue/datatable';
+import Tooltip from 'primevue/tooltip';
+import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
+import ConfirmDialog from 'primevue/confirmdialog';
+import ConfirmationService from 'primevue/confirmationservice';
+import InputSwitch from 'primevue/inputswitch';
 
 
 createApp(App)
     .use(store)
     .use(router)
     .use(PrimeVue)
+    .use(ToastService)
+    .use(ConfirmationService)
+    .component('ConfirmDialog', ConfirmDialog)
+    .component('Toast', Toast)
+    .component('Column', Column)
+    .component('TriStateCheckbox', TriStateCheckbox)
+    .component('DataTable', DataTable)
     .component('Menubar', Menubar)
     .component('Card', Card)
     .component('Button', Button)
@@ -35,4 +49,6 @@ createApp(App)
     .component('InputNumber', InputNumber)
     .component('Sidebar', Sidebar)
     .component('Menu', Menu)
+    .directive('Tooltip', Tooltip)
+    .component('InputSwitch', InputSwitch)
     .mount('#app')

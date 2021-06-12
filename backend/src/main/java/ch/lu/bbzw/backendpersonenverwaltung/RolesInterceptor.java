@@ -6,6 +6,7 @@ import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
 import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,6 +26,12 @@ public class RolesInterceptor implements HandlerInterceptor{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+        // Allow preflight
+        if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
+            System.out.println("preflight allowed");
+            return true;
+        }
+
         String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if(jwt == null || ! jwtService.isJwtValid(jwt)){
@@ -33,16 +40,15 @@ public class RolesInterceptor implements HandlerInterceptor{
             Method method = ((HandlerMethod) handler).getMethod();
             if(method.isAnnotationPresent(ProtectedForRole.class)){
                 UserRole role = method.getAnnotation(ProtectedForRole.class).value();
-                Boolean isAdmin = jwtService.isAdminFromClaim(jwt);
+                Boolean admin = jwtService.isAdminFromClaim(jwt);
 
-                if(isAdmin == null){
-                    return false;
-                }else if(isAdmin == true){
-                    return true;
-                }else{
-                    return role == UserRole.USER;
+                if(role == UserRole.ADMIN){
+                    return admin;
                 }
-            } // Interceptor returns false if no Annotation is set -> Configure in InterceptorConfig.java
+                if(role == UserRole.USER){
+                    return admin != null;
+                }
+            } // Interceptor returns false if no Annotation is set -> Configure unwanted paths in InterceptorConfig.java
         }
         // True to proceed and false to stop the method call
         return false;

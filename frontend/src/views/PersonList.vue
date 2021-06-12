@@ -1,71 +1,108 @@
 <template>
-  <Card>
-    <template #title>
-      <h1 class="title">Person List</h1>
-    </template>
-    <template #content>
-      <div class="content">
-        <Dropdown :options="userDataFilter" optionLabel="name" :filter="true" placeholder="Filter by" class="filter"
-                  :showClear="true">
-          <template #value="slotProps">
-            <div v-if="slotProps.value">
-              <div>{{ slotProps.value.name }}</div>
-            </div>
-            <span v-else>
-            {{ slotProps.placeholder }}
-          </span>
+  <div>
+    <h1 class="title">Person List</h1>
+    <div class="card">
+      <DataTable :value="employees" :paginator="true" class="p-datatable-customers" :rows="10"
+                 dataKey="id" v-model:filters="filter" filterDisplay="row" :loading="loading"
+                 responsiveLayout="scroll"
+                 :globalFilterFields="['name','email','admin']"
+                 :row-hover="true"
+                 @row-click="rowSelect($event)"
+      >
+        <template #header>
+        </template>
+        <template #empty>
+          No employees found.
+        </template>
+        <template #loading>
+          Loading employees. Please wait.
+        </template>
+        <Column field="name" header="Name" style="min-width:12rem">
+          <template #body="{data}">
+            {{ data.name }}
           </template>
-          <template #option="slotProps">
-            <div>
-              <div>{{ slotProps.option.name }}</div>
-            </div>
+          <template #filter="{filterModel,filterCallback}">
+            <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter"
+                       placeholder="Search by name" v-tooltip.top.focus="'Hit enter key to filter'"/>
           </template>
-        </Dropdown>
-
-        <Listbox v-model="selected" :options="templates" :multiple="true" :filter="true" optionLabel="name"
-                 listStyle="max-height:250px" class="search" filterPlaceholder="Search">
-          <template #option="slotProps">
-            <div>
-              <div>{{ slotProps.option.name }}</div>
-              <div>{{ slotProps.option.lastname }}</div>
-            </div>
+        </Column>
+        <Column header="Email" filterField="email" style="min-width:12rem">
+          <template #body="{data}">
+            <span class="email-text">{{ data.email }}</span>
           </template>
-        </Listbox>
-      </div>
-    </template>
-  </Card>
+          <template #filter="{filterModel,filterCallback}">
+            <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="p-column-filter"
+                       placeholder="Search by email" v-tooltip.top.focus="'Filter as you type'"/>
+          </template>
+        </Column>
+        <Column field="admin" header="Is Admin" dataType="boolean" style="min-width:6rem">
+          <template #body="{data}">
+            <i class="pi"
+               :class="{'true-icon pi-check-circle': data.admin, 'false-icon pi-times-circle': !data.admin}"></i>
+          </template>
+          <template #filter="{filterModel,filterCallback}">
+            <TriStateCheckbox v-model="filterModel.value" @change="filterCallback()"/>
+          </template>
+        </Column>
+        <Column header="Edit" v-if="admin">
+          <template #body="{data}">
+            <router-link :to="'/edit/' + data.id" class="edit-link" v-if="data.id !== viewerId">
+              <i class="pi true-icon pi-pencil"/>
+            </router-link>
+            <router-link :to="'/edit/' + data.id" class="edit-link" v-else>
+              <i class="pi true-icon pi-pencil" style="color: purple"/>
+            </router-link>
+          </template>
+        </Column>
+      </DataTable>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import PersonEndpoints from "@/mixins/person/PersonEndpoints";
+import {QueryPersonDto} from "@/mixins/person/dto/query.person.dto";
+import {FilterMatchMode} from "primevue/api";
+import router from '@/router';
+import store from '@/store'
 
 @Options({
   data() {
     return {
-      selected: null,
-      templates: [
-        {name: 'Stefan', lastname: 'Keller'},
-        {name: 'Anna', lastname: 'Baumann'},
-        {name: 'Otto', lastname: 'Heller'},
-      ],
-      userDataFilter: [
-        {name: 'firstname'},
-        {name: 'lastname'},
-        {name: 'email'},
-        {name: 'address'},
-        {name: 'phone'}
-      ]
+      filter: {
+        'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
+        'name': {value: null, matchMode: FilterMatchMode.CONTAINS},
+        'email': {value: null, matchMode: FilterMatchMode.CONTAINS},
+        'admin': {value: null, matchMode: FilterMatchMode.EQUALS}
+      }
     }
   }
 })
-
 export default class PersonList extends Vue {
-  private property = "";
-  private value = "";
+  private employees: QueryPersonDto[] = [];
+  private loading = true;
+  private admin: boolean = store.getters.isAdmin;
+  private viewerId: boolean = store.getters.getJwtData.id;
 
-  searchPerson(): void {
-    PersonEndpoints.methods.getQuery(this.property, this.value);
+  rowSelect($event: any) {
+    let id = $event.data.id;
+    router.push('/detail/' + id);
+  }
+
+  async searchPerson(): Promise<void> {
+    PersonEndpoints.methods.queryAll().then(e => {
+      this.employees = e;
+      this.loading = false;
+    });
+  }
+
+  created() {
+    this.searchPerson();
+    let jwt = store.getters.getJwt;
+    if (jwt === '') {
+      router.push('/')
+    }
   }
 }
 </script>
@@ -73,24 +110,11 @@ export default class PersonList extends Vue {
 <style scoped>
 .title {
   display: block;
-  margin: 5% auto;
+  margin: 2% auto;
 }
 
-.content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: auto;
-  width: 80%;
+.edit-link{
+  color: black
 }
 
-.search {
-  flex-grow: 9;
-}
-
-.filter {
-  float: left;
-  height: 20%;
-  flex-grow: 1;
-}
 </style>

@@ -1,6 +1,8 @@
 <template>
-  <Header></Header>
-  <router-view/>
+  <ConfirmDialog/>
+  <Toast/>
+  <Header/>
+  <router-view :key="$route.fullPath"/>
 
 </template>
 
@@ -15,7 +17,8 @@ import Header from "@/components/Header.vue";
   }
 })
 
-export default class App extends Vue {}
+export default class App extends Vue {
+}
 </script>
 
 <style>
@@ -26,53 +29,21 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
 }
+
 Card {
   width: 80%;
   margin: 20% auto;
 }
 
 h1 {
+  font-size: 20pt;
+}
+
+h2 {
   font-size: 16pt;
 }
 
-.title {
-  display: block;
-  margin: 5% auto;
-}
-.form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 50%;
-  margin: auto;
-}
-.labels {
-  display: flex;
-  flex-direction: column;
-}
-
-.normal-label {
-  flex-grow: 1;
-  margin-top: 3pt;
-
-}
-.address-label {
-  flex-grow: 2;
-}
-
-.after-address-labels {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 3;
-  margin-bottom: 20pt;
-}
-
-@media screen and (max-width: 500px) {
-  .form {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0 0 0 0;
-    width: 100%;
-  }
+h3 {
+  font-size: 12pt;
 }
 </style>

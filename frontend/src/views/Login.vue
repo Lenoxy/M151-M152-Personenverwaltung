@@ -17,18 +17,11 @@
 
 <script lang="ts">
 
-import {Options, Vue} from 'vue-class-component';
+import {Vue} from 'vue-class-component';
 import AuthEndpoints from "../mixins/auth/AuthEndpoints";
 import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
-import Header from '@/components/Header.vue';
 import router from '@/router';
 import store from '@/store'
-
-@Options({
-  components: {
-    Header
-  }
-})
 
 export default class Login extends Vue {
   private username = "";
@@ -36,7 +29,6 @@ export default class Login extends Vue {
 
   async checkUser(): Promise<void> {
     this.state = LoginResponseDto[await AuthEndpoints.methods.checkUser(this.username)];
-    console.log(this.state);
     if (this.state == LoginResponseDto.NEEDS_PASSWORD) {
       store.commit('updateUsername', this.username)
       await router.push({path: '/set-password'});
@@ -44,7 +36,7 @@ export default class Login extends Vue {
       store.commit('updateUsername', this.username)
       await router.push({path: '/verify-password'})
     } else if (this.state == LoginResponseDto.INVALID_USER) {
-      // Show error
+      this.$toast.add({severity: 'warn', summary: 'The specified user doesn\'t exist.', life: 3000});
     }
   }
 

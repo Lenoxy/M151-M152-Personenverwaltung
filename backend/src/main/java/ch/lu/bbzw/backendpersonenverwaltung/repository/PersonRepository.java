@@ -14,13 +14,7 @@ public interface PersonRepository extends CrudRepository<PersonEntity, String>{
 
     Optional<PersonEntity> findByUsernameIgnoreCase(String username);
 
-    Optional<PersonEntity> findByUsernameIgnoreCaseAndPasswordIgnoreCase(String username, String password);
-
-    List<PersonEntity> findByFirstnameIgnoreCase(String firstname);
-
-    List<PersonEntity> findByLastnameIgnoreCase(String lastname);
-
-    List<PersonEntity> findByEmailIgnoreCase(String email);
+    List<PersonEntity> findAll();
 
     String removeById(String id);
 }

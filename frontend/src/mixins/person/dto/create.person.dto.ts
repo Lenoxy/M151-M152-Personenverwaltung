@@ -7,6 +7,6 @@ export interface CreatePersonDto{
     address: AddressDto;
     phonenumber: string;
     position: string;
-    isAdmin: boolean;
+    admin: boolean;
     username: string;
 }

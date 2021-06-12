@@ -8,7 +8,7 @@ public class SinglePersonDto{
     AddressDto address;
     String phonenumber;
     String position;
-    boolean isAdmin;
+    boolean admin;
     String username;
     // String password; TODO: not in dto but in entity
 }

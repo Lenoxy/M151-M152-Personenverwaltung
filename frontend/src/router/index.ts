@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/SetPassword.vue')
   },
   {
+    path: '/change-password',
+    name: 'Change password',
+    component: () => import('../views/ChangePassword.vue')
+  },
+  {
     path: '/verify-password',
     name: 'Verify password',
     component: () => import('../views/VerifyPassword.vue')
@@ -32,13 +37,18 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/PersonList.vue')
   },
   {
-    path: '/edit',
-    name: 'Edit Person',
+    path: '/edit/:id',
+    name: 'Edit person',
     component: () => import('../views/PersonEdit.vue')
   },
   {
-    path: '/detail',
-    name: 'Person Detail',
+    path: '/selfedit',
+    name: 'Edit Self',
+    component: () => import('../views/PersonEdit.vue')
+  },
+  {
+    path: '/detail/:id',
+    name: 'Person detail',
     component: () => import('../views/PersonDetail.vue')
   }
 ]

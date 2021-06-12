@@ -3,6 +3,7 @@ import {RegisterDto} from "@/mixins/auth/dto/register.dto";
 import {VerifyPasswordDto} from "@/mixins/auth/dto/verify.password.dto";
 import {ResetPasswordDto} from "@/mixins/auth/dto/reset.password.dto";
 import {LoginResponseDto} from "@/mixins/auth/dto/login.response.dto";
+import store from '@/store';
 
 export default {
     methods: {
@@ -25,14 +26,19 @@ export default {
         async verifyPassword(verifyPasswordDto: VerifyPasswordDto): Promise<string> {
             return (await axios.post<string>(process.env.VUE_APP_BACKEND + "auth/verify-password", verifyPasswordDto, {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     }
                 })
             ).data;
         },
-        // TODO
-        async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<string> {
-            return await axios.put(process.env.VUE_APP_BACKEND + "auth/reset-password", {resetPasswordDto});
+        async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<boolean> {
+            return (await axios.put<boolean>(process.env.VUE_APP_BACKEND + "auth/reset-password", resetPasswordDto, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': store.getters.getJwt,
+                    }
+                })
+            ).data;
         }
     }
 }

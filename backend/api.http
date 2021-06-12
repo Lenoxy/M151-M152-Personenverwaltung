@@ -16,7 +16,7 @@ Content-Type: application/json
   },
   "phonenumber": "0790000000",
   "position": "CIO",
-  "isAdmin": true,
+  "admin": true,
   "username": "leo.scherer"
 }
 
@@ -38,7 +38,7 @@ Content-Type: application/json
   },
   "phonenumber": "fadsfdsf0xxxxxx",
   "position": "CIO",
-  "isAdmin": true,
+  "admin": true,
   "username": "leo.scherer"
 }
 
@@ -64,7 +64,7 @@ Content-Type: application/json
 
 {
   "username": "leo.scherer",
-  "password": "secureNotHashedPW"
+  "password": "Hallovelo1"
 }
 
 ###
@@ -73,5 +73,16 @@ Content-Type: application/json
 
 {
   "username": "leo.scherer",
-  "password": "secureNotHashedPW"
+  "password": "hallovelo"
 }
+
+###
+PUT http://localhost:8081/auth/reset-password
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtMTUxLW0xNTItcGVyc29uZW52ZXJ3YWx0dW5nIiwiaXNBZG1pbiI6ZmFsc2UsInVzZXIiOiJsZW8uc2NoZXJlciJ9.mRLv49P_uE-8TdrAF75Gkj-OqGFgl9NLu3v150lMY5w
+Content-Type: application/json
+
+{
+  "oldPassword": "Hallovelo1",
+  "newPassword": "Hallovelo2"
+}
+

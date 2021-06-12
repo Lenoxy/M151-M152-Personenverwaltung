@@ -23,15 +23,22 @@ export default class VerifyPassword extends Vue {
   private password = "";
 
   async verifyPassword(): Promise<void> {
-    let username = await store.getters.username;
+    let username = await store.getters.getUsername;
 
-    await store.dispatch('verifyPassword', {username: username, password: this.password} as VerifyPasswordDto)
-    await router.push('/list')
+    try {
+      await store.dispatch('verifyPassword', {username: username, password: this.password} as VerifyPasswordDto)
+      await router.push('/list')
+      this.$toast.add({severity: 'success', summary: 'Welcome, ' + username, life: 3000})
+
+    }catch (e) {
+      this.$toast.add({severity: 'warn', summary: 'Your password is incorrect', life: 3000})
+    }
   }
 
+  // Deny users arriving at this page directly
   async created() {
     //this.$refs.verifyPassword.focus();
-    let username = await store.getters.username;
+    let username = await store.getters.getUsername;
     if (username === '') {
       await router.push('/login')
     }

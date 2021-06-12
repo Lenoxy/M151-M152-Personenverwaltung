@@ -17,12 +17,12 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	//implementation 'org.springframework.boot:spring-boot-starter-security' Adds login screen, TODO check if we need that
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto
+	implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.4.6'
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.auth0:java-jwt:3.15.0'
-	//implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.8'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }

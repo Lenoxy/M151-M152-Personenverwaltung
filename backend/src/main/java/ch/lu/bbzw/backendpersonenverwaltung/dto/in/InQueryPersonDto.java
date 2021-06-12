@@ -5,14 +5,14 @@ import lombok.Getter;
 @Getter
 public class InQueryPersonDto{
     String id;
-    String firstname;
-    String lastname;
+    String name;
     String email;
+    boolean admin;
 
-    public InQueryPersonDto(String id, String firstname, String lastname, String email){
+    public InQueryPersonDto(String id, String firstname, String lastname, String email, boolean admin){
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.name = firstname + " " + lastname;
         this.email = email;
+        this.admin = admin;
     }
 }
