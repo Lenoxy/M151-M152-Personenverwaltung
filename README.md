@@ -91,3 +91,26 @@ Als Administrator möchte ich Benutzer sowie Administratoren anlegen, bearbeiten
 Die restlichen Seiten sehen im responsive Design gleich aus, wie im browser. z.B.:
 
 ![Person overview reponsive](images/responsive-person-overview.png)
+
+
+## Design Entscheidungen
+
+Beim bestimmen von Schriftarten und Farben im Frontend haben wir mehrere Möglichkeiten angeschaut, die wir als 
+Design einfügen können. Da wir Vue 3 gebraucht haben, mussten wir uns hier für eine den neusten Designs entscheiden.
+Primevue hat unsere Meinung nach eine gute Darstellung in Bezug auf Farben und Schriftarten und sonst.
+
+Bei den Elementen war das wichtigste für uns, dass wir Karten einsetzen. Somit waren Karten auf jede Seite 
+obligatorisch. Die zweit wichtigste Punkt für uns war, dass das Content der Seite ausserhalb des Headers in
+der Mitte der Seite dargestellt wird. 
+
+Unsere Zielgruppe besteht aus Personen aus verschiedene Altergruppen. Aus dem Grund haben wir eine entsprechende 
+Shcriftgrösse gewählt. Sonst haben wir noch Login aufgeteilt auf Benutzer ohne und mit Passwort. Das haben wir gemacht,
+dass wir unser Login möglichst einfach halten. Wir haben noch ein navbar erstellt, dass alles von jeder Seite zugreifbar
+ist. Für die Sprache haben wir Englisch gewählt, dass möglichst viele Leute das App verstehen.
+
+In Sinne von Responsiveness funktioniert das App einwandfrei bis 360px breite.
+
+
+
+
+
