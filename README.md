@@ -11,7 +11,7 @@
 
 ## Run locally
 1. `git clone git@github.com:Lenoxy/M151-M152-Personenverwaltung.git`
-1. `cd frontend`
+1. `cd M151-M152-Personenverwaltung/frontend`
 1. `npm install`
 1. `npm run build`
 1. `cd ../backend`
@@ -89,25 +89,25 @@ Als Administrator möchte ich Benutzer sowie Administratoren anlegen, bearbeiten
 
 ## Mockups
 
-![Login](images/login.png)
+![Login](doc/images/login.png)
 
-![Overview](images/overview.png)
+![Overview](doc/images/overview.png)
 
-![Person overview](images/person-overview.png)
+![Person overview](doc/images/person-overview.png)
 
-![Admin Overview](images/admin-overview.png)
+![Admin Overview](doc/images/admin-overview.png)
 
-![Set Password](images/set-password.png)
+![Set Password](doc/images/set-password.png)
 
-![Edit self profile](images/edit-self-profile.png)
+![Edit self profile](doc/images/edit-self-profile.png)
 
-![Admin edit and create profile](images/admin-edit-create-profile.png)
+![Admin edit and create profile](doc/images/admin-edit-create-profile.png)
 
-![Overview responsive](images/responsive-overview.png)
+![Overview responsive](doc/images/responsive-overview.png)
 
 Die restlichen Seiten sehen im responsive Design gleich aus, wie im browser. z.B.:
 
-![Person overview reponsive](images/responsive-person-overview.png)
+![Person overview reponsive](doc/images/responsive-person-overview.png)
 
 
 ## Designentscheidungen
