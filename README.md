@@ -1,6 +1,28 @@
 # M151 / M152 Personenverwaltung
 [Link zu Openapi UI Lokal](http://localhost:8081/swagger-ui.html)
 
+# Benötigte Technologien
+
+- Docker
+
+- Java Spring
+
+- Node package manager
+
+
+
+# Ausführen
+
+1. git clone git@github.com:Lenoxy/M151-M152-Personenverwaltung.git
+   
+2. /M151-M152-Personenverwaltung/frontend: npm install
+   
+3. /M151-M152-Personenverwaltung/: gradle build
+
+4. /M151-M152-Personenverwaltung/: docker-compose up
+
+5. localhost:81/ im browser öffnen
+
 
 ## Einführung
 
