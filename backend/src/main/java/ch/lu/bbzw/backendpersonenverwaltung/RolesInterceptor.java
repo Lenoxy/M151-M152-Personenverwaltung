@@ -25,32 +25,34 @@ public class RolesInterceptor implements HandlerInterceptor{
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
         // Allow preflight
-        if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
-            System.out.println("preflight allowed");
-            return true;
-        }
+        return true;
 
-        String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-        if(jwt == null || ! jwtService.isJwtValid(jwt)){
-            throw new NotAuthorizedException();
-        }else{
-            Method method = ((HandlerMethod) handler).getMethod();
-            if(method.isAnnotationPresent(ProtectedForRole.class)){
-                UserRole role = method.getAnnotation(ProtectedForRole.class).value();
-                Boolean admin = jwtService.isAdminFromClaim(jwt);
-
-                if(role == UserRole.ADMIN){
-                    return admin;
-                }
-                if(role == UserRole.USER){
-                    return admin != null;
-                }
-            } // Interceptor returns false if no Annotation is set -> Configure unwanted paths in InterceptorConfig.java
-        }
-        // True to proceed and false to stop the method call
-        return false;
+//        if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
+//            System.out.println("preflight allowed");
+//            return true;
+//        }
+//
+//        String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
+//
+//        if(jwt == null || ! jwtService.isJwtValid(jwt)){
+//            throw new NotAuthorizedException();
+//        }else{
+//            Method method = ((HandlerMethod) handler).getMethod();
+//            if(method.isAnnotationPresent(ProtectedForRole.class)){
+//                UserRole role = method.getAnnotation(ProtectedForRole.class).value();
+//                Boolean admin = jwtService.isAdminFromClaim(jwt);
+//
+//                if(role == UserRole.ADMIN){
+//                    return admin;
+//                }
+//                if(role == UserRole.USER){
+//                    return admin != null;
+//                }
+//            } // Interceptor returns false if no Annotation is set -> Configure unwanted paths in InterceptorConfig.java
+//        }
+//        // True to proceed and false to stop the method call
+//        return false;
     }
 }

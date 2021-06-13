@@ -2,9 +2,6 @@
 [Link zu Openapi UI Lokal](http://localhost:8081/swagger-ui.html)
 
 
-
-
-
 ## Einführung
 
 In diesem Projekt erstellen wir eine Personenverwaltung für ein fiktives Unternehmen. Dazu gibt es Adminbenutzer, welche alle Benutzer verwalten können. Die "normalen" Benutzer haben ausschliesslich Leserechte auf alle Benutzer.
@@ -93,22 +90,23 @@ Die restlichen Seiten sehen im responsive Design gleich aus, wie im browser. z.B
 ![Person overview reponsive](images/responsive-person-overview.png)
 
 
-## Design Entscheidungen
+## Designentscheidungen
 
-Beim bestimmen von Schriftarten und Farben im Frontend haben wir mehrere Möglichkeiten angeschaut, die wir als 
-Design einfügen können. Da wir Vue 3 gebraucht haben, mussten wir uns hier für eine den neusten Designs entscheiden.
-Primevue hat unsere Meinung nach eine gute Darstellung in Bezug auf Farben und Schriftarten und sonst.
+Beim bestimmen von Schriftarten und Farben im Frontend haben wir diverse Möglichkeiten angeschaut.
+Da wir Vue 3 gebraucht haben, mussten wir uns hier für eine den neusten Design-Frameworks entscheiden.
+Primevue hat unsere Meinung nach eine gute Darstellung in Bezug auf Farben, Schriftarten und responsive Design.
 
-Bei den Elementen war das wichtigste für uns, dass wir Karten einsetzen. Somit waren Karten auf jede Seite 
-obligatorisch. Die zweit wichtigste Punkt für uns war, dass das Content der Seite ausserhalb des Headers in
+Bei den Elementen war das wichtigste für uns, dass wir Karten einsetzen können. Somit waren Karten auf jeder Seite 
+obligatorisch. Der nächste Punkt für uns war, dass der Content der Seite ausserhalb des Headers in
 der Mitte der Seite dargestellt wird. 
 
-Unsere Zielgruppe besteht aus Personen aus verschiedene Altergruppen. Aus dem Grund haben wir eine entsprechende 
-Shcriftgrösse gewählt. Sonst haben wir noch Login aufgeteilt auf Benutzer ohne und mit Passwort. Das haben wir gemacht,
-dass wir unser Login möglichst einfach halten. Wir haben noch ein navbar erstellt, dass alles von jeder Seite zugreifbar
-ist. Für die Sprache haben wir Englisch gewählt, dass möglichst viele Leute das App verstehen.
+Unsere Zielgruppe besteht aus Personen aus verschiedenen Altersgruppen. Aus dem Grund haben wir eine entsprechende 
+Schriftgrösse gewählt. Sonst haben wir noch Login aufgeteilt auf Benutzer ohne und mit Passwort. Das haben wir gemacht,
+dass wir unser Login möglichst einfach halten, sodass jeder Benutzer sich problemlos einloggen kann. 
+Wir haben eine navbar erstellt, dass alles mit den richtigen Berechtigungen Seite zugreifbar
+ist. Für die Sprache haben wir Englisch gewählt, sodass die App international angewendet werden kann.
 
-In Sinne von Responsiveness funktioniert das App einwandfrei bis 360px breite.
+Bei der Responsiveness funktioniert die App einwandfrei für Geräte mit 360px in der breite.
 
 
 
