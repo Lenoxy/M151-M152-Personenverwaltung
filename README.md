@@ -3,20 +3,21 @@
 
 
 
-# Execute
+# Execution
 ## Prerequisites
 - Docker
 - Gradle
 - Node package manager
 
-1. git clone git@github.com:Lenoxy/M151-M152-Personenverwaltung.git
-1. cd frontend
-1. npm install
-1. npm run build
-1. cd ../backend
-1. gradle build
-1. cd ..
-1. docker-compose up -d
+## Run locally
+1. `git clone git@github.com:Lenoxy/M151-M152-Personenverwaltung.git`
+1. `cd frontend`
+1. `npm install`
+1. `npm run build`
+1. `cd ../backend`
+1. `gradle build`
+1. `cd ..`
+1. `docker-compose up -d`
 1. Open [localhost:81](http://localhost:81) in your browser
 
 
