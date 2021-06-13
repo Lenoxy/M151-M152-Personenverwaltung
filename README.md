@@ -1,35 +1,32 @@
 # M151 / M152 Personenverwaltung
-[Link zu Openapi UI Lokal](http://localhost:8081/swagger-ui.html)
 
-# Benötigte Technologien
 
+
+
+# Execute
+## Prerequisites
 - Docker
-
-- Java Spring
-
+- Gradle
 - Node package manager
 
-
-
-# Ausführen
-
 1. git clone git@github.com:Lenoxy/M151-M152-Personenverwaltung.git
-   
-2. /M151-M152-Personenverwaltung/frontend: npm install
-   
-3. /M151-M152-Personenverwaltung/: gradle build
-
-4. /M151-M152-Personenverwaltung/: docker-compose up
-
-5. localhost:81/ im browser öffnen
+1. cd frontend
+1. npm install
+1. npm run build
+1. cd ../backend
+1. gradle build
+1. cd ..
+1. docker-compose up -d
+1. Open [localhost:81](http://localhost:81) in your browser
 
 
 ## Einführung
 
-In diesem Projekt erstellen wir eine Personenverwaltung für ein fiktives Unternehmen. Dazu gibt es Adminbenutzer, welche alle Benutzer verwalten können. Die "normalen" Benutzer haben ausschliesslich Leserechte auf alle Benutzer.
+In diesem Projekt erstellen wir eine Personenverwaltung für ein fiktives Unternehmen. 
+Dazu gibt es Administratoren, welche alle Benutzer verwalten können. 
+Die "normalen" Benutzer haben ausschliesslich Leserechte auf alle Benutzer.
 
-## Personengruppern
-
+## Personengruppen
 ### Stefan Keller
 
 - 61 Jahre alt
