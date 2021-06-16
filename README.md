@@ -20,6 +20,8 @@
 1. `docker-compose up -d`
 1. Open [localhost:81](http://localhost:81) in your browser
 
+Info: für die zwei vordefinierten Benutzer lautet dass Passwort Hallovelo1
+
 
 ## Einführung
 
