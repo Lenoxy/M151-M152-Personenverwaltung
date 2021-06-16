@@ -109,7 +109,7 @@ export default class DataViewer extends Vue {
 @media screen and (max-width: 750px) {
   .form {
     display: grid;
-    grid-template-columns: 100px 250px;
+    grid-template-columns: 100px 230px;
     grid-template-rows: repeat(8, 50px);
   }
 }

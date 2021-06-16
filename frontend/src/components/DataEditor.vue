@@ -147,7 +147,6 @@ export default class DataEditor extends Vue {
   }
 
   async deletePerson(): Promise<void> {
-
     this.$confirm.require({
       message: 'Are you sure you want to delete "' + this.person.firstname + ' ' + this.person.lastname + '"?',
       header: 'Confirmation',
@@ -227,7 +226,7 @@ export default class DataEditor extends Vue {
 @media screen and (max-width: 750px) {
   .form {
     display: grid;
-    grid-template-columns: 100px 250px;
+    grid-template-columns: 100px 230px;
     grid-template-rows: repeat(8, 50px);
   }
 }

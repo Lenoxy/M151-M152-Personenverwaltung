@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      <h1 class="title">Create User</h1>
+      <h1 class="title">Create Person</h1>
     </template>
     <template #content>
         <DataCreator></DataCreator>
