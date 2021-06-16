@@ -22,8 +22,8 @@
             {{ data.name }}
           </template>
           <template #filter="{filterModel,filterCallback}">
-            <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter"
-                       placeholder="Search by name" v-tooltip.top.focus="'Hit enter key to filter'"/>
+            <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="p-column-filter"
+                       placeholder="Search by name" v-tooltip.top.focus="'Filter as you type'"/>
           </template>
         </Column>
         <Column header="Email" filterField="email" style="min-width:12rem">

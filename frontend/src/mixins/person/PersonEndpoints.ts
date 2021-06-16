@@ -23,7 +23,6 @@ export default {
             })).data;
         },
         async editPerson(id: string, person: EditPersonDto): Promise<string[]> {
-            console.log(person)
             return (await axios.put(process.env.VUE_APP_BACKEND + "person/" + id, person, {
                 headers: {
                     'Authorization': store.getters.getJwt,
