@@ -1,6 +1,6 @@
 package ch.lu.bbzw.backendpersonenverwaltung.config;
 
-import ch.lu.bbzw.backendpersonenverwaltung.RolesInterceptor;
+import ch.lu.bbzw.backendpersonenverwaltung.security.RolesInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

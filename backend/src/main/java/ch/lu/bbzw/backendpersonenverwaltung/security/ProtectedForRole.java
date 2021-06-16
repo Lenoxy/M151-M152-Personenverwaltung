@@ -1,4 +1,4 @@
-package ch.lu.bbzw.backendpersonenverwaltung.stereotypes;
+package ch.lu.bbzw.backendpersonenverwaltung.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

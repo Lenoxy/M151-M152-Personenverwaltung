@@ -1,9 +1,9 @@
-package ch.lu.bbzw.backendpersonenverwaltung;
+package ch.lu.bbzw.backendpersonenverwaltung.security;
 
 import ch.lu.bbzw.backendpersonenverwaltung.dto.httpException.NotAuthorizedException;
 import ch.lu.bbzw.backendpersonenverwaltung.service.JwtService;
-import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.ProtectedForRole;
-import ch.lu.bbzw.backendpersonenverwaltung.stereotypes.UserRole;
+import ch.lu.bbzw.backendpersonenverwaltung.security.ProtectedForRole;
+import ch.lu.bbzw.backendpersonenverwaltung.security.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,10 +25,9 @@ public class RolesInterceptor implements HandlerInterceptor{
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
         // Allow preflight
         if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
-            System.out.println("preflight allowed");
             return true;
         }
 
