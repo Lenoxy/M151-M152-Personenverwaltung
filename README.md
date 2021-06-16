@@ -126,7 +126,7 @@ dass wir unser Login möglichst einfach halten, sodass jeder Benutzer sich probl
 Wir haben eine navbar erstellt, dass alles mit den richtigen Berechtigungen Seite zugreifbar
 ist. Für die Sprache haben wir Englisch gewählt, sodass die App international angewendet werden kann.
 
-Bei der Responsiveness funktioniert die App einwandfrei für Geräte mit 360px in der breite.
+Bei der Responsiveness funktioniert die App einwandfrei für Geräte mit `360px` in der Breite.
 Wir haben noch eine Home Seite eingefügt, damit die Rollen des Webapps allen Besuchern klar sind.
 
 
